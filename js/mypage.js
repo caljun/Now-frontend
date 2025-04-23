@@ -1,29 +1,81 @@
-window.addEventListener('DOMContentLoaded', () => {
-  if (!navigator.geolocation) {
-    alert("位置情報が取得できません。");
+window.addEventListener('DOMContentLoaded', async () => {
+  const token = localStorage.getItem('token');
+  if (!token) {
+    alert('ログインしてください');
+    window.location.href = 'login.html';
     return;
   }
 
-  navigator.geolocation.getCurrentPosition(position => {
-    const lat = position.coords.latitude;
-    const lng = position.coords.longitude;
+  // 現在地取得
+  if ('geolocation' in navigator) {
+    navigator.geolocation.getCurrentPosition(async (position) => {
+      const latitude = position.coords.latitude;
+      const longitude = position.coords.longitude;
 
-    const map = L.map('map').setView([lat, lng], 17);
+      try {
+        const res = await fetch('https://now-backend.onrender.com/api/location', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify({ latitude, longitude })
+        });
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '© OpenStreetMap contributors'
-    }).addTo(map);
+        const data = await res.json();
 
-    L.marker([lat, lng]).addTo(map).bindPopup("あなたの現在地").openPopup();
-
-    // TODO: 自分の現在位置をサーバーに送信する処理（POST /location）
-
-  }, () => {
-    alert("位置情報の取得に失敗しました。");
-  });
+        if (res.ok) {
+          console.log('位置情報送信成功:', data);
+          // 構内なら表示など（必要に応じてここでマップ操作）
+        } else {
+          console.error('送信失敗:', data);
+          alert(data.error || '位置情報送信に失敗しました');
+        }
+      } catch (err) {
+        console.error('通信エラー:', err);
+        alert('サーバーとの通信に失敗しました');
+      }
+    }, (error) => {
+      alert('位置情報の取得に失敗しました');
+      console.error(error);
+    });
+  } else {
+    alert('このブラウザでは位置情報が使えません');
+  }
 });
 
-document.getElementById('logoutBtn').addEventListener('click', () => {
-  // TODO: トークン削除・ログアウト処理
-  window.location.href = 'index.html';
-});
+async function fetchFriendsInCampus() {
+  const token = localStorage.getItem('token');
+  if (!token) return;
+
+  try {
+    const res = await fetch('https://now-backend.onrender.com/api/friends/in-campus', {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
+
+    const data = await res.json();
+
+    if (res.ok) {
+      const list = document.getElementById('friendList');
+      list.innerHTML = ''; // 一旦リセット
+
+      data.forEach(friend => {
+        const item = document.createElement('div');
+        item.className = 'friend-card';
+        item.innerHTML = `
+          <p><strong>${friend.name}</strong></p>
+          <p>${friend.email}</p>
+          <img src="${friend.profilePhoto}" alt="プロフィール画像" width="100" />
+        `;
+        list.appendChild(item);
+      });
+
+    } else {
+      console.error('取得失敗:', data);
+    }
+  } catch (err) {
+    console.error('通信エラー:', err);
+  }
+}
