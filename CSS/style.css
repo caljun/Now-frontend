@@ -64,3 +64,34 @@ form input {
 input[type="file"] {
   color: white;
 }
+
+/* ---------- スマホ向け最適化（幅600px以下） ---------- */
+@media screen and (max-width: 600px) {
+  .main {
+    padding: 1rem;
+  }
+
+  .logo {
+    font-size: 1.3rem;
+  }
+
+  h2 {
+    font-size: 1.2rem;
+  }
+
+  form input,
+  form button {
+    font-size: 0.95rem;
+    padding: 0.8rem;
+  }
+
+  .btn {
+    font-size: 0.95rem;
+    padding: 0.8rem;
+  }
+
+  p,
+  a {
+    font-size: 0.9rem;
+  }
+}
