@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>新規登録 | Now</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script defer src="js/register.js"></script>
+</head>
+<body>
+
+  <header class="header">
+    <h1 class="logo">Now</h1>
+  </header>
+
+  <main class="main">
+    <section>
+      <h2>新規登録</h2>
+
+      <form id="registerForm" enctype="multipart/form-data">
+        <input type="text" id="name" placeholder="名前（ニックネーム）" required><br>
+        <input type="email" id="email" placeholder="メールアドレス" required><br>
+        <input type="password" id="password" placeholder="パスワード" required><br>
+
+        <label>プロフィール画像を選択</label><br>
+        <input type="file" id="profilePhoto" accept="image/*"><br><br>
+
+        <button type="submit" class="btn">登録する</button>
+      </form>
+
+      <p>すでにアカウントをお持ちの方は <a href="login.html">ログイン</a></p>
+    </section>
+  </main>
+
+</body>
+</html>
