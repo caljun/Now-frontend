@@ -26,7 +26,10 @@ window.addEventListener('DOMContentLoaded', async () => {
 
         if (res.ok) {
           console.log('位置情報送信成功:', data);
-          initMap(latitude, longitude);
+          const { map } = initMap(latitude, longitude);
+          window.map = map;
+          fetchFriendsInCampus();
+
           // 構内なら表示など（必要に応じてここでマップ操作）
         } else {
           console.error('送信失敗:', data);
@@ -59,18 +62,31 @@ async function fetchFriendsInCampus() {
     const data = await res.json();
 
     if (res.ok) {
+      // リスト表示（任意）
       const list = document.getElementById('friendList');
-      list.innerHTML = ''; // 一旦リセット
+      if (list) {
+        list.innerHTML = '';
+      }
 
       data.forEach(friend => {
-        const item = document.createElement('div');
-        item.className = 'friend-card';
-        item.innerHTML = `
-          <p><strong>${friend.name}</strong></p>
-          <p>${friend.email}</p>
-          <img src="${friend.profilePhoto}" alt="プロフィール画像" width="100" />
-        `;
-        list.appendChild(item);
+        // マーカー追加
+        if (friend.latitude && friend.longitude) {
+          L.marker([friend.latitude, friend.longitude])
+            .addTo(window.map)
+            .bindPopup(`${friend.name}（構内）`);
+        }
+
+        // 友達リスト表示（任意）
+        if (list) {
+          const item = document.createElement('div');
+          item.className = 'friend-card';
+          item.innerHTML = `
+            <p><strong>${friend.name}</strong></p>
+            <p>${friend.email}</p>
+            <img src="${friend.profilePhoto}" alt="プロフィール画像" width="100" />
+          `;
+          list.appendChild(item);
+        }
       });
 
     } else {
