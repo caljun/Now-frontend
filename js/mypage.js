@@ -13,7 +13,7 @@ window.addEventListener('DOMContentLoaded', async () => {
       const longitude = position.coords.longitude;
 
       try {
-        const res = await fetch('https://now-backend.onrender.com/api/location', {
+        const res = await fetch('https://now-backend-wah5.onrender.com/api/location', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -49,7 +49,7 @@ async function fetchFriendsInCampus() {
   if (!token) return;
 
   try {
-    const res = await fetch('https://now-backend.onrender.com/api/friends/in-campus', {
+    const res = await fetch('https://now-backend-wah5.onrender.com/api/friends/in-campus', {
       headers: {
         'Authorization': `Bearer ${token}`
       }
