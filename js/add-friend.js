@@ -33,3 +33,23 @@ document.getElementById('addFriendForm').addEventListener('submit', async (e) =>
     alert('サーバーとの通信に失敗しました');
   }
 });
+
+// JWTからユーザーIDを取り出して表示する関数
+function parseJwt(token) {
+  const base64Url = token.split('.')[1];
+  const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+  const jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
+    return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+  }).join(''));
+  return JSON.parse(jsonPayload);
+}
+
+// トークン取得とID表示処理
+const token = localStorage.getItem('token');
+if (token) {
+  const payload = parseJwt(token);
+  const myId = payload?.id;
+  if (myId) {
+    document.getElementById('myId').textContent = `あなたの Now ID：${myId}`;
+  }
+}
