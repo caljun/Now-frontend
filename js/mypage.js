@@ -26,6 +26,7 @@ window.addEventListener('DOMContentLoaded', async () => {
 
         if (res.ok) {
           console.log('位置情報送信成功:', data);
+          initMap(latitude, longitude);
           // 構内なら表示など（必要に応じてここでマップ操作）
         } else {
           console.error('送信失敗:', data);

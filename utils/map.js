@@ -28,4 +28,5 @@ const KWANSEI_POLYGON = [
   
     return lat <= northLat && lat >= southLat && lng >= westLng && lng <= eastLng;
   }
-  
+
+  window.initMap = initMap;
