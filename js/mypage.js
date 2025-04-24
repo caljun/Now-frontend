@@ -29,6 +29,7 @@ window.addEventListener('DOMContentLoaded', async () => {
           const { map } = initMap(latitude, longitude);
           window.map = map;
           fetchFriendsInCampus();
+          setInterval(fetchFriendsInCampus, 10000);
 
           // 構内なら表示など（必要に応じてここでマップ操作）
         } else {
