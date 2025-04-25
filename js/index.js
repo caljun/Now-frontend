@@ -1,15 +1,19 @@
-// ✅ 修正版：index.js
+function checkLoginAndRedirect(attempt = 0) {
+  const user = localStorage.getItem('user');
+  if (user) {
+    location.replace('mypage.html'); // ← 成功
+  } else if (attempt < 5) {
+    // 0.5秒後にもう一回試す（最大5回）
+    setTimeout(() => checkLoginAndRedirect(attempt + 1), 500);
+  } else {
+    console.log('ユーザー情報が取得できませんでした（PWA対応リトライ失敗）');
+  }
+}
+
 window.addEventListener('load', () => {
-  // iOS PWA 対策：読み込み完了後、少し待ってからlocalStorageを確認
-  setTimeout(() => {
-    const user = localStorage.getItem('user');
-    if (user) {
-      location.replace('mypage.html'); // ← 強制遷移（履歴に残さない）
-    }
-  }, 200); // ← Safari PWA対応のために200ms待つ
+  checkLoginAndRedirect();
 });
 
-// ✅ Service Worker登録（これはそのままでOK）
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('service-worker.js')
     .then(() => console.log('Service Worker registered'))
