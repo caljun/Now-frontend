@@ -4,7 +4,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
   if (user) {
     // すでにログイン済みならマイページへ
-    window.location.href = 'mypage.html';
+    location.replace('mypage.html');
   }
 
   // 未ログインならそのまま説明表示（特に追加処理なし）
