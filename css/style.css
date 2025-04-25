@@ -95,3 +95,17 @@ input[type="file"] {
     font-size: 0.9rem;
   }
 }
+
+@media screen and (max-width: 600px) {
+  .intro h2 {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    padding: 0 10px;
+  }
+
+  .intro p {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    padding: 0 12px;
+  }
+}
