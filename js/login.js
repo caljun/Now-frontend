@@ -17,6 +17,12 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
 
     if (res.ok) {
       localStorage.setItem('token', data.token);
+      localStorage.setItem('user', JSON.stringify({
+        id: data.user.id,
+        name: data.user.name,
+        email: data.user.email,
+        profilePhoto: data.user.profilePhoto
+      }));
       window.location.href = 'mypage.html';
     } else {
       alert(data.error || 'ログインに失敗しました');
@@ -26,5 +32,3 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
     alert('サーバーとの通信に失敗しました');
   }
 });
-
-  
