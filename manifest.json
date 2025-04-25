@@ -1,6 +1,6 @@
 {
     "name": "関学Now",
-    "short_name": "Now",
+    "short_name": "関学Now",
     "start_url": "./index.html",
     "display": "standalone",
     "background_color": "#000000",
