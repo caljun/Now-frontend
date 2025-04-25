@@ -97,3 +97,15 @@ async function fetchFriendsInCampus() {
     console.error('通信エラー:', err);
   }
 }
+
+// ✅ ログアウト処理を追加
+document.addEventListener('DOMContentLoaded', () => {
+  const logoutBtn = document.getElementById('logoutBtn');
+  if (logoutBtn) {
+    logoutBtn.addEventListener('click', () => {
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      location.replace('index.html');
+    });
+  }
+});
