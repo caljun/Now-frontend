@@ -32,5 +32,13 @@
     </div>
   </main>
 
+  <div id="debugUser" style="color: red; font-size: 14px;"></div>
+
+<script>
+window.addEventListener('load', () => {
+  const user = localStorage.getItem('user');
+  document.getElementById('debugUser').textContent = 'localStorage.user = ' + user;
+});
+</script>
 </body>
 </html>
