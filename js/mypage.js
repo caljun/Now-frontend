@@ -70,25 +70,29 @@ async function fetchFriendsInCampus() {
       }
 
       data.forEach(friend => {
-        // マーカー追加
         if (friend.latitude && friend.longitude) {
-          L.marker([friend.latitude, friend.longitude])
-            .addTo(window.map)
-            .bindPopup(`${friend.name}（構内）`);
-        }
-
-        // 友達リスト表示（任意）
-        if (list) {
-          const item = document.createElement('div');
-          item.className = 'friend-card';
-          item.innerHTML = `
-            <p><strong>${friend.name}</strong></p>
-            <p>${friend.email}</p>
-            <img src="${friend.profilePhoto}" alt="プロフィール画像" width="100" />
-          `;
-          list.appendChild(item);
+          if (isInsideKwanseiGakuin(friend.latitude, friend.longitude)) {
+            // 学内の友達だけマーカー追加
+            L.marker([friend.latitude, friend.longitude])
+              .addTo(window.map)
+              .bindPopup(`${friend.name}（構内）`);
+      
+            // 学内の友達だけリスト追加
+            if (list) {
+              const item = document.createElement('div');
+              item.className = 'friend-card';
+              item.innerHTML = `
+                <p><strong>${friend.name}</strong></p>
+                <p>${friend.email}</p>
+                <img src="${friend.profilePhoto}" alt="プロフィール画像" width="100" />
+              `;
+              list.appendChild(item);
+            }
+          }
+          // 学外の友達は完全に無視する
         }
       });
+      
 
     } else {
       console.error('取得失敗:', data);
