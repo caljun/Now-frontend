@@ -158,6 +158,35 @@ async function loadFriendRequests() {
   }
 }
 
+async function acceptFriend(friendId) {
+  const token = localStorage.getItem('token');
+  if (!token) return;
+
+  try {
+    const res = await fetch('https://now-backend-wah5.onrender.com/api/friends/accept', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify({ friendId })
+    });
+
+    const data = await res.json();
+
+    if (res.ok) {
+      alert('友達リクエストを承認しました');
+      loadFriends();
+      loadFriendRequests();
+    } else {
+      alert(data.error || '友達リクエスト承認に失敗しました');
+    }
+  } catch (err) {
+    console.error('通信エラー:', err);
+    alert('サーバーとの通信に失敗しました');
+  }
+}
+
 // ページ読み込み時に友達一覧も表示
 window.addEventListener('DOMContentLoaded', () => {
   loadFriends();
