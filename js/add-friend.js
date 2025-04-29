@@ -87,7 +87,7 @@ async function loadFriends() {
           nameElem.style.marginBottom = '4px';
 
           const idElem = document.createElement('span');
-          idElem.textContent = 'ID: ${friend.id}';
+          idElem.textContent = `ID: ${friend.id}`;
           idElem.style.fontSize = '12px';
           idElem.style.opacity = '0.8';
 
