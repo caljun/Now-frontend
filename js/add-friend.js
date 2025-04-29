@@ -11,7 +11,7 @@ document.getElementById('addFriendForm').addEventListener('submit', async (e) =>
   const friendId = document.getElementById('friendId').value;
 
   try {
-    const res = await fetch('https://now-backend-wah5.onrender.com/api/friends/add', {
+    const res = await fetch('https://now-backend-wah5.onrender.com/api/friends/request', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
