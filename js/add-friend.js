@@ -104,6 +104,63 @@ async function loadFriends() {
   }
 }
 
+async function loadFriendRequests() {
+  const token = localStorage.getItem('token');
+  if (!token) return;
+
+  try {
+    const res = await fetch('https://now-backend-wah5.onrender.com/api/friends/requests', {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
+
+    const data = await res.json();
+
+    if (res.ok) {
+      const requestList = document.getElementById('requestList');
+      requestList.innerHTML = '';
+
+      if (data.requests.length === 0) {
+        requestList.innerHTML = '<li>リクエストはありません</li>';
+      } else {
+        data.requests.forEach(request => {
+          const li = document.createElement('li');
+          li.classList.add('friend-card');
+
+          const nameElem = document.createElement('div');
+          nameElem.textContent = request.name;
+          nameElem.style.fontWeight = 'bold';
+          nameElem.style.marginBottom = '4px';
+
+          const idElem = document.createElement('div');
+          idElem.textContent = `ID: ${request.id}`;
+          idElem.style.fontSize = '12px';
+          idElem.style.opacity = '0.8';
+
+          const acceptButton = document.createElement('button');
+          acceptButton.textContent = '承認';
+          acceptButton.classList.add('btn');
+          acceptButton.onclick = () => acceptFriend(request.id); // ★次ここを作る！
+
+          li.appendChild(nameElem);
+          li.appendChild(idElem);
+          li.appendChild(acceptButton);
+          requestList.appendChild(li);
+        });
+      }
+    } else {
+      console.error('リクエスト一覧取得失敗:', data.error);
+    }
+  } catch (err) {
+    console.error('通信エラー:', err);
+  }
+}
+
 // ページ読み込み時に友達一覧も表示
-window.addEventListener('DOMContentLoaded', loadFriends);
+window.addEventListener('DOMContentLoaded', () => {
+  loadFriends();
+  loadFriendRequests();
+});
 
