@@ -78,7 +78,7 @@ async function loadFriends() {
       } else {
         data.friends.forEach(friend => {
           const li = document.createElement('li');
-          li.textContent = `ID: ${friend.friendId}`; // 名前など取得できるなら変更可
+          li.textContent = `ID: ${friend.id}`; // 名前など取得できるなら変更可
           friendList.appendChild(li);
         });
       }
