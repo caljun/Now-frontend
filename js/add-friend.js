@@ -53,3 +53,43 @@ if (token) {
     document.getElementById('myId').textContent = `あなたの Now ID：${myId}`;
   }
 }
+
+// 友達一覧を取得して表示する関数
+async function loadFriends() {
+  const token = localStorage.getItem('token');
+  if (!token) return;
+
+  try {
+    const res = await fetch('https://now-backend-wah5.onrender.com/api/friends/list', {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
+
+    const data = await res.json();
+
+    if (res.ok) {
+      const friendList = document.getElementById('friendList');
+      friendList.innerHTML = '';
+
+      if (data.friends.length === 0) {
+        friendList.innerHTML = '<li>まだ友達がいません</li>';
+      } else {
+        data.friends.forEach(friend => {
+          const li = document.createElement('li');
+          li.textContent = `ID: ${friend.friendId}`; // 名前など取得できるなら変更可
+          friendList.appendChild(li);
+        });
+      }
+    } else {
+      console.error('友達一覧取得失敗:', data.error);
+    }
+  } catch (err) {
+    console.error('通信エラー:', err);
+  }
+}
+
+// ページ読み込み時に友達一覧も表示
+window.addEventListener('DOMContentLoaded', loadFriends);
+
