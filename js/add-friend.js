@@ -77,8 +77,7 @@ async function loadFriends() {
         friendList.innerHTML = '<li>まだ友達がいません</li>';
       } else {
         data.friends.forEach(friend => {
-          const li = document.createElement('li');
-          li.textContent = `ID: ${friend.id} / 名前: ${friend.name}`; 
+          const li = document.createElement('li'); 
           li.classList.add('friend-card');
 
           const nameElem = document.createElement('span');
