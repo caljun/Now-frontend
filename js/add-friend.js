@@ -92,7 +92,7 @@ async function loadFriends() {
           idElem.style.opacity = '0.8';
 
           li.appendChild(nameElem);
-          li,oppendChild(idElem);
+          li.oppendChild(idElem);
           friendList.appendChild(li);
         });
       }
