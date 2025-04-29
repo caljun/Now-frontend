@@ -134,14 +134,14 @@ function startWatchingLocation(token) {
     });
 
     // 自分のマーカーを更新
-    if (!myMarker) {
-      myMarker = L.marker([latitude, longitude]).addTo(map).bindPopup("あなたの現在地");
+    if (!window.myMarker) {
+      window.myMarker = L.marker([latitude, longitude]).addTo(window.map).bindPopup("あなたの現在地");
     } else {
-      myMarker.setLatLng([latitude, longitude]);
+      window.myMarker.setLatLng([latitude, longitude]);
     }
 
     // 必要なら地図を追尾させる（任意）
-    map.setView([latitude, longitude]);
+    window.map.setView([latitude, longitude]);
   }, (err) => {
     console.error('位置情報の取得に失敗しました', err);
   }, {
