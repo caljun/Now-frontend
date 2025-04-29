@@ -28,6 +28,7 @@ window.addEventListener('DOMContentLoaded', async () => {
           console.log('位置情報送信成功:', data);
           const { map } = initMap(latitude, longitude);
           window.map = map;
+          startWatchingLocation(token);
           fetchFriendsInCampus();
           setInterval(fetchFriendsInCampus, 10000);
 
@@ -113,3 +114,39 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
+
+
+function startWatchingLocation(token) {
+  if (!navigator.geolocation) return;
+
+  navigator.geolocation.watchPosition(async (position) => {
+    const latitude = position.coords.latitude;
+    const longitude = position.coords.longitude;
+
+    // サーバーに現在地を送信
+    await fetch('https://now-backend-wah5.onrender.com/api/location', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify({ latitude, longitude })
+    });
+
+    // 自分のマーカーを更新
+    if (!myMarker) {
+      myMarker = L.marker([latitude, longitude]).addTo(map).bindPopup("あなたの現在地");
+    } else {
+      myMarker.setLatLng([latitude, longitude]);
+    }
+
+    // 必要なら地図を追尾させる（任意）
+    map.setView([latitude, longitude]);
+  }, (err) => {
+    console.error('位置情報の取得に失敗しました', err);
+  }, {
+    enableHighAccuracy: true,
+    maximumAge: 5000,
+    timeout: 10000
+  });
+}
