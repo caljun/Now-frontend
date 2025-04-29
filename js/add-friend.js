@@ -80,6 +80,20 @@ async function loadFriends() {
           const li = document.createElement('li');
           li.textContent = `ID: ${friend.id} / 名前: ${friend.name}`; 
           li.classList.add('friend-card');
+
+          const nameElem = document.createElement('span');
+          nameElem.textContent = friend.name;
+          nameElem.style.fontWeight = 'bold';
+          nameElem.style.fontSize = '16px';
+          nameElem.style.marginBottom = '4px';
+
+          const idElem = document.createElement('span');
+          idElem.textContent = 'ID: ${friend.id}';
+          idElem.style.fontSize = '12px';
+          idElem.style.opacity = '0.8';
+
+          li.appendChild(nameElem);
+          li,oppendChild(idElem);
           friendList.appendChild(li);
         });
       }
