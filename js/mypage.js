@@ -119,34 +119,43 @@ document.addEventListener('DOMContentLoaded', () => {
 function startWatchingLocation(token) {
   if (!navigator.geolocation) return;
 
-  navigator.geolocation.watchPosition(async (position) => {
-    const latitude = position.coords.latitude;
-    const longitude = position.coords.longitude;
-
-    // サーバーに現在地を送信
-    await fetch('https://now-backend-wah5.onrender.com/api/location', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      },
-      body: JSON.stringify({ latitude, longitude })
-    });
-
-    // 自分のマーカーを更新
-    if (!window.myMarker) {
-      window.myMarker = L.marker([latitude, longitude]).addTo(window.map).bindPopup("あなたの現在地");
-    } else {
-      window.myMarker.setLatLng([latitude, longitude]);
+  navigator.geolocation.watchPosition(
+    async (position) => {
+      const latitude = position.coords.latitude;
+      const longitude = position.coords.longitude;
+  
+      await fetch('https://now-backend-wah5.onrender.com/api/location', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({ latitude, longitude })
+      });
+  
+      if (!window.myMarker) {
+        window.myMarker = L.marker([latitude, longitude]).addTo(window.map).bindPopup("あなたの現在地");
+      } else {
+        window.myMarker.setLatLng([latitude, longitude]);
+      }
+  
+      window.map.setView([latitude, longitude]);
+    },
+    (err) => {
+      console.error('位置情報の取得に失敗しました', err);
+  
+      if (err.code === 1) {
+        alert('位置情報の使用が拒否されています。「設定 > アプリ > Safari > 位置情報」で「確認」または「許可」に変更してください。');
+      } else if (err.code === 2) {
+        alert('位置情報が取得できません。通信状況を確認してください。');
+      } else {
+        alert('未知の理由で位置情報の取得に失敗しました。');
+      }
+    },
+    {
+      enableHighAccuracy: true,
+      maximumAge: 5000,
+      timeout: 10000
     }
-
-    // 必要なら地図を追尾させる（任意）
-    window.map.setView([latitude, longitude]);
-  }, (err) => {
-    console.error('位置情報の取得に失敗しました', err);
-  }, {
-    enableHighAccuracy: true,
-    maximumAge: 5000,
-    timeout: 10000
-  });
+  );
 }
