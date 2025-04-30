@@ -13,7 +13,7 @@ function initMap(lat, lng) {
       [34.7645, 135.3425],  // 南西
       [34.7720, 135.3510]   // 北東
     ],
-    maxBoundsViscosity: 1.0
+    maxBoundsViscosity: 0.5,
   }).setView([lat, lng], 17); // ここlat,lng維持でOK。動くマーカーが後から使う
 
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
