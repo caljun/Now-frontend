@@ -26,7 +26,7 @@ window.addEventListener('DOMContentLoaded', async () => {
 
         if (res.ok) {
           console.log('位置情報送信成功:', data);
-          const { map } = initMap(latitude, longitude);
+          const { map } = initMap(34.768462, 135.346724);
           window.map = map;
           startWatchingLocation(token);
           fetchFriendsInCampus();
@@ -138,8 +138,6 @@ function startWatchingLocation(token) {
       } else {
         window.myMarker.setLatLng([latitude, longitude]);
       }
-  
-      window.map.setView([latitude, longitude]);
     },
     (err) => {
       console.error('位置情報の取得に失敗しました', err);
