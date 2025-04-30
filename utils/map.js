@@ -6,15 +6,21 @@ const KWANSEI_POLYGON = [
   [34.7669979, 135.3433948]  // 南西
 ];
 
+// 関学の中心点（4点の平均）
+const KWANSEI_CENTER = {
+  lat: (34.7713160 + 34.7703541 + 34.7651447 + 34.7669979) / 4,
+  lng: (135.3463970 + 135.3501509 + 135.3473802 + 135.3433948) / 4
+};
+
 // 地図を初期化（スクロール制限つき）
-function initMap(lat, lng) {
+function initMap() {
   const map = L.map('map', {
     maxBounds: [
       [34.7645, 135.3425],  // 南西
       [34.7720, 135.3510]   // 北東
     ],
-    maxBoundsViscosity: 0.5,
-  }).setView([lat, lng], 17); // ここlat,lng維持でOK。動くマーカーが後から使う
+    maxBoundsViscosity: 1.0
+  }).setView([KWANSEI_CENTER.lat, KWANSEI_CENTER.lng], 17); // 常に関学の真ん中を初期表示
 
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '© OpenStreetMap contributors'
