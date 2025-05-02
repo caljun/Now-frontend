@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>プロフィール | Now</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Now" />
+  <link rel="apple-touch-icon" href="assets/now-icon.png" />
+</head>
+<body>
+  <header class="header">
+    <h1 class="logo">Now</h1>
+  </header>
+
+  <main class="main">
+    <section class="profile-section">
+      <h2>プロフィール</h2>
+      <img id="profilePhoto" src="assets/placeholder.png" alt="プロフィール画像" width="100" />
+      <p><strong id="userName">名前未取得</strong></p>
+      <p>ID: <span id="userId">NowID未取得</span></p>
+    </section>
+
+    <section class="area-section">
+      <h2>エリア一覧</h2>
+      <ul id="areaList"></ul>
+    </section>
+
+    <button id="logoutBtn" class="btn" style="margin-top: 20px;">ログアウト</button>
+  </main>
+
+  <nav class="tab-bar">
+    <a href="home.html">🏠</a>
+    <a href="area.html">➕</a>
+    <a href="friends.html">👥</a>
+    <a href="profile.html" class="active">👤</a>
+  </nav>
+
+  <script defer src="js/profile.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('service-worker.js')
+          .then(reg => console.log('SW registered:', reg.scope))
+          .catch(err => console.error('SW registration failed:', err));
+      });
+    }
+  </script>
+</body>
+</html>

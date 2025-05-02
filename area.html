@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>エリア追加 | Now</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Now" />
+  <link rel="apple-touch-icon" href="assets/now-icon.png" />
+</head>
+<body>
+  <header class="header">
+    <h1 class="logo">Now</h1>
+  </header>
+
+  <main class="main">
+    <form id="areaForm">
+      <input type="text" id="areaName" placeholder="エリア名" required />
+      <div id="map" style="height: 70vh; margin: 10px 0; border-radius: 10px;"></div>
+      <button class="btn" type="submit">保存</button>
+    </form>
+  </main>
+
+  <nav class="tab-bar">
+    <a href="home.html">🏠</a>
+    <a href="area.html" class="active">➕</a>
+    <a href="friends.html">👥</a>
+    <a href="profile.html">👤</a>
+  </nav>
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script defer src="js/area.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('service-worker.js')
+          .then(reg => console.log('SW registered:', reg.scope))
+          .catch(err => console.error('SW registration failed:', err));
+      });
+    }
+  </script>
+</body>
+</html>

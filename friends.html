@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>友達管理 | Now</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Now" />
+  <link rel="apple-touch-icon" href="assets/now-icon.png" />
+</head>
+<body>
+  <header class="header">
+    <h1 class="logo">Now</h1>
+  </header>
+
+  <main class="main">
+    <section>
+      <h2>エリアを選択</h2>
+      <select id="areaSelect"></select>
+    </section>
+
+    <section>
+      <h2>友達を追加</h2>
+      <input type="text" id="friendNowId" placeholder="友達のNow ID" />
+      <button id="addFriendBtn" class="btn">このエリアに追加</button>
+    </section>
+
+    <section>
+      <h2>届いたリクエスト</h2>
+      <ul id="requestList" class="friend-list"></ul>
+    </section>
+  </main>
+
+  <nav class="tab-bar">
+    <a href="home.html">🏠</a>
+    <a href="area.html">➕</a>
+    <a href="friends.html" class="active">👥</a>
+    <a href="profile.html">👤</a>
+  </nav>
+
+  <script defer src="js/friends.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('service-worker.js')
+          .then(reg => console.log('SW registered:', reg.scope))
+          .catch(err => console.error('SW registration failed:', err));
+      });
+    }
+  </script>
+</body>
+</html>

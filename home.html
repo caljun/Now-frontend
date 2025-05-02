@@ -3,16 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>マイページ | Now</title>
+  <title>ホーム | Now</title>
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/mypage.css" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#000000" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="Now" />
+  <link rel="apple-touch-icon" href="assets/now-icon.png" />
 </head>
 <body>
-
   <header class="header">
     <h1 class="logo">Now</h1>
   </header>
@@ -25,21 +27,30 @@
       <option>読み込み中...</option>
     </select>
 
-    <div class="actions" style="margin-top: 16px;">
-      <a href="add-friend.html" class="btn">友達を追加</a>
-      <a href="area-setup.html" class="btn">＋ 新しいエリアを作成</a>
-      <button class="btn" id="logoutBtn">ログアウト</button>
-    </div>
-
     <section class="friends-section">
-      <h2 style="margin-top: 24px;">構内にいる友達一覧</h2>
+      <h2 style="margin-top: 20px;">構内にいる友達一覧</h2>
       <div id="friendList" style="margin-top: 10px;"></div>
     </section>
   </main>
 
+  <nav class="tab-bar">
+    <a href="home.html" class="active">🏠</a>
+    <a href="area.html">➕</a>
+    <a href="friends.html">👥</a>
+    <a href="profile.html">👤</a>
+  </nav>
+
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script src="utils/map.js"></script>
   <script defer src="js/mypage.js"></script>
-
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('service-worker.js')
+          .then(reg => console.log('SW registered:', reg.scope))
+          .catch(err => console.error('SW registration failed:', err));
+      });
+    }
+  </script>
 </body>
 </html>
