@@ -4,49 +4,52 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>プロフィール | Now</title>
+
+  <!-- スタイル -->
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/profile.css" />
   <link rel="manifest" href="manifest.json" />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet" />
+
+  <!-- PWA -->
   <meta name="theme-color" content="#000000" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="Now" />
   <link rel="apple-touch-icon" href="assets/now-icon.png" />
 </head>
-<body>
 
+<body>
   <header class="header">
     <h1 class="logo">Now</h1>
   </header>
 
   <main class="main">
     <div class="profile-container">
-  
-      <!-- 📸 プロフ画像 -->
+      <!-- プロフ画像 -->
       <img id="profilePhoto" src="assets/placeholder.png" alt="プロフィール画像" class="profile-photo" />
-  
-      <!-- 🧾 名前・ID -->
+
+      <!-- 名前・ID -->
       <div class="profile-info">
         <h2 id="userName">名前未取得</h2>
-        <p>ID: <span id="userId">NowID未取得</span> 
+        <p>
+          ID: <span id="userId">NowID未取得</span>
           <button onclick="copyNowId()" class="copy-btn">📋</button>
         </p>
         <p id="friendCount">友達: 0人</p>
       </div>
-  
-      <!-- 🗂 エリア一覧 -->
+
+      <!-- エリア一覧 -->
       <h3 class="area-title">エリア一覧</h3>
       <ul id="areaList" class="area-list"></ul>
-  
-      <!-- 🚪 ログアウト -->
+
+      <!-- ログアウトボタン -->
       <button id="logoutBtn" class="logout-btn">ログアウト</button>
     </div>
   </main>
-  
 
   <nav class="tab-bar">
-    <a href="home.html" class="tab-item active">
+    <a href="home.html" class="tab-item">
       <i data-lucide="map"></i>
       <span class="label">ホーム</span>
     </a>
@@ -58,13 +61,16 @@
       <i data-lucide="users"></i>
       <span class="label">友達</span>
     </a>
-    <a href="profile.html" class="tab-item">
+    <a href="profile.html" class="tab-item active">
       <i data-lucide="user"></i>
       <span class="label">プロフ</span>
     </a>
   </nav>
 
+  <!-- スクリプト -->
   <script defer src="js/profile.js"></script>
+
+  <!-- Service Worker -->
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
@@ -74,6 +80,8 @@
       });
     }
   </script>
+
+  <!-- Lucideアイコン -->
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
   <script>
     lucide.createIcons();

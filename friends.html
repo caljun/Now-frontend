@@ -4,30 +4,34 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>友達管理 | Now</title>
+
+  <!-- スタイルシート -->
   <link rel="stylesheet" href="css/style.css" />
-  <link rel="stylesheet" href="css/friends.css">
+  <link rel="stylesheet" href="css/friends.css" />
   <link rel="manifest" href="manifest.json" />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet" />
+
+  <!-- PWA関連 -->
   <meta name="theme-color" content="#000000" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="Now" />
   <link rel="apple-touch-icon" href="assets/now-icon.png" />
 </head>
+
 <body>
   <header class="header">
     <h1 class="logo">Now</h1>
   </header>
 
   <main class="main">
-
     <!-- エリア選択 -->
     <section class="friend-section">
       <h2>エリアを選択</h2>
       <select id="areaSelect"></select>
     </section>
 
-    <!-- 友達追加（formでラップ） -->
+    <!-- 友達追加 -->
     <section class="friend-section">
       <h2>友達を追加</h2>
       <form id="addFriendForm">
@@ -47,11 +51,10 @@
       <h2>友達一覧</h2>
       <ul id="friendList" class="friend-list"></ul>
     </section>
-
   </main>
 
   <nav class="tab-bar">
-    <a href="home.html" class="tab-item active">
+    <a href="home.html" class="tab-item">
       <i data-lucide="map"></i>
       <span class="label">ホーム</span>
     </a>
@@ -59,7 +62,7 @@
       <i data-lucide="plus-circle"></i>
       <span class="label">追加</span>
     </a>
-    <a href="friends.html" class="tab-item">
+    <a href="friends.html" class="tab-item active">
       <i data-lucide="users"></i>
       <span class="label">友達</span>
     </a>
@@ -67,9 +70,12 @@
       <i data-lucide="user"></i>
       <span class="label">プロフ</span>
     </a>
-  </nav> 
+  </nav>
 
+  <!-- JS -->
   <script defer src="js/friends.js"></script>
+
+  <!-- Service Worker -->
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
@@ -79,6 +85,8 @@
       });
     }
   </script>
+
+  <!-- Lucideアイコン -->
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
   <script>
     lucide.createIcons();
