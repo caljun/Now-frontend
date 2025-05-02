@@ -36,13 +36,11 @@ async function loadFriends() {
 
         const name = document.createElement('span');
         name.textContent = friend.name;
-        name.style.fontWeight = 'bold';
-        name.style.fontSize = '16px';
-
+        name.classList.add('name');             // ✅
+        
         const id = document.createElement('span');
         id.textContent = `ID: ${friend.id}`;
-        id.style.fontSize = '12px';
-        id.style.opacity = '0.8';
+        id.classList.add('id');                 // ✅        
 
         li.append(name, id);
         friendList.appendChild(li);
@@ -73,12 +71,11 @@ async function loadFriendRequests() {
 
         const name = document.createElement('div');
         name.textContent = request.name;
-        name.style.fontWeight = 'bold';
-
+        name.classList.add('name');              // ✅
+        
         const id = document.createElement('div');
         id.textContent = `ID: ${request.id}`;
-        id.style.fontSize = '12px';
-        id.style.opacity = '0.8';
+        id.classList.add('id');                  // ✅        
 
         const btn = document.createElement('button');
         btn.textContent = '承認';

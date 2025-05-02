@@ -27,11 +27,13 @@
       <select id="areaSelect"></select>
     </section>
 
-    <!-- 友達追加 -->
+    <!-- 友達追加（formでラップ） -->
     <section class="friend-section">
       <h2>友達を追加</h2>
-      <input type="text" id="friendNowId" placeholder="友達のNow ID" />
-      <button id="addFriendBtn" class="btn">このエリアに追加</button>
+      <form id="addFriendForm">
+        <input type="text" id="friendNowId" placeholder="友達のNow ID" />
+        <button type="submit" class="btn">このエリアに追加</button>
+      </form>
     </section>
 
     <!-- リクエスト一覧 -->
@@ -40,7 +42,7 @@
       <ul id="requestList" class="friend-list"></ul>
     </section>
 
-    <!-- 友達一覧（追加予定用） -->
+    <!-- 友達一覧 -->
     <section class="friend-section">
       <h2>友達一覧</h2>
       <ul id="friendList" class="friend-list"></ul>
