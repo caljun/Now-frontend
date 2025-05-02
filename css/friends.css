@@ -1,0 +1,76 @@
+/* エリアセレクト */
+#areaSelect {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 6px;
+    background-color: #222;
+    color: white;
+    border: 1px solid #444;
+    margin-bottom: 20px;
+  }
+  
+  /* 友達追加フォーム */
+  #friendNowId {
+    width: calc(100% - 120px);
+    padding: 10px;
+    font-size: 1rem;
+    margin-right: 8px;
+    border-radius: 6px;
+    border: 1px solid #444;
+    background-color: #1e1e1e;
+    color: white;
+  }
+  
+  #addFriendBtn {
+    padding: 10px 12px;
+    font-size: 1rem;
+    border-radius: 6px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  /* リスト表示 */
+  .friend-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .friend-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #1e1e1e;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #333;
+  }
+  
+  .friend-card span {
+    display: block;
+    color: white;
+  }
+  
+  .friend-card .name {
+    font-weight: bold;
+    font-size: 1rem;
+  }
+  
+  .friend-card .id {
+    font-size: 0.85rem;
+    opacity: 0.7;
+  }
+  
+  .friend-card button {
+    background-color: #4caf50;
+    color: white;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  

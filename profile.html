@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>プロフィール | Now</title>
   <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/profile.css" />
   <link rel="manifest" href="manifest.json" />
   <meta name="theme-color" content="#000000" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -13,24 +14,23 @@
   <link rel="apple-touch-icon" href="assets/now-icon.png" />
 </head>
 <body>
+
   <header class="header">
     <h1 class="logo">Now</h1>
   </header>
 
   <main class="main">
-    <section class="profile-section">
-      <h2>プロフィール</h2>
-      <img id="profilePhoto" src="assets/placeholder.png" alt="プロフィール画像" width="100" />
-      <p><strong id="userName">名前未取得</strong></p>
-      <p>ID: <span id="userId">NowID未取得</span></p>
-    </section>
+    <div class="profile-container">
+      <img id="profilePhoto" src="assets/placeholder.png" alt="プロフィール画像" class="profile-photo" />
+      <div class="profile-info">
+        <h2 id="userName">名前未取得</h2>
+        <p>ID: <span id="userId">NowID未取得</span></p>
+      </div>
 
-    <section class="area-section">
-      <h2>エリア一覧</h2>
-      <ul id="areaList"></ul>
-    </section>
+      <ul id="areaList" class="area-list"></ul>
 
-    <button id="logoutBtn" class="btn" style="margin-top: 20px;">ログアウト</button>
+      <button id="logoutBtn" class="logout-btn">ログアウト</button>
+    </div>
   </main>
 
   <nav class="tab-bar">

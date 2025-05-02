@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>エリア追加 | Now</title>
   <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/area.css" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   <link rel="manifest" href="manifest.json" />
   <meta name="theme-color" content="#000000" />
@@ -14,6 +15,7 @@
   <link rel="apple-touch-icon" href="assets/now-icon.png" />
 </head>
 <body>
+
   <header class="header">
     <h1 class="logo">Now</h1>
   </header>
@@ -21,7 +23,7 @@
   <main class="main">
     <form id="areaForm">
       <input type="text" id="areaName" placeholder="エリア名" required />
-      <div id="map" style="height: 70vh; margin: 10px 0; border-radius: 10px;"></div>
+      <div id="map"></div>
       <button class="btn" type="submit">保存</button>
     </form>
   </main>

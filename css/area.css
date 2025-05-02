@@ -1,0 +1,39 @@
+/* マップエリア */
+#map {
+    height: 70vh;
+    width: 100%;
+    border-radius: 12px;
+    margin-bottom: 16px;
+  }
+  
+  /* エリア作成フォーム */
+  form#areaForm {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 16px;
+  }
+  
+  #areaName {
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 6px;
+    background-color: #1e1e1e;
+    color: white;
+    border: 1px solid #444;
+  }
+  
+  #saveAreaBtn {
+    padding: 10px 14px;
+    font-size: 1rem;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  #saveAreaBtn:hover {
+    background-color: #45a049;
+  }
+  

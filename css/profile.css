@@ -1,0 +1,80 @@
+/* プロフィール全体のレイアウト */
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px 16px;
+  }
+  
+  /* プロフィール画像 */
+  .profile-photo {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #555;
+    margin-bottom: 16px;
+  }
+  
+  /* ユーザー情報 */
+  .profile-info {
+    text-align: center;
+    color: white;
+    margin-bottom: 24px;
+  }
+  
+  .profile-info h2 {
+    font-size: 1.5rem;
+    margin: 8px 0;
+  }
+  
+  .profile-info p {
+    font-size: 0.95rem;
+    opacity: 0.8;
+  }
+  
+  /* エリア一覧 */
+  .area-list {
+    width: 100%;
+    max-width: 400px;
+    padding: 0;
+    list-style: none;
+    margin: 0;
+  }
+  
+  .area-card {
+    background-color: #1e1e1e;
+    color: white;
+    padding: 14px;
+    border-radius: 8px;
+    border: 1px solid #333;
+    margin-bottom: 12px;
+  }
+  
+  .area-card h3 {
+    margin: 0;
+    font-size: 1.1rem;
+  }
+  
+  .area-card p {
+    margin: 6px 0 0;
+    font-size: 0.9rem;
+    opacity: 0.8;
+  }
+  
+  /* ログアウトボタン */
+  .logout-btn {
+    margin-top: 32px;
+    padding: 10px 16px;
+    font-size: 1rem;
+    background-color: #e53935;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  .logout-btn:hover {
+    background-color: #d32f2f;
+  }
+  
