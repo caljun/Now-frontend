@@ -31,7 +31,7 @@ document.getElementById('registerForm').addEventListener('submit', async (e) => 
 
       if (loginRes.ok) {
         localStorage.setItem('token', loginData.token);
-        window.location.href = 'mypage.html';
+        window.location.href = 'area-setup.html';
       } else {
         alert('登録は成功しましたが、ログインに失敗しました');
       }
