@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>マイページ | Now</title>
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/mypage.css">
-  <script defer src="js/mypage.js"></script>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/mypage.css" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-  <script src="utils/map.js"></script>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Now Everywhere" />
 </head>
 <body>
 
@@ -19,6 +19,7 @@
 
   <main class="main">
     <div id="map" style="height: 70vh; border-radius: 10px;"></div>
+
     <label for="areaSelect">現在のエリア：</label>
     <select id="areaSelect">
       <option>読み込み中...</option>
@@ -29,12 +30,15 @@
       <button class="btn" id="logoutBtn">ログアウト</button>
     </div>
 
-    <!-- 友達一覧表示エリア（追加） -->
     <section class="friends-section">
       <h2 style="margin-top: 20px;">構内にいる友達一覧</h2>
       <div id="friendList" style="margin-top: 10px;"></div>
     </section>
   </main>
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="utils/map.js"></script>
+  <script defer src="js/mypage.js"></script>
 
 </body>
 </html>
