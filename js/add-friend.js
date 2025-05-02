@@ -1,50 +1,12 @@
-document.getElementById('addFriendForm').addEventListener('submit', async (e) => {
-  e.preventDefault();
-
-  const token = localStorage.getItem('token');
-  if (!token) {
-    alert('ログインしてください');
-    window.location.href = 'login.html';
-    return;
-  }
-
-  const friendId = document.getElementById('friendId').value;
-
-  try {
-    const res = await fetch('https://now-backend-wah5.onrender.com/api/friends/request', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      },
-      body: JSON.stringify({ friendId })
-    });
-
-    const data = await res.json();
-
-    if (res.ok) {
-      alert('友達を追加しました');
-      document.getElementById('friendId').value = '';
-    } else {
-      alert(data.error || '友達の追加に失敗しました');
-    }
-  } catch (err) {
-    console.error('通信エラー:', err);
-    alert('サーバーとの通信に失敗しました');
-  }
-});
-
-// JWTからユーザーIDを取り出して表示する関数
 function parseJwt(token) {
   const base64Url = token.split('.')[1];
   const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-  const jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
-    return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-  }).join(''));
+  const jsonPayload = decodeURIComponent(atob(base64).split('').map(c =>
+    '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
+  ).join(''));
   return JSON.parse(jsonPayload);
 }
 
-// トークン取得とID表示処理
 const token = localStorage.getItem('token');
 if (token) {
   const payload = parseJwt(token);
@@ -54,50 +16,37 @@ if (token) {
   }
 }
 
-// 友達一覧を取得して表示する関数
 async function loadFriends() {
-  const token = localStorage.getItem('token');
-  if (!token) return;
-
   try {
     const res = await fetch('https://now-backend-wah5.onrender.com/api/friends/list', {
-      method: 'GET',
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }
+      headers: { 'Authorization': `Bearer ${token}` }
     });
-
     const data = await res.json();
+    const friendList = document.getElementById('friendList');
+    friendList.innerHTML = '';
 
-    if (res.ok) {
-      const friendList = document.getElementById('friendList');
-      friendList.innerHTML = '';
+    if (!res.ok) return console.error('友達一覧取得失敗:', data.error);
 
-      if (data.friends.length === 0) {
-        friendList.innerHTML = '<li>まだ友達がいません</li>';
-      } else {
-        data.friends.forEach(friend => {
-          const li = document.createElement('li'); 
-          li.classList.add('friend-card');
-
-          const nameElem = document.createElement('span');
-          nameElem.textContent = friend.name;
-          nameElem.style.fontWeight = 'bold';
-          nameElem.style.fontSize = '16px';
-          nameElem.style.marginBottom = '4px';
-
-          const idElem = document.createElement('span');
-          idElem.textContent = `ID: ${friend.id}`;
-          idElem.style.fontSize = '12px';
-          idElem.style.opacity = '0.8';
-
-          li.appendChild(nameElem);
-          li.appendChild(idElem);
-          friendList.appendChild(li);
-        });
-      }
+    if (data.friends.length === 0) {
+      friendList.innerHTML = '<li>まだ友達がいません</li>';
     } else {
-      console.error('友達一覧取得失敗:', data.error);
+      data.friends.forEach(friend => {
+        const li = document.createElement('li');
+        li.classList.add('friend-card');
+
+        const name = document.createElement('span');
+        name.textContent = friend.name;
+        name.style.fontWeight = 'bold';
+        name.style.fontSize = '16px';
+
+        const id = document.createElement('span');
+        id.textContent = `ID: ${friend.id}`;
+        id.style.fontSize = '12px';
+        id.style.opacity = '0.8';
+
+        li.append(name, id);
+        friendList.appendChild(li);
+      });
     }
   } catch (err) {
     console.error('通信エラー:', err);
@@ -105,53 +54,40 @@ async function loadFriends() {
 }
 
 async function loadFriendRequests() {
-  const token = localStorage.getItem('token');
-  if (!token) return;
-
   try {
     const res = await fetch('https://now-backend-wah5.onrender.com/api/friends/requests', {
-      method: 'GET',
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }
+      headers: { 'Authorization': `Bearer ${token}` }
     });
-
     const data = await res.json();
+    const requestList = document.getElementById('requestList');
+    requestList.innerHTML = '';
 
-    if (res.ok) {
-      const requestList = document.getElementById('requestList');
-      requestList.innerHTML = '';
+    if (!res.ok) return console.error('リクエスト取得失敗:', data.error);
 
-      if (data.requests.length === 0) {
-        requestList.innerHTML = '<li>リクエストはありません</li>';
-      } else {
-        data.requests.forEach(request => {
-          const li = document.createElement('li');
-          li.classList.add('friend-card');
-
-          const nameElem = document.createElement('div');
-          nameElem.textContent = request.name;
-          nameElem.style.fontWeight = 'bold';
-          nameElem.style.marginBottom = '4px';
-
-          const idElem = document.createElement('div');
-          idElem.textContent = `ID: ${request.id}`;
-          idElem.style.fontSize = '12px';
-          idElem.style.opacity = '0.8';
-
-          const acceptButton = document.createElement('button');
-          acceptButton.textContent = '承認';
-          acceptButton.classList.add('btn');
-          acceptButton.onclick = () => acceptFriend(request.id); // ★次ここを作る！
-
-          li.appendChild(nameElem);
-          li.appendChild(idElem);
-          li.appendChild(acceptButton);
-          requestList.appendChild(li);
-        });
-      }
+    if (data.requests.length === 0) {
+      requestList.innerHTML = '<li>リクエストはありません</li>';
     } else {
-      console.error('リクエスト一覧取得失敗:', data.error);
+      data.requests.forEach(request => {
+        const li = document.createElement('li');
+        li.classList.add('friend-card');
+
+        const name = document.createElement('div');
+        name.textContent = request.name;
+        name.style.fontWeight = 'bold';
+
+        const id = document.createElement('div');
+        id.textContent = `ID: ${request.id}`;
+        id.style.fontSize = '12px';
+        id.style.opacity = '0.8';
+
+        const btn = document.createElement('button');
+        btn.textContent = '承認';
+        btn.classList.add('btn');
+        btn.onclick = () => acceptFriend(request.id);
+
+        li.append(name, id, btn);
+        requestList.appendChild(li);
+      });
     }
   } catch (err) {
     console.error('通信エラー:', err);
@@ -159,9 +95,6 @@ async function loadFriendRequests() {
 }
 
 async function acceptFriend(friendId) {
-  const token = localStorage.getItem('token');
-  if (!token) return;
-
   try {
     const res = await fetch('https://now-backend-wah5.onrender.com/api/friends/accept', {
       method: 'POST',
@@ -171,15 +104,63 @@ async function acceptFriend(friendId) {
       },
       body: JSON.stringify({ friendId })
     });
-
     const data = await res.json();
-
     if (res.ok) {
       alert('友達リクエストを承認しました');
       loadFriends();
       loadFriendRequests();
     } else {
-      alert(data.error || '友達リクエスト承認に失敗しました');
+      alert(data.error || '承認に失敗しました');
+    }
+  } catch (err) {
+    console.error('通信エラー:', err);
+    alert('通信エラーが発生しました');
+  }
+}
+
+async function setupAreaSelect() {
+  try {
+    const res = await fetch('https://now-backend-wah5.onrender.com/api/areas/my', {
+      headers: { 'Authorization': `Bearer ${token}` }
+    });
+    const areas = await res.json();
+    const select = document.getElementById('areaSelect');
+    select.innerHTML = '';
+    areas.forEach(area => {
+      const opt = document.createElement('option');
+      opt.value = area._id;
+      opt.textContent = area.name;
+      select.appendChild(opt);
+    });
+  } catch (err) {
+    console.error('エリア取得エラー:', err);
+  }
+}
+
+async function addFriendToArea() {
+  const areaId = document.getElementById('areaSelect').value;
+  const friendNowId = document.getElementById('friendNowId').value.trim();
+
+  if (!friendNowId) {
+    return alert('Now IDを入力してください');
+  }
+
+  try {
+    const res = await fetch(`https://now-backend-wah5.onrender.com/api/areas/${areaId}/add-friend`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify({ friendNowId })
+    });
+
+    const data = await res.json();
+    if (res.ok) {
+      alert('友達を追加しました');
+      location.reload();
+    } else {
+      alert(data.error || '追加に失敗しました');
     }
   } catch (err) {
     console.error('通信エラー:', err);
@@ -187,49 +168,13 @@ async function acceptFriend(friendId) {
   }
 }
 
-// ページ読み込み時に友達一覧も表示
-window.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
+  setupAreaSelect();
   loadFriends();
   loadFriendRequests();
-});
 
-async function setupAreaSelect() {
-  const token = localStorage.getItem('token');
-  const select = document.getElementById('areaSelect');
-  const res = await fetch('https://now-backend-wah5.onrender.com/api/areas/my', {
-    headers: { Authorization: `Bearer ${token}` }
+  document.getElementById('addFriendForm').addEventListener('submit', e => {
+    e.preventDefault();
+    addFriendToArea();
   });
-  const areas = await res.json();
-  select.innerHTML = '';
-  areas.forEach(a => {
-    const opt = document.createElement('option');
-    opt.value = a._id;
-    opt.textContent = a.name;
-    select.appendChild(opt);
-  });
-}
-
-document.addEventListener('DOMContentLoaded', setupAreaSelect);
-
-document.getElementById('addFriendBtn').addEventListener('click', async () => {
-  const areaId = document.getElementById('areaSelect').value;
-  const friendNowId = document.getElementById('friendNowId').value.trim();
-  const token = localStorage.getItem('token');
-
-  const res = await fetch(`https://now-backend-wah5.onrender.com/api/areas/${areaId}/add-friend`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
-    },
-    body: JSON.stringify({ friendNowId })
-  });
-
-  const data = await res.json();
-  if (res.ok) {
-    alert('友達を追加しました');
-    location.reload();
-  } else {
-    alert(data.error || '追加に失敗しました');
-  }
 });
