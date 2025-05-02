@@ -10,11 +10,12 @@
   
   /* 📍マップ */
   #map {
-    height: 60vh;
+    height: calc(100vh - 220px); /* 例：ヘッダー＋セレクト＋ボタン＋タブバーを引いた高さ */
     width: 100%;
     border-radius: 16px;
     margin: 16px 0;
     box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    box-sizing: border-box;
   }
   
   /* ✏️ フォーム */
