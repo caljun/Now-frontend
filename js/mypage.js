@@ -40,7 +40,7 @@ async function sendCurrentLocation() {
 
       console.log('位置情報送信成功:', data);
 
-      const { map } = initMap(34.768462, 135.346724);
+      const { map } = initMap();
       window.map = map;
       startWatchingLocation();
 

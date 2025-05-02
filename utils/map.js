@@ -1,6 +1,7 @@
 function initMap(lat = null, lng = null) {
-  const defaultLat = 34.768462;
-  const defaultLng = 135.346724;
+  // 🧭 fallback座標を東京駅に変更
+  const defaultLat = 35.681236;
+  const defaultLng = 139.767125;
 
   const map = L.map('map', {
     maxBoundsViscosity: 0.5
@@ -18,13 +19,12 @@ function initMap(lat = null, lng = null) {
         map.setView([position.coords.latitude, position.coords.longitude], 17);
       },
       () => {
-        map.setView([defaultLat, defaultLng], 17); // 現在地取得に失敗した場合のフォールバック
+        map.setView([defaultLat, defaultLng], 17); // ✅ 現在地取得失敗時
       }
     );
   } else {
-    map.setView([defaultLat, defaultLng], 17); // geolocation 非対応端末
+    map.setView([defaultLat, defaultLng], 17); // ✅ geolocation 非対応時
   }
 
   return { map };
 }
-
