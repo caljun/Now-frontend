@@ -1,4 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const token = localStorage.getItem('token');
+  
+    if (!token) {
+      alert('ログイン情報が無効です。再ログインしてください。');
+      window.location.href = 'login.html';
+      return;
+    }
+  
     const pins = [];
   
     const map = L.map('map', {
@@ -9,24 +17,24 @@ document.addEventListener('DOMContentLoaded', () => {
       attribution: '© OpenStreetMap contributors'
     }).addTo(map);
   
-    // ✅ 現在地を中心に表示（取得できなければ東京駅）
+    // 現在地を中心に表示（取得できなければ東京駅）
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           map.setView([position.coords.latitude, position.coords.longitude], 17);
         },
         () => {
-          map.setView([35.681236, 139.767125], 17); // 東京駅 fallback
+          map.setView([35.681236, 139.767125], 17); // fallback: 東京駅
         }
       );
     } else {
-      map.setView([35.681236, 139.767125], 17); // fallback: 非対応端末
+      map.setView([35.681236, 139.767125], 17);
     }
   
     map.on('click', (e) => {
       const marker = L.marker(e.latlng).addTo(map);
       pins.push(e.latlng);
-
+  
       if (pins.length >= 3) {
         if (window.polygon) map.removeLayer(window.polygon);
         window.polygon = L.polygon(pins, {
@@ -41,12 +49,6 @@ document.addEventListener('DOMContentLoaded', () => {
       e.preventDefault();
   
       const name = document.getElementById('areaName').value.trim();
-      const token = localStorage.getItem('token');
-  
-      if (!token) {
-        alert('ログイン情報がありません。再ログインしてください。');
-        return;
-      }
   
       if (pins.length < 3) {
         alert('3点以上のピンを追加してください');
@@ -77,11 +79,12 @@ document.addEventListener('DOMContentLoaded', () => {
           alert('エリアを作成しました');
           window.location.href = 'mypage.html';
         } else {
+          console.error('エリア作成失敗:', res.status, data);
           alert(data.error || 'エリア作成に失敗しました');
         }
   
       } catch (err) {
-        console.error(err);
+        console.error('通信エラー:', err);
         alert('サーバーとの通信に失敗しました');
       }
     });
