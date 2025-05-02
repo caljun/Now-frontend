@@ -193,3 +193,43 @@ window.addEventListener('DOMContentLoaded', () => {
   loadFriendRequests();
 });
 
+async function setupAreaSelect() {
+  const token = localStorage.getItem('token');
+  const select = document.getElementById('areaSelect');
+  const res = await fetch('https://now-backend-wah5.onrender.com/api/areas/my', {
+    headers: { Authorization: `Bearer ${token}` }
+  });
+  const areas = await res.json();
+  select.innerHTML = '';
+  areas.forEach(a => {
+    const opt = document.createElement('option');
+    opt.value = a._id;
+    opt.textContent = a.name;
+    select.appendChild(opt);
+  });
+}
+
+document.addEventListener('DOMContentLoaded', setupAreaSelect);
+
+document.getElementById('addFriendBtn').addEventListener('click', async () => {
+  const areaId = document.getElementById('areaSelect').value;
+  const friendNowId = document.getElementById('friendNowId').value.trim();
+  const token = localStorage.getItem('token');
+
+  const res = await fetch(`https://now-backend-wah5.onrender.com/api/areas/${areaId}/add-friend`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    },
+    body: JSON.stringify({ friendNowId })
+  });
+
+  const data = await res.json();
+  if (res.ok) {
+    alert('友達を追加しました');
+    location.reload();
+  } else {
+    alert(data.error || '追加に失敗しました');
+  }
+});
