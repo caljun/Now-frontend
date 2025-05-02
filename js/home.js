@@ -18,8 +18,7 @@ async function sendCurrentLocation() {
   }
 
   navigator.geolocation.getCurrentPosition(async (position) => {
-    const latitude = position.coords.latitude;
-    const longitude = position.coords.longitude;
+    const { latitude, longitude } = position.coords;
 
     try {
       const res = await fetch('https://now-backend-wah5.onrender.com/api/location', {
@@ -55,8 +54,13 @@ async function sendCurrentLocation() {
       alert('サーバーとの通信に失敗しました');
     }
   }, (error) => {
-    console.error(error);
-    alert('位置情報の取得に失敗しました');
+    console.error('位置情報の取得に失敗しました', error);
+    const messages = {
+      1: '位置情報の使用が拒否されています。「設定 > アプリ > Safari > 位置情報」で「確認」または「許可」に変更してください。',
+      2: '位置情報が取得できません。通信状況を確認してください。',
+      default: '未知の理由で位置情報の取得に失敗しました。'
+    };
+    alert(messages[error.code] || messages.default);
   });
 }
 
@@ -85,7 +89,7 @@ function startWatchingLocation() {
     (err) => {
       console.error('位置情報の取得に失敗しました', err);
       const messages = {
-        1: '位置情報の使用が拒否されています。「設定 > アプリ > Safari > 位置情報」で「確認」または「許可」に変更してください。',
+        1: '位置情報の使用が拒否されています。',
         2: '位置情報が取得できません。通信状況を確認してください。',
         default: '未知の理由で位置情報の取得に失敗しました。'
       };
@@ -123,7 +127,7 @@ async function loadAreaList() {
     select.addEventListener('change', async () => {
       const areaId = select.value;
       localStorage.setItem('selectedAreaId', areaId);
-      await fetchAreaFriends(areaId); // ← リロード不要！
+      await fetchAreaFriends(areaId);
     });
 
   } catch (err) {

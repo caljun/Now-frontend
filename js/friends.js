@@ -10,10 +10,6 @@ function parseJwt(token) {
 const token = localStorage.getItem('token');
 if (token) {
   const payload = parseJwt(token);
-  const myId = payload?.id;
-  if (myId) {
-    document.getElementById('myId').textContent = `あなたの Now ID：${myId}`;
-  }
 }
 
 async function loadFriends() {
