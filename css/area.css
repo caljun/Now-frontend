@@ -10,20 +10,23 @@
   
   /* 📍マップ */
   #map {
-    height: calc(100vh - 220px); /* 例：ヘッダー＋セレクト＋ボタン＋タブバーを引いた高さ */
+    height: calc(100vh - 220px); /* ヘッダー + フォーム + タブバーの高さを除く */
     width: 100%;
     border-radius: 16px;
     margin: 16px 0;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
     box-sizing: border-box;
   }
   
-  /* ✏️ フォーム */
+  /* ✏️ フォーム全体 */
   form#areaForm {
     display: flex;
     flex-direction: column;
     gap: 16px;
     margin-top: 16px;
+    margin-bottom: 32px; /* ✅ 保存ボタン下の余白 */
+    padding: 0 16px;      /* ✅ 端からはみ出さないための余白 */
+    box-sizing: border-box;
   }
   
   /* 🏷 エリア名 */
@@ -34,6 +37,8 @@
     background-color: #222;
     color: #fff;
     border: 1px solid #444;
+    width: 100%;
+    box-sizing: border-box; /* ✅ はみ出し防止 */
   }
   
   /* 💾 保存ボタン */
@@ -42,16 +47,23 @@
     font-size: 1rem;
     background-color: #000;
     color: white;
-    border: 2px solid #fff; /* ✅ 白い縁追加 */
+    border: 2px solid #fff; /* ✅ 白い縁 */
     border-radius: 12px;
     font-weight: bold;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.15); /* ✅ 外側に白い光 */
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.15); /* ✅ 白い光の影 */
+    width: 100%;
+    box-sizing: border-box;
   }
   
   #areaForm .btn:hover {
     background-color: #222;
-    box-shadow: 0 6px 14px rgba(255, 255, 255, 0.25); /* ✅ hover時もっと浮かせる */
+    box-shadow: 0 6px 14px rgba(255, 255, 255, 0.25); /* ✅ ホバー時に浮かせる */
+  }
+  
+  /* ✅ 全体に適用（念のため） */
+  * {
+    box-sizing: border-box;
   }
   
