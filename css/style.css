@@ -43,13 +43,13 @@ h1, h2, h3, p {
   font-weight: bold;
   cursor: pointer;
   width: 100%;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* ← 追加：立体感 */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
   transition: all 0.3s ease;
 }
 
 .btn:hover {
-  background-color: #2a2a2a;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4); /* ← 強調 */
+  background-color: #333;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.5);
 }
 
 .logout-btn {
