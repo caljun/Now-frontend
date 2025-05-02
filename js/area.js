@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
         if (res.ok) {
           alert('エリアを作成しました');
-          window.location.href = 'mypage.html';
+          window.location.href = 'home.html';
         } else {
           console.error('エリア作成失敗:', res.status, data);
           alert(data.error || 'エリア作成に失敗しました');
