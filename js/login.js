@@ -23,7 +23,7 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
         email: data.user.email,
         profilePhoto: data.user.profilePhoto
       }));
-      window.location.href = 'mypage.html';
+      window.location.href = 'home.html';
     } else {
       alert(data.error || 'ログインに失敗しました');
     }
