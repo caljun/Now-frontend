@@ -1,39 +1,54 @@
-/* マップエリア */
-#map {
-    height: 70vh;
-    width: 100%;
-    border-radius: 12px;
+/* 📝 説明テキスト */
+#areaDescription {
+    font-size: 0.95rem;
+    color: #ccc;
+    text-align: center;
+    margin-top: 12px;
     margin-bottom: 16px;
+    line-height: 1.6;
   }
   
-  /* エリア作成フォーム */
+  /* 📍マップ */
+  #map {
+    height: 60vh;
+    width: 100%;
+    border-radius: 16px;
+    margin: 16px 0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  }
+  
+  /* ✏️ フォーム */
   form#areaForm {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 16px;
     margin-top: 16px;
   }
   
+  /* 🏷 エリア名 */
   #areaName {
-    padding: 10px;
+    padding: 14px;
     font-size: 1rem;
-    border-radius: 6px;
-    background-color: #1e1e1e;
-    color: white;
+    border-radius: 12px;
+    background-color: #222;
+    color: #fff;
     border: 1px solid #444;
   }
   
-  #saveAreaBtn {
-    padding: 10px 14px;
+  /* 💾 保存ボタン */
+  #areaForm .btn {
+    padding: 14px;
     font-size: 1rem;
-    background-color: #4caf50;
+    background-color: #000;
     color: white;
     border: none;
-    border-radius: 6px;
+    border-radius: 12px;
+    font-weight: bold;
     cursor: pointer;
+    transition: background-color 0.3s;
   }
   
-  #saveAreaBtn:hover {
-    background-color: #45a049;
+  #areaForm .btn:hover {
+    background-color: #333;
   }
   

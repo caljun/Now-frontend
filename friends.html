@@ -20,21 +20,32 @@
   </header>
 
   <main class="main">
-    <section>
+
+    <!-- エリア選択 -->
+    <section class="friend-section">
       <h2>エリアを選択</h2>
       <select id="areaSelect"></select>
     </section>
 
-    <section>
+    <!-- 友達追加 -->
+    <section class="friend-section">
       <h2>友達を追加</h2>
       <input type="text" id="friendNowId" placeholder="友達のNow ID" />
       <button id="addFriendBtn" class="btn">このエリアに追加</button>
     </section>
 
-    <section>
+    <!-- リクエスト一覧 -->
+    <section class="friend-section">
       <h2>届いたリクエスト</h2>
       <ul id="requestList" class="friend-list"></ul>
     </section>
+
+    <!-- 友達一覧（追加予定用） -->
+    <section class="friend-section">
+      <h2>友達一覧</h2>
+      <ul id="friendList" class="friend-list"></ul>
+    </section>
+
   </main>
 
   <nav class="tab-bar">

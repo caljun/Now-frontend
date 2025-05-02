@@ -12,6 +12,7 @@
   .intro h2 {
     font-size: 1.8rem;
     margin-bottom: 20px;
+    color: white;
   }
   
   .intro p {
@@ -19,6 +20,7 @@
     line-height: 1.6;
     margin-bottom: 14px;
     opacity: 0.85;
+    color: #ccc;
   }
   
   .actions {
@@ -31,19 +33,21 @@
   }
   
   .actions .btn {
-    padding: 12px;
+    padding: 14px;
     font-size: 1rem;
-    background-color: #007bff;
+    background-color: #000;
     color: white;
     border: none;
-    border-radius: 6px;
+    border-radius: 12px;
+    font-weight: bold;
     text-decoration: none;
     display: block;
     text-align: center;
+    transition: background-color 0.3s;
   }
   
   .actions .btn:hover {
-    background-color: #0056b3;
+    background-color: #222;
   }
   
   /* === ログイン・登録フォーム共通 === */
@@ -59,34 +63,39 @@
   form input[type="email"],
   form input[type="password"],
   form input[type="file"] {
-    padding: 10px;
+    padding: 12px;
     font-size: 1rem;
-    border-radius: 6px;
-    border: none;
+    border-radius: 12px;
+    border: 1px solid #444;
+    background-color: #222;
+    color: white;
   }
   
   form label {
     font-size: 0.9rem;
     margin-top: 10px;
-    color: #ccc;
+    color: #aaa;
   }
   
   form .btn {
-    padding: 12px;
-    background-color: #28a745;
+    padding: 14px;
+    background-color: #000;
     color: white;
     border: none;
-    border-radius: 6px;
+    border-radius: 12px;
     font-size: 1rem;
+    font-weight: bold;
     cursor: pointer;
+    transition: background-color 0.3s;
   }
   
   form .btn:hover {
-    background-color: #1e7e34;
+    background-color: #222;
   }
   
   p {
     margin-top: 20px;
     font-size: 0.9rem;
+    color: #ccc;
   }
   

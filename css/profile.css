@@ -1,59 +1,75 @@
-/* プロフィール全体のレイアウト */
+/* 📸 プロフィール全体 */
 .profile-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 24px 16px;
+    color: #fff;
   }
   
-  /* プロフィール画像 */
+  /* 🖼 プロフ写真 */
   .profile-photo {
-    width: 120px;
-    height: 120px;
+    width: 130px;
+    height: 130px;
     border-radius: 50%;
     object-fit: cover;
-    border: 2px solid #555;
+    border: 3px solid #fff;
     margin-bottom: 16px;
+    box-shadow: 0 2px 6px rgba(255, 255, 255, 0.1);
   }
   
-  /* ユーザー情報 */
+  /* 🧾 プロフ情報 */
   .profile-info {
     text-align: center;
-    color: white;
-    margin-bottom: 24px;
+    margin-bottom: 16px;
   }
   
   .profile-info h2 {
     font-size: 1.5rem;
     margin: 8px 0;
+    font-weight: bold;
+    color: #fff;
   }
   
   .profile-info p {
     font-size: 0.95rem;
     opacity: 0.8;
+    color: #ccc;
   }
   
-  /* エリア一覧 */
+  /* 🔢 友達数表示 */
+  #friendCount {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-top: 8px;
+    color: #fff;
+  }
+  
+  /* 📋 エリアリスト */
   .area-list {
     width: 100%;
     max-width: 400px;
     padding: 0;
     list-style: none;
     margin: 0;
+    margin-top: 24px;
   }
   
+  /* 🗂 エリアカード */
   .area-card {
     background-color: #1e1e1e;
-    color: white;
-    padding: 14px;
-    border-radius: 8px;
-    border: 1px solid #333;
+    color: #fff;
+    padding: 16px;
+    border-radius: 12px;
+    border: 1px solid #444;
     margin-bottom: 12px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.4);
   }
   
   .area-card h3 {
     margin: 0;
     font-size: 1.1rem;
+    font-weight: bold;
   }
   
   .area-card p {
@@ -62,19 +78,41 @@
     opacity: 0.8;
   }
   
-  /* ログアウトボタン */
+  /* 🚪 ログアウトボタン */
   .logout-btn {
     margin-top: 32px;
-    padding: 10px 16px;
+    padding: 12px 20px;
     font-size: 1rem;
-    background-color: #e53935;
-    color: white;
-    border: none;
-    border-radius: 6px;
+    background-color: #000;
+    color: #e53935;
+    border: 1px solid #e53935;
+    border-radius: 12px;
+    font-weight: bold;
     cursor: pointer;
+    transition: background-color 0.3s;
   }
   
   .logout-btn:hover {
-    background-color: #d32f2f;
+    background-color: #1e1e1e;
+  }
+  
+  .copy-btn {
+    background: none;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    color: #aaa;
+    margin-left: 8px;
+  }
+  .copy-btn:hover {
+    color: #fff;
+  }
+  
+  .area-title {
+    font-size: 1.1rem;
+    color: #ccc;
+    margin-bottom: 12px;
+    text-align: center;
+    margin-top: 24px;
   }
   

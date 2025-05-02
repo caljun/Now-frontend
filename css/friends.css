@@ -1,53 +1,64 @@
-/* エリアセレクト */
+/* 🔽 エリアセレクト */
 #areaSelect {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     font-size: 1rem;
-    border-radius: 6px;
+    border-radius: 12px;
     background-color: #222;
-    color: white;
+    color: #fff;
     border: 1px solid #444;
     margin-bottom: 20px;
   }
   
-  /* 友達追加フォーム */
+  /* 🧑‍🤝‍🧑 ID入力 */
   #friendNowId {
-    width: calc(100% - 120px);
-    padding: 10px;
+    width: 100%;
+    padding: 12px;
     font-size: 1rem;
-    margin-right: 8px;
-    border-radius: 6px;
-    border: 1px solid #444;
+    margin-bottom: 12px;
+    border-radius: 12px;
     background-color: #1e1e1e;
-    color: white;
+    color: #fff;
+    border: 1px solid #444;
   }
   
+  /* ➕ 追加ボタン */
   #addFriendBtn {
-    padding: 10px 12px;
+    padding: 12px;
     font-size: 1rem;
-    border-radius: 6px;
-    background-color: #4caf50;
+    border-radius: 12px;
+    background-color: #000;
     color: white;
     border: none;
+    font-weight: bold;
     cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%;
+    margin-bottom: 24px;
   }
   
-  /* リスト表示 */
+  #addFriendBtn:hover {
+    background-color: #333;
+  }
+  
+  /* 📋 リスト共通 */
   .friend-list {
     list-style: none;
     padding: 0;
     margin: 0;
   }
   
+  /* 🧾 カードUI（リクエスト・友達共通） */
   .friend-card {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
     background-color: #1e1e1e;
-    padding: 12px;
-    border-radius: 8px;
-    margin-bottom: 10px;
+    padding: 14px 16px;
+    border-radius: 12px;
+    margin-bottom: 12px;
     border: 1px solid #333;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
   
   .friend-card span {
@@ -65,12 +76,19 @@
     opacity: 0.7;
   }
   
+  /* ✅ 承認ボタン */
   .friend-card button {
-    background-color: #4caf50;
+    background-color: #000;
     color: white;
-    padding: 6px 12px;
+    padding: 8px 14px;
     border: none;
-    border-radius: 6px;
+    border-radius: 10px;
+    font-weight: bold;
     cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .friend-card button:hover {
+    background-color: #333;
   }
   
