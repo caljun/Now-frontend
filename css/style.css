@@ -118,3 +118,19 @@ input[type="file"] {
   background-color: rgba(255, 255, 255, 0.1);
   text-align: center;
 }
+
+.map-container {
+  height: 400px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+#areaName, #saveAreaBtn {
+  display: block;
+  margin: 10px 0;
+}
+
+.instruction {
+  font-size: 14px;
+  color: #555;
+}

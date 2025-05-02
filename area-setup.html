@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>エリア作成</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+</head>
+<body>
+  <h2>エリアを作成</h2>
+
+  <div id="map" class="map-container"></div>
+
+  <input type="text" id="areaName" placeholder="エリア名を入力（例：関学）">
+  <button id="saveAreaBtn">エリアを保存する</button>
+  <p class="instruction">地図をタップしてピンを追加してください（3点以上）</p>
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="area-setup.js"></script>
+</body>
+</html>
