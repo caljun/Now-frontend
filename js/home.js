@@ -155,7 +155,7 @@ async function fetchAreaFriends(areaId) {
           .bindPopup(`${friend.name}（${friend.email}）`);
 
         if (list) {
-          const item = document.createElement('div');
+          const item = document.createElement('li');
           item.className = 'friend-card';
           item.innerHTML = `
             <p><strong>${friend.name}</strong></p>

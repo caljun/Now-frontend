@@ -31,7 +31,8 @@ document.addEventListener('DOMContentLoaded', async () => {
       } else {
         data.areas.forEach(area => {
           const item = document.createElement('li');
-          item.textContent = `${area.name}（${area.count}人）`;
+          item.className = 'area-card';
+          item.innerHTML = `<h3>${area.name}</h3><p>${area.count}人</p>`;
           list.appendChild(item);
         });
       }
