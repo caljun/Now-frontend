@@ -13,7 +13,6 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="Now" />
   <link rel="apple-touch-icon" href="assets/now-icon.png" />
-  <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
   <header class="header">
@@ -80,10 +79,9 @@
       });
     }
   </script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
   <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      lucide.createIcons();
-    });
-  </script>  
+    lucide.createIcons();
+  </script>
 </body>
 </html>

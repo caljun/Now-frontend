@@ -4,9 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ホーム | Now</title>
+  
+  <!-- CSS -->
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/home.css" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+  <!-- フォント・PWA -->
   <link rel="manifest" href="manifest.json" />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
   <meta name="theme-color" content="#000000" />
@@ -14,8 +18,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="Now" />
   <link rel="apple-touch-icon" href="assets/now-icon.png" />
-  <script src="https://unpkg.com/lucide@latest"></script>
 </head>
+
 <body>
   <header class="header">
     <h1 class="logo">Now</h1>
@@ -48,9 +52,14 @@
     </a>
   </nav>
 
+  <!-- Leaflet地図用 -->
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+  <!-- アプリ用スクリプト -->
   <script src="utils/map.js"></script>
   <script defer src="js/home.js"></script>
+
+  <!-- Service Worker登録 -->
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
@@ -60,10 +69,11 @@
       });
     }
   </script>
+
+  <!-- Lucideアイコン読み込み（UMD安定版） -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
   <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      lucide.createIcons();
-    });
+    lucide.createIcons();
   </script>
 </body>
 </html>
