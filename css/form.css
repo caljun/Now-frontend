@@ -1,0 +1,92 @@
+/* === 全体共通のスタイル === */
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 16px;
+    text-align: center;
+    color: white;
+  }
+  
+  /* === トップページ用 === */
+  .intro h2 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+  }
+  
+  .intro p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 14px;
+    opacity: 0.85;
+  }
+  
+  .actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    max-width: 280px;
+    margin-top: 24px;
+  }
+  
+  .actions .btn {
+    padding: 12px;
+    font-size: 1rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+  }
+  
+  .actions .btn:hover {
+    background-color: #0056b3;
+  }
+  
+  /* === ログイン・登録フォーム共通 === */
+  form {
+    width: 100%;
+    max-width: 320px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  form input[type="text"],
+  form input[type="email"],
+  form input[type="password"],
+  form input[type="file"] {
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 6px;
+    border: none;
+  }
+  
+  form label {
+    font-size: 0.9rem;
+    margin-top: 10px;
+    color: #ccc;
+  }
+  
+  form .btn {
+    padding: 12px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  
+  form .btn:hover {
+    background-color: #1e7e34;
+  }
+  
+  p {
+    margin-top: 20px;
+    font-size: 0.9rem;
+  }
+  
