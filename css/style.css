@@ -34,8 +34,8 @@ h1, h2, h3, p {
 
 /* === ボタン === */
 .btn {
-  background-color: #fff;
-  color: #000;
+  background-color: #1f1f1f;
+  color: #fff;
   padding: 12px;
   border: none;
   border-radius: 12px;
@@ -43,11 +43,13 @@ h1, h2, h3, p {
   font-weight: bold;
   cursor: pointer;
   width: 100%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* ← 追加：立体感 */
   transition: all 0.3s ease;
 }
 
 .btn:hover {
-  opacity: 0.85;
+  background-color: #2a2a2a;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4); /* ← 強調 */
 }
 
 .logout-btn {
