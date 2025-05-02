@@ -26,12 +26,15 @@ document.addEventListener('DOMContentLoaded', () => {
     map.on('click', (e) => {
       const marker = L.marker(e.latlng).addTo(map);
       pins.push(e.latlng);
-  
-      // 後で有効化したい場合はこちら
-      // if (pins.length >= 3) {
-      //   if (window.polygon) map.removeLayer(window.polygon);
-      //   window.polygon = L.polygon(pins, { color: 'blue' }).addTo(map);
-      // }
+
+      if (pins.length >= 3) {
+        if (window.polygon) map.removeLayer(window.polygon);
+        window.polygon = L.polygon(pins, {
+          color: 'blue',
+          fillColor: '#3388ff',
+          fillOpacity: 0.4
+        }).addTo(map);
+      }
     });
   
     document.getElementById('areaForm').addEventListener('submit', async (e) => {
