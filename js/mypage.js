@@ -157,3 +157,43 @@ function startWatchingLocation(token) {
     }
   );
 }
+
+async function loadAreaList() {
+  const token = localStorage.getItem('token');
+  const select = document.getElementById('areaSelect');
+
+  try {
+    const res = await fetch('https://now-backend-wah5.onrender.com/api/areas/my', {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
+
+    const areas = await res.json();
+    select.innerHTML = '';
+
+    areas.forEach(area => {
+      const option = document.createElement('option');
+      option.value = area._id;
+      option.textContent = area.name;
+      select.appendChild(option);
+    });
+
+    // 最初に選択されたエリアを保存
+    select.addEventListener('change', () => {
+      localStorage.setItem('selectedAreaId', select.value);
+      location.reload(); // 必要なら画面を再読み込み
+    });
+
+    // 前回選んだエリアがあれば復元
+    const saved = localStorage.getItem('selectedAreaId');
+    if (saved) select.value = saved;
+
+  } catch (err) {
+    console.error('エリア一覧の取得に失敗', err);
+    select.innerHTML = '<option>読み込み失敗</option>';
+  }
+}
+
+document.addEventListener('DOMContentLoaded', loadAreaList);
+
