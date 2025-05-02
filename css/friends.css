@@ -13,6 +13,7 @@
   /* 🧑‍🤝‍🧑 ID入力 */
   #friendNowId {
     width: 100%;
+    box-sizing: border-box; /* ✅ パディング・ボーダーを含めて100%に */
     padding: 12px;
     font-size: 1rem;
     margin-bottom: 12px;
