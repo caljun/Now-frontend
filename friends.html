@@ -25,33 +25,36 @@
   </header>
 
   <main class="main">
-<!-- 🔁 友達追加フォーム（1つのカード枠に統合） -->
-<section class="friend-card add-section">
-  <h2>友達を追加</h2>
-  <label for="areaSelect">エリアを選択</label>
-  <select id="areaSelect"></select>
 
-  <label for="friendNowId">友達のNow ID</label>
-  <input type="text" id="friendNowId" placeholder="例：abcd1234" />
-
-  <button type="submit" id="addFriendBtn">このエリアに追加</button>
-</section>
-
+    <!-- 🔁 友達追加フォーム（1つのカード枠に統合） -->
+    <section class="friend-card add-section">
+      <h2>友達を追加</h2>
+  
+      <select id="areaSelect">
+        <option value="" disabled selected>エリアを選択</option>
+      </select>
+  
+      <input type="text" id="friendNowId" placeholder="友達のNow ID（例：abcd1234）" />
+  
+      <button type="submit" id="addFriendBtn">このエリアに追加</button>
+    </section>
+  
     <br>
-
+  
     <!-- リクエスト一覧 -->
     <section class="friend-section">
       <h2>届いたリクエスト</h2>
       <ul id="requestList" class="friend-list"></ul>
     </section>
-
+  
     <!-- 友達一覧 -->
     <section class="friend-section">
       <h2>友達一覧</h2>
       <ul id="friendList" class="friend-list"></ul>
     </section>
+  
   </main>
-
+  
   <nav class="tab-bar">
     <a href="home.html" class="tab-item">
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" stroke="currentColor" fill="none" stroke-width="2">
