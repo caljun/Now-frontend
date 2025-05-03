@@ -162,23 +162,35 @@
     color: #fff;
   }
 
-  /* 🗑️ エリア削除ボタン（控えめデザイン） */
-.delete-area-btn {
+/* エリアカード内の削除ボタン配置用 */
+.area-card {
+    position: relative; /* ← ボタンをカード内に絶対配置するために必要 */
+    background-color: #1e1e1e;
+    color: #fff;
+    padding: 16px;
+    border-radius: 12px;
+    border: 1px solid #444;
+    margin-bottom: 12px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+  }
+  
+  /* 🗑 右上に小さく出す削除ボタン */
+  .delete-area-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
     background-color: transparent;
     color: #f44336;
     border: 1px solid #f44336;
-    padding: 6px 12px;
-    font-size: 0.85rem;
-    border-radius: 8px;
+    padding: 4px 8px;
+    font-size: 0.75rem;
+    border-radius: 6px;
     cursor: pointer;
-    margin-top: 8px;
     transition: all 0.2s ease;
-    display: inline-block;
   }
   
   .delete-area-btn:hover {
     background-color: #f44336;
     color: #fff;
   }
-  
   
