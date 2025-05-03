@@ -69,7 +69,7 @@ function startWatchingLocation() {
     async (position) => {
       const { latitude, longitude } = position.coords;
 
-      await fetch('https://now-backend-wah5.onrender.com/api/location', {
+      const res = await fetch('https://now-backend-wah5.onrender.com/api/location', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -77,6 +77,12 @@ function startWatchingLocation() {
         },
         body: JSON.stringify({ latitude, longitude })
       });
+      
+      if (!res.ok) {
+        const errText = await res.text();
+        console.error('位置情報の更新失敗:', res.status, errText);
+        return;
+      }      
 
       if (!window.myMarker) {
         window.myMarker = L.marker([latitude, longitude])
