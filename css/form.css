@@ -34,6 +34,7 @@
     width: 100%;
     max-width: 360px;
     margin: 24px auto 0 auto;
+    gap: 24px;
   }  
   
   /* ✅ トップページのボタン */
