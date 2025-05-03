@@ -31,10 +31,12 @@
     width: 100%;
     max-width: 280px;
     margin-top: 24px;
+    margin: 24px auto 0 auto;
   }
   
   /* ✅ トップページのボタン */
   .actions .btn {
+    width: 100%;
     padding: 14px;
     font-size: 1rem;
     background-color: #000;
