@@ -30,10 +30,11 @@
   .actions {
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    align-items: center;        /* ✅ 中央寄せ */
-    margin-top: 24px;
-  }
+    align-items: center;
+    width: 100%;
+    max-width: 360px;
+    margin: 24px auto 0 auto;
+  }  
   
   /* ✅ トップページのボタン */
   .actions .btn {
