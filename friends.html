@@ -25,20 +25,18 @@
   </header>
 
   <main class="main">
-    <!-- エリア選択 -->
-    <section class="friend-section">
-      <h2>エリアを選択</h2>
-      <select id="areaSelect"></select>
-    </section>
+<!-- 🔁 友達追加フォーム（1つのカード枠に統合） -->
+<section class="friend-card add-section">
+  <h2>友達を追加</h2>
+  <label for="areaSelect">エリアを選択</label>
+  <select id="areaSelect"></select>
 
-    <!-- 友達追加 -->
-    <section class="friend-section">
-      <h2>友達を追加</h2>
-      <form id="addFriendForm">
-        <input type="text" id="friendNowId" placeholder="友達のNow ID" />
-        <button type="submit" class="btn">このエリアに追加</button>
-      </form>
-    </section>
+  <label for="friendNowId">友達のNow ID</label>
+  <input type="text" id="friendNowId" placeholder="例：abcd1234" />
+
+  <button type="submit" id="addFriendBtn">このエリアに追加</button>
+</section>
+
     <br>
 
     <!-- リクエスト一覧 -->
