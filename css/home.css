@@ -5,10 +5,12 @@
 }
 
 .area-label {
-  font-size: 1.1rem;
-  font-weight: bold;
-  color: #fff;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #f5f5f5;
   margin-bottom: 10px;
+  letter-spacing: 0.5px;
 }
 
 #areaSelect {
