@@ -93,3 +93,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
   });
   
+  document.getElementById('openModalBtn').addEventListener('click', () => {
+    document.getElementById('editModal').classList.remove('hidden');
+  });
+  
+  document.getElementById('closeModalBtn').addEventListener('click', () => {
+    document.getElementById('editModal').classList.add('hidden');
+  });
+  

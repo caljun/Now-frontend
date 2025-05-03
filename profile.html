@@ -29,10 +29,8 @@
       <!-- プロフ画像 -->
       <img id="profilePhoto" src="assets/placeholder.png" alt="プロフィール画像" class="profile-photo" />
 
-      <!-- 編集用 -->
-      <input type="file" id="photoInput" accept="image/*" />
-      <input type="text" id="nameInput" placeholder="新しい名前" />
-      <button id="updateProfileBtn" class="btn">プロフィール更新</button>
+      <!-- 編集モーダル起動ボタン -->
+      <button id="openModalBtn" class="btn">プロフィールを編集</button>
 
       <!-- 名前・ID -->
       <div class="profile-info">
@@ -53,6 +51,18 @@
     </div>
   </main>
 
+  <!-- 🔲 編集用モーダル -->
+  <div id="editModal" class="modal hidden">
+    <div class="modal-content">
+      <span id="closeModalBtn" class="modal-close">×</span>
+      <h3>プロフィール編集</h3>
+      <input type="file" id="photoInput" accept="image/*" />
+      <input type="text" id="nameInput" placeholder="新しい名前" />
+      <button id="updateProfileBtn" class="btn">プロフィール更新</button>
+    </div>
+  </div>
+
+  <!-- タブバー -->
   <nav class="tab-bar">
     <a href="home.html" class="tab-item">
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" stroke="currentColor" fill="none" stroke-width="2">
@@ -89,8 +99,8 @@
   <!-- スクリプト -->
   <script defer src="js/profile.js"></script>
 
-  <!-- Service Worker -->
   <script>
+    // Service Worker登録
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('service-worker.js')
@@ -101,3 +111,4 @@
   </script>
 </body>
 </html>
+
