@@ -4,9 +4,9 @@
 body {
   margin: 0;
   font-family: 'Noto Sans JP', sans-serif;
-  background-color: #0f0f0f;
+  background-color: #000; /* ← 最初から黒に */
   color: #fff;
-  padding-bottom: 80px; /* タブ分 */
+  padding-bottom: calc(72px + env(safe-area-inset-bottom)); /* ← タブ＋safe-area */
 }
 
 h1, h2, h3, p {
@@ -150,10 +150,4 @@ label {
 
 .tab-item.active svg {
   stroke: #fff;
-}
-
-/* === iOS PWA対応：全体に黒背景、safe-area確保 === */
-body {
-  background-color: #000;
-  padding-bottom: calc(72px + env(safe-area-inset-bottom));
 }
