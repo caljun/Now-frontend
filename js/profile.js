@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       });
     }
 
-    // エリア削除ボタンにイベント追加
+    // エリア削除処理
     document.querySelectorAll('.delete-area-btn').forEach(btn => {
       btn.addEventListener('click', async () => {
         const areaId = btn.dataset.id;
@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     location.href = 'index.html';
   });
 
-  // プロフィール更新処理（即時反映あり）
+  // ✅ プロフィール更新処理
   document.getElementById('updateProfileBtn').addEventListener('click', async () => {
     const name = document.getElementById('nameInput').value;
     const photoInput = document.getElementById('photoInput').files[0];
@@ -86,11 +86,13 @@ document.addEventListener('DOMContentLoaded', async () => {
         body: formData
       });
 
-      const result = await updateRes.json();
+      const raw = await updateRes.text();
+      console.log("🧪 サーバーからのレスポンス:", raw);
 
+      const result = JSON.parse(raw);
       if (!updateRes.ok) throw new Error(result.error || '更新失敗');
 
-      // 更新内容を即時反映
+      // 成功時の即時反映
       if (result.user.name) {
         document.getElementById('userName').textContent = result.user.name;
       }
@@ -101,6 +103,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
       document.getElementById('editModal').classList.add('hidden');
       alert('プロフィールを更新しました');
+
     } catch (err) {
       console.error(err);
       alert('更新に失敗しました');
@@ -108,7 +111,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   });
 });
 
-// モーダル開閉
+// モーダル開閉処理
 document.getElementById('openModalBtn').addEventListener('click', () => {
   document.getElementById('editModal').classList.remove('hidden');
 });
