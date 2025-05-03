@@ -160,9 +160,15 @@ async function fetchAreaFriends(areaId) {
     friends.forEach(friend => {
       const loc = friend.location;
       if (loc?.latitude && loc?.longitude) {
-        L.marker([loc.latitude, loc.longitude])
-          .addTo(window.map)
-          .bindPopup(`${friend.name}（${friend.email}）`);
+        const icon = L.divIcon({
+          className: 'custom-label',
+          html: `<div class="label-box">${friend.name}</div>`,
+          iconSize: [100, 24],
+          iconAnchor: [50, 32]
+        });
+    
+        L.marker([loc.latitude, loc.longitude], { icon })
+          .addTo(window.map);
 
         if (list) {
           const item = document.createElement('li');

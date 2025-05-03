@@ -72,3 +72,21 @@
     background: #222;
   }
   
+  .custom-label .label-box {
+    background-color: white;
+    color: black;
+    padding: 2px 6px;
+    border-radius: 12px;
+    font-size: 13px;
+    box-shadow: 0 0 4px rgba(0,0,0,0.3);
+    white-space: nowrap;
+    text-align: center;
+  }
+  
+  @media (max-width: 480px) {
+    .custom-label .label-box {
+      font-size: 11px;
+      padding: 2px 4px;
+    }
+  }
+  
