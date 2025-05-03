@@ -150,3 +150,31 @@ label {
 .tab-item.active svg {
   stroke: #000;
 }
+
+/* === iOS PWA対応：タブバーの背景を黒に & safe-area-inset考慮 === */
+body {
+  background-color: #000;
+  padding-bottom: calc(72px + env(safe-area-inset-bottom));
+}
+
+.tab-bar {
+  background-color: #000;
+  border-top: 1px solid #333;
+  height: calc(72px + env(safe-area-inset-bottom));
+}
+
+.tab-item {
+  color: #999;
+}
+
+.tab-item.active {
+  color: #fff;
+}
+
+.tab-item svg {
+  stroke: #999;
+}
+
+.tab-item.active svg {
+  stroke: #fff;
+}
