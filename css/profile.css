@@ -57,10 +57,14 @@
   
   /* 🗂 エリアカード */
   .area-card {
-    background-color: #1e1e1e;
-    color: #fff;
+    position: relative;
+    display: flex;
+    flex-direction: column;      /* 子要素を縦に並べる */
+    justify-content: space-between;
+    height: 100px;               /* 高さを固定してバランス確保 */
     padding: 16px;
     border-radius: 12px;
+    background-color: #1e1e1e;
     border: 1px solid #444;
     margin-bottom: 12px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.4);
@@ -163,39 +167,23 @@
   }
 
 /* エリアカード内の削除ボタン配置用 */
-.area-card {
-    position: relative; /* ← ボタンをカード内に絶対配置するために必要 */
-    background-color: #1e1e1e;
-    color: #fff;
-    padding: 16px;
-    border-radius: 12px;
-    border: 1px solid #444;
-    margin-bottom: 12px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.4);
-  }
-  
-  .delete-area-btn {
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    height: 32px;
-    padding: 0 12px;
-    font-size: 0.85rem;
-    background-color: transparent;
-    color: #f44336;
-    border: 1px solid #f44336;
-    border-radius: 8px;  /* ← 丸みを帯びた長方形 */
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.2s ease;
-  }  
-  
-  .delete-area-btn:hover {
-    background-color: #f44336;
-    color: #fff;
-  }
+.delete-area-btn {
+  align-self: flex-end;   /* 親の右端に寄せる */
+  margin-top: auto;       /* 下に押し下げる */
+  padding: 6px 14px;
+  font-size: 0.85rem;
+  background-color: transparent;
+  color: #f44336;
+  border: 1px solid #f44336;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.delete-area-btn:hover {
+  background-color: #f44336;
+  color: #fff;
+}
   
   /* 🔲 モーダル全体 */
 .modal {
