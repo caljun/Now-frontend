@@ -4,42 +4,48 @@ document.getElementById('registerForm').addEventListener('submit', async (e) => 
   const name = document.getElementById('name').value;
   const email = document.getElementById('email').value;
   const password = document.getElementById('password').value;
-  const profilePhoto = document.getElementById('profilePhoto').value; // base64でもURLでもOK
+  const fileInput = document.getElementById('profilePhoto');
+  const file = fileInput.files[0];
 
-  try {
-    const res = await fetch('https://now-backend-wah5.onrender.com/api/auth/register', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ name, email, password, profilePhoto })
-    });
+  if (!file) {
+    return alert("プロフィール写真を選択してください");
+  }
 
-    const data = await res.json();
+  const reader = new FileReader();
+  reader.onloadend = async () => {
+    const profilePhoto = reader.result; // base64文字列
 
-    if (res.ok) {
-      // 登録後はログインAPIを自動実行
-      const loginRes = await fetch('https://now-backend-wah5.onrender.com/api/auth/login', {
+    try {
+      const res = await fetch('https://now-backend-wah5.onrender.com/api/auth/register', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ email, password })
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, password, profilePhoto })
       });
 
-      const loginData = await loginRes.json();
+      const data = await res.json();
 
-      if (loginRes.ok) {
-        localStorage.setItem('token', loginData.token);
-        window.location.href = 'area.html';
+      if (res.ok) {
+        const loginRes = await fetch('https://now-backend-wah5.onrender.com/api/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        });
+
+        const loginData = await loginRes.json();
+        if (loginRes.ok) {
+          localStorage.setItem('token', loginData.token);
+          window.location.href = 'area.html';
+        } else {
+          alert('登録は成功しましたが、ログインに失敗しました');
+        }
       } else {
-        alert('登録は成功しましたが、ログインに失敗しました');
+        alert(data.error || '登録に失敗しました');
       }
-    } else {
-      alert(data.error || '登録に失敗しました');
+    } catch (err) {
+      console.error('通信エラー:', err);
+      alert('サーバーとの通信に失敗しました');
     }
-  } catch (err) {
-    console.error('通信エラー:', err);
-    alert('サーバーとの通信に失敗しました');
-  }
+  };
+
+  reader.readAsDataURL(file); // 🔥 base64へ変換して読み込む
 });
