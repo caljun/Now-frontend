@@ -148,14 +148,17 @@ async function fetchAreaFriends(areaId) {
       headers: { Authorization: `Bearer ${token}` }
     });
 
-    const friends = await res.json();
+    const data = await res.json();
+    alert("friends内容: " + JSON.stringify(data.friends));
     const list = document.getElementById('friendList');
     if (list) list.innerHTML = '';
 
     if (!res.ok) {
-      console.error('エリア内の友達取得失敗:', friends.error);
+      console.error('エリア内の友達取得失敗:', data.error);
       return;
     }
+
+    const friends = data.friends;
 
     friends.forEach(friend => {
       if (friend.latitude && friend.longitude) {
