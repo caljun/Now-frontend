@@ -104,14 +104,12 @@
 }
 
 .area-label {
-  background-color: #222;
-  color: white;
-  padding: 8px 14px;
-  border-radius: 20px;
-  font-size: 14px;
+  border: 1px solid #ccc;
+  padding: 6px 12px;
+  border-radius: 8px;
+  text-align: center;
   cursor: pointer;
-  border: 1px solid #444;
-  transition: background-color 0.3s;
+  white-space: nowrap;
 }
 
 .area-label:hover {
@@ -144,4 +142,12 @@
 
 .area-selection-ui .action-buttons button:hover {
   background-color: #333;
+}
+
+.label-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-width: 100%;
+  overflow-x: auto;
 }
