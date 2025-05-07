@@ -154,31 +154,30 @@ async function loadFriendRequests() {
   }
 }
 
-let selectedFriendNowId = null; // モーダル経由で friendNowId を保持
-
-async function addFriendToAreaFromList(friendNowId) {
-  selectedFriendNowId = friendNowId;
-
-  // モーダル表示
-  const modal = document.getElementById('areaSelectModal');
-  const dropdown = document.getElementById('areaDropdown');
-  modal.classList.remove('hidden');
-  dropdown.innerHTML = '<option disabled selected>エリアを選択してください</option>';
+async function handleAreaLabelClick(areaId) {
+  if (!selectedFriendNowId) return;
 
   try {
-    const res = await fetch('https://now-backend-wah5.onrender.com/api/areas/my', {
-      headers: { Authorization: `Bearer ${token}` }
+    const res = await fetch(`https://now-backend-wah5.onrender.com/api/areas/${areaId}/add-friend`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ friendNowId: selectedFriendNowId })
     });
-    const areas = await res.json();
 
-    areas.forEach(area => {
-      const opt = document.createElement('option');
-      opt.value = area._id;
-      opt.textContent = area.name;
-      dropdown.appendChild(opt);
-    });
+    const data = await res.json();
+    if (res.ok) {
+      alert('エリアに追加しました');
+    } else {
+      alert(data.error || '追加に失敗しました');
+    }
   } catch (err) {
-    alert('エリア一覧の取得に失敗しました');
+    alert('通信エラー: ' + err.message);
+  } finally {
+    document.getElementById('areaLabelBox').classList.add('hidden');
+    selectedFriendNowId = null;
   }
 }
 
@@ -187,39 +186,4 @@ document.addEventListener('DOMContentLoaded', () => {
   loadFriends();
   loadFriendRequests();
   document.getElementById('addFriendForm').addEventListener('submit', handleAddFriendSubmit);
-
-  // ✅ 「追加」ボタン処理
-  document.getElementById('confirmAreaAddBtn').addEventListener('click', async () => {
-    const selectedAreaId = document.getElementById('areaDropdown').value;
-    if (!selectedAreaId || !selectedFriendNowId) return alert('エリアを選択してください');
-
-    try {
-      const res = await fetch(`https://now-backend-wah5.onrender.com/api/areas/${selectedAreaId}/add-friend`, {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ friendNowId: selectedFriendNowId })
-      });
-
-      const data = await res.json();
-      if (res.ok) {
-        alert('エリアに追加しました');
-        document.getElementById('areaSelectModal').classList.add('hidden');
-        selectedFriendNowId = null;
-      } else {
-        alert(data.error || '追加に失敗しました');
-      }
-    } catch (err) {
-      alert('通信エラー: ' + err.message);
-    }
-  });
-
-  // ✅ 「キャンセル」ボタン処理
-  document.getElementById('cancelAreaAddBtn').addEventListener('click', () => {
-    document.getElementById('areaSelectModal').classList.add('hidden');
-    selectedFriendNowId = null;
-  });
 });
-
