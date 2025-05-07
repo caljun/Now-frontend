@@ -161,7 +161,6 @@ async function handleAddFriendSubmit(e) {
 
 async function acceptFriend(friendId) {
   try {
-    // まずリクエストを承認
     const res = await fetch('https://now-backend-wah5.onrender.com/api/friends/accept', {
       method: 'POST',
       headers: {
@@ -176,25 +175,7 @@ async function acceptFriend(friendId) {
       return alert(data.error || '承認に失敗しました');
     }
 
-    // ✅ 承認成功 → 選択中のエリアIDを取得して、そこに追加
-    const areaId = document.getElementById('areaSelect').value;
-    const areaRes = await fetch(`https://now-backend-wah5.onrender.com/api/areas/${areaId}/add-friend`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      },
-      body: JSON.stringify({ friendNowId: data.friendNowId }) // ← friendNowId を返すようにサーバ側調整必要
-    });
-
-    const areaData = await areaRes.json();
-    if (!areaRes.ok) {
-      console.warn('エリア追加に失敗:', areaData.error);
-      alert('友達は承認されましたが、エリア追加に失敗しました');
-    } else {
-      alert('友達を承認し、エリアにも追加しました');
-    }
-
+    alert('友達リクエストを承認しました');
     loadFriends();
     loadFriendRequests();
 
@@ -204,6 +185,30 @@ async function acceptFriend(friendId) {
   }
 }
 
+async function addFriendToAreaFromList(friendNowId) {
+  const areaId = prompt("追加するエリアIDを入力してください"); // 後でselect化も可能
+  if (!areaId) return;
+
+  try {
+    const res = await fetch(`https://now-backend-wah5.onrender.com/api/areas/${areaId}/add-friend`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ friendNowId })
+    });
+
+    const data = await res.json();
+    if (res.ok) {
+      alert('エリアに追加しました');
+    } else {
+      alert(data.error || '追加に失敗しました');
+    }
+  } catch (err) {
+    alert('通信エラー: ' + err.message);
+  }
+}
 
 // 初期化
 document.addEventListener('DOMContentLoaded', () => {
