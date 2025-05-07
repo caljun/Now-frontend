@@ -110,6 +110,7 @@
   text-align: center;
   cursor: pointer;
   white-space: nowrap;
+  max-width: 100%;
 }
 
 .area-label:hover {
