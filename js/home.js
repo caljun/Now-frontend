@@ -158,8 +158,7 @@ async function fetchAreaFriends(areaId) {
     }
 
     friends.forEach(friend => {
-      const loc = friend.location;
-      if (loc?.latitude && loc?.longitude) {
+      if (friend.latitude && friend.longitude) {
         const icon = L.divIcon({
           className: 'custom-label',
           html: `<div class="label-box">${friend.name}</div>`,
@@ -167,7 +166,7 @@ async function fetchAreaFriends(areaId) {
           iconAnchor: [50, 32]
         });
     
-        L.marker([loc.latitude, loc.longitude], { icon })
+        L.marker([friend.latitude, friend.longitude], { icon })
           .addTo(window.map);
 
         if (list) {
