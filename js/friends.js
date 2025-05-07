@@ -12,21 +12,17 @@ function parseJwt(token) {
 const token = localStorage.getItem('token');
 if (token) parseJwt(token);
 
-// ユーザーの Now ID から MongoDB の _id を取得
+// Now IDから_userIdを取得
 async function getUserIdByNowId(nowId) {
-  try {
-    const res = await fetch(`https://now-backend-wah5.onrender.com/api/auth/user-by-nowid/${nowId}`, {
-      headers: { 'Authorization': `Bearer ${token}` }
-    });
-    const data = await res.json();
-    if (!res.ok) throw new Error(data.error || 'ユーザー取得に失敗');
-    return data.id;
-  } catch (err) {
-    throw new Error('ユーザー検索エラー: ' + err.message);
-  }
+  const res = await fetch(`https://now-backend-wah5.onrender.com/api/auth/user-by-nowid/${nowId}`, {
+    headers: { 'Authorization': `Bearer ${token}` }
+  });
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.error || 'ユーザー取得に失敗');
+  return data.id;
 }
 
-// 友達リクエストを送る
+// フレンド申請送信
 async function sendFriendRequest(friendId) {
   const res = await fetch('https://now-backend-wah5.onrender.com/api/friends/request', {
     method: 'POST',
@@ -41,7 +37,44 @@ async function sendFriendRequest(friendId) {
   if (!res.ok) throw new Error(data.error || 'リクエスト送信失敗');
 }
 
-// フレンド一覧取得
+// ✅ フォーム送信処理（areaId削除済）
+async function handleAddFriendSubmit(e) {
+  e.preventDefault();
+  const friendNowId = document.getElementById('friendNowId').value.trim();
+  if (!friendNowId) return alert('Now IDを入力してください');
+
+  try {
+    const friendId = await getUserIdByNowId(friendNowId);
+    await sendFriendRequest(friendId);
+    alert('友達申請が送られました');
+  } catch (err) {
+    alert(err.message);
+  }
+}
+
+// 承認処理
+async function acceptFriend(friendId) {
+  try {
+    const res = await fetch('https://now-backend-wah5.onrender.com/api/friends/accept', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify({ friendId })
+    });
+
+    const data = await res.json();
+    if (!res.ok) return alert(data.error || '承認に失敗しました');
+    alert('友達リクエストを承認しました');
+    loadFriends();
+    loadFriendRequests();
+  } catch (err) {
+    alert('通信エラーが発生しました');
+  }
+}
+
+// ✅ 友達一覧に＋エリア追加ボタン
 async function loadFriends() {
   try {
     const res = await fetch('https://now-backend-wah5.onrender.com/api/friends/list', {
@@ -68,7 +101,11 @@ async function loadFriends() {
         id.textContent = `ID: ${friend.id}`;
         id.classList.add('id');
 
-        li.append(name, id);
+        const addBtn = document.createElement('button');
+        addBtn.textContent = '＋エリア追加';
+        addBtn.onclick = () => addFriendToAreaFromList(friend.id);
+
+        li.append(name, id, addBtn);
         friendList.appendChild(li);
       });
     }
@@ -77,7 +114,7 @@ async function loadFriends() {
   }
 }
 
-// リクエスト一覧表示
+// リクエスト表示
 async function loadFriendRequests() {
   try {
     const res = await fetch('https://now-backend-wah5.onrender.com/api/friends/requests', {
@@ -106,7 +143,6 @@ async function loadFriendRequests() {
 
         const btn = document.createElement('button');
         btn.textContent = '承認';
-        btn.classList.add('btn');
         btn.onclick = () => acceptFriend(request.id);
 
         li.append(name, id, btn);
@@ -118,75 +154,9 @@ async function loadFriendRequests() {
   }
 }
 
-// エリア選択セレクトを構築
-async function setupAreaSelect() {
-  try {
-    const res = await fetch('https://now-backend-wah5.onrender.com/api/areas/my', {
-      headers: { 'Authorization': `Bearer ${token}` }
-    });
-    const areas = await res.json();
-    const select = document.getElementById('areaSelect');
-    select.innerHTML = '';
-
-    areas.forEach(area => {
-      const opt = document.createElement('option');
-      opt.value = area._id;
-      opt.textContent = area.name;
-      select.appendChild(opt);
-    });
-  } catch (err) {
-    console.error('エリア取得エラー:', err);
-  }
-}
-
-// フォーム送信時の処理：申請 → 成功後にエリア追加
-async function handleAddFriendSubmit(e) {
-  e.preventDefault();
-
-  const areaId = document.getElementById('areaSelect').value;
-  const friendNowId = document.getElementById('friendNowId').value.trim();
-
-  if (!friendNowId) return alert('Now IDを入力してください');
-
-  try {
-    const friendId = await getUserIdByNowId(friendNowId);
-    await sendFriendRequest(friendId);
-
-    alert('リクエストを送信しました。相手の承認後、エリアに自動追加されます。');
-
-  } catch (err) {
-    alert(err.message);
-  }
-}
-
-async function acceptFriend(friendId) {
-  try {
-    const res = await fetch('https://now-backend-wah5.onrender.com/api/friends/accept', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      },
-      body: JSON.stringify({ friendId })
-    });
-
-    const data = await res.json();
-    if (!res.ok) {
-      return alert(data.error || '承認に失敗しました');
-    }
-
-    alert('友達リクエストを承認しました');
-    loadFriends();
-    loadFriendRequests();
-
-  } catch (err) {
-    console.error('通信エラー:', err);
-    alert('通信エラーが発生しました');
-  }
-}
-
+// ✅ エリア追加（今はpromptでID指定、後でselect対応も可）
 async function addFriendToAreaFromList(friendNowId) {
-  const areaId = prompt("追加するエリアIDを入力してください"); // 後でselect化も可能
+  const areaId = prompt("追加するエリアIDを入力してください"); // 後でセレクトに置換可能
   if (!areaId) return;
 
   try {
@@ -210,11 +180,9 @@ async function addFriendToAreaFromList(friendNowId) {
   }
 }
 
-// 初期化
+// ✅ 初期化（setupAreaSelectは削除）
 document.addEventListener('DOMContentLoaded', () => {
-  setupAreaSelect();
   loadFriends();
   loadFriendRequests();
-
   document.getElementById('addFriendForm').addEventListener('submit', handleAddFriendSubmit);
 });
