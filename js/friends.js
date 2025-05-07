@@ -98,12 +98,12 @@ async function loadFriends() {
         name.classList.add('name');
 
         const id = document.createElement('span');
-        id.textContent = `ID: ${friend.id}`;
+        id.textContent = `Now ID: ${friend.nowId}`;
         id.classList.add('id');
 
         const addBtn = document.createElement('button');
         addBtn.textContent = '＋エリア追加';
-        addBtn.onclick = () => addFriendToAreaFromList(friend.id);
+        addBtn.onclick = () => addFriendToAreaFromList(friend.nowId);
 
         li.append(name, id, addBtn);
         friendList.appendChild(li);
