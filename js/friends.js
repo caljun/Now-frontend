@@ -154,36 +154,87 @@ async function loadFriendRequests() {
   }
 }
 
-async function handleAreaLabelClick(areaId) {
-  if (!selectedFriendNowId) return;
+let selectedFriendNowId = null;
+let selectedAreaId = null;
+
+async function addFriendToAreaFromList(friendNowId) {
+  selectedFriendNowId = friendNowId;
+  selectedAreaId = null;
+
+  const labelBox = document.getElementById('areaLabelBox');
+  const labelList = document.getElementById('areaLabelList');
+  const actionButtons = document.getElementById('areaActionButtons');
+
+  labelBox.classList.remove('hidden');
+  actionButtons.classList.remove('hidden');
+  labelList.innerHTML = '';
 
   try {
-    const res = await fetch(`https://now-backend-wah5.onrender.com/api/areas/${areaId}/add-friend`, {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ friendNowId: selectedFriendNowId })
+    const res = await fetch('https://now-backend-wah5.onrender.com/api/areas/my', {
+      headers: { Authorization: `Bearer ${token}` }
     });
+    const areas = await res.json();
 
-    const data = await res.json();
-    if (res.ok) {
-      alert('エリアに追加しました');
-    } else {
-      alert(data.error || '追加に失敗しました');
-    }
+    areas.forEach(area => {
+      const label = document.createElement('div');
+      label.textContent = area.name;
+      label.classList.add('area-label');
+      label.onclick = () => {
+        document.querySelectorAll('.area-label').forEach(l => l.classList.remove('selected'));
+        label.classList.add('selected');
+        selectedAreaId = area._id;
+      };
+      labelList.appendChild(label);
+    });
   } catch (err) {
-    alert('通信エラー: ' + err.message);
-  } finally {
-    document.getElementById('areaLabelBox').classList.add('hidden');
-    selectedFriendNowId = null;
+    alert('エリア一覧の取得に失敗しました');
   }
 }
+
 
 // ✅ 初期化（setupAreaSelectは削除）
 document.addEventListener('DOMContentLoaded', () => {
   loadFriends();
   loadFriendRequests();
   document.getElementById('addFriendForm').addEventListener('submit', handleAddFriendSubmit);
+
+  // ✅ 「追加」ボタン処理
+  document.getElementById('confirmAreaAddBtn').addEventListener('click', async () => {
+    if (!selectedFriendNowId || !selectedAreaId) {
+      return alert('エリアを選択してください');
+    }
+
+    try {
+      const res = await fetch(`https://now-backend-wah5.onrender.com/api/areas/${selectedAreaId}/add-friend`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ friendNowId: selectedFriendNowId })
+      });
+
+      const data = await res.json();
+      if (res.ok) {
+        alert('エリアに追加しました');
+      } else {
+        alert(data.error || '追加に失敗しました');
+      }
+    } catch (err) {
+      alert('通信エラー: ' + err.message);
+    } finally {
+      document.getElementById('areaLabelBox').classList.add('hidden');
+      document.getElementById('areaActionButtons').classList.add('hidden');
+      selectedFriendNowId = null;
+      selectedAreaId = null;
+    }
+  });
+
+  // ✅ 「キャンセル」ボタン処理
+  document.getElementById('cancelAreaAddBtn').addEventListener('click', () => {
+    document.getElementById('areaLabelBox').classList.add('hidden');
+    document.getElementById('areaActionButtons').classList.add('hidden');
+    selectedFriendNowId = null;
+    selectedAreaId = null;
+  });
 });
