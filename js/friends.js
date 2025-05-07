@@ -161,48 +161,28 @@ async function addFriendToAreaFromList(friendNowId) {
   selectedFriendNowId = friendNowId;
   selectedAreaId = null;
 
-  const labelBox = document.getElementById('areaLabelBox');
-  const labelList = document.getElementById('areaLabelList');
-  const actionButtons = document.getElementById('areaActionButtons');
+  // すでに開いてる UI は全て閉じる
+  document.querySelectorAll('.area-selection-ui').forEach(el => el.remove());
 
-  labelBox.classList.remove('hidden');
-  actionButtons.classList.remove('hidden');
-  labelList.innerHTML = '';
+  // 対象の友達カードを特定
+  const targetLi = Array.from(document.querySelectorAll('#friendList .friend-card'))
+    .find(li => li.querySelector('.id')?.textContent.includes(friendNowId));
 
-  try {
-    const res = await fetch('https://now-backend-wah5.onrender.com/api/areas/my', {
-      headers: { Authorization: `Bearer ${token}` }
-    });
-    const areas = await res.json();
+  if (!targetLi) return alert('対象の友達が見つかりません');
 
-    areas.forEach(area => {
-      const label = document.createElement('div');
-      label.textContent = area.name;
-      label.classList.add('area-label');
-      label.onclick = () => {
-        document.querySelectorAll('.area-label').forEach(l => l.classList.remove('selected'));
-        label.classList.add('selected');
-        selectedAreaId = area._id;
-      };
-      labelList.appendChild(label);
-    });
-  } catch (err) {
-    alert('エリア一覧の取得に失敗しました');
-  }
-}
+  const uiWrapper = document.createElement('div');
+  uiWrapper.className = 'area-selection-ui';
 
+  const labelList = document.createElement('div');
+  labelList.className = 'label-list';
 
-// ✅ 初期化（setupAreaSelectは削除）
-document.addEventListener('DOMContentLoaded', () => {
-  loadFriends();
-  loadFriendRequests();
-  document.getElementById('addFriendForm').addEventListener('submit', handleAddFriendSubmit);
+  const actionButtons = document.createElement('div');
+  actionButtons.className = 'action-buttons';
 
-  // ✅ 「追加」ボタン処理
-  document.getElementById('confirmAreaAddBtn').addEventListener('click', async () => {
-    if (!selectedFriendNowId || !selectedAreaId) {
-      return alert('エリアを選択してください');
-    }
+  const addBtn = document.createElement('button');
+  addBtn.textContent = '追加';
+  addBtn.onclick = async () => {
+    if (!selectedAreaId) return alert('エリアを選択してください');
 
     try {
       const res = await fetch(`https://now-backend-wah5.onrender.com/api/areas/${selectedAreaId}/add-friend`, {
@@ -223,18 +203,47 @@ document.addEventListener('DOMContentLoaded', () => {
     } catch (err) {
       alert('通信エラー: ' + err.message);
     } finally {
-      document.getElementById('areaLabelBox').classList.add('hidden');
-      document.getElementById('areaActionButtons').classList.add('hidden');
-      selectedFriendNowId = null;
-      selectedAreaId = null;
+      uiWrapper.remove();
     }
-  });
+  };
 
-  // ✅ 「キャンセル」ボタン処理
-  document.getElementById('cancelAreaAddBtn').addEventListener('click', () => {
-    document.getElementById('areaLabelBox').classList.add('hidden');
-    document.getElementById('areaActionButtons').classList.add('hidden');
-    selectedFriendNowId = null;
-    selectedAreaId = null;
-  });
+  const cancelBtn = document.createElement('button');
+  cancelBtn.textContent = 'キャンセル';
+  cancelBtn.onclick = () => uiWrapper.remove();
+
+  actionButtons.append(addBtn, cancelBtn);
+  uiWrapper.appendChild(labelList);
+  uiWrapper.appendChild(actionButtons);
+
+  targetLi.appendChild(uiWrapper);
+
+  // エリア一覧取得
+  try {
+    const res = await fetch('https://now-backend-wah5.onrender.com/api/areas/my', {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    const areas = await res.json();
+
+    areas.forEach(area => {
+      const label = document.createElement('div');
+      label.textContent = area.name;
+      label.className = 'area-label';
+      label.onclick = () => {
+        selectedAreaId = area._id;
+        // 全部から選択クラス外して、これだけにする
+        labelList.querySelectorAll('.area-label').forEach(l => l.classList.remove('selected'));
+        label.classList.add('selected');
+      };
+      labelList.appendChild(label);
+    });
+  } catch (err) {
+    alert('エリア一覧の取得に失敗しました');
+  }
+}
+
+// ✅ 初期化（setupAreaSelectは削除）
+document.addEventListener('DOMContentLoaded', () => {
+  loadFriends();
+  loadFriendRequests();
+  document.getElementById('addFriendForm').addEventListener('submit', handleAddFriendSubmit);
 });
