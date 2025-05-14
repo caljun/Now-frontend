@@ -161,10 +161,8 @@ async function addFriendToAreaFromList(friendNowId) {
   selectedFriendNowId = friendNowId;
   selectedAreaId = null;
 
-  // すでに開いてる UI は全て閉じる
   document.querySelectorAll('.area-selection-ui').forEach(el => el.remove());
 
-  // 対象の友達カードを特定
   const targetLi = Array.from(document.querySelectorAll('#friendList .friend-card'))
     .find(li => li.querySelector('.id')?.textContent.includes(friendNowId));
 
@@ -180,25 +178,28 @@ async function addFriendToAreaFromList(friendNowId) {
   actionButtons.className = 'action-buttons';
 
   const addBtn = document.createElement('button');
-  addBtn.textContent = '追加';
+  addBtn.textContent = '申請する';
   addBtn.onclick = async () => {
     if (!selectedAreaId) return alert('エリアを選択してください');
 
     try {
-      const res = await fetch(`https://now-backend-wah5.onrender.com/api/areas/${selectedAreaId}/add-friend`, {
+      const res = await fetch('/api/areas/requests/request-add', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ friendNowId: selectedFriendNowId })
+        body: JSON.stringify({
+          toUserNowId: selectedFriendNowId,
+          areaId: selectedAreaId
+        })
       });
 
       const data = await res.json();
       if (res.ok) {
-        alert('エリアに追加しました');
+        alert('エリア追加のリクエストを送信しました');
       } else {
-        alert(data.error || '追加に失敗しました');
+        alert(data.error || '送信に失敗しました');
       }
     } catch (err) {
       alert('通信エラー: ' + err.message);
@@ -217,7 +218,6 @@ async function addFriendToAreaFromList(friendNowId) {
 
   targetLi.appendChild(uiWrapper);
 
-  // エリア一覧取得
   try {
     const res = await fetch('https://now-backend-wah5.onrender.com/api/areas/my', {
       headers: { Authorization: `Bearer ${token}` }
@@ -230,7 +230,6 @@ async function addFriendToAreaFromList(friendNowId) {
       label.className = 'area-label';
       label.onclick = () => {
         selectedAreaId = area._id;
-        // 全部から選択クラス外して、これだけにする
         labelList.querySelectorAll('.area-label').forEach(l => l.classList.remove('selected'));
         label.classList.add('selected');
       };
