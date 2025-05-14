@@ -54,24 +54,6 @@
     margin-top: 5px;
   }
   
-  /* ✨ Leafletのカスタムポップアップ */
-  .leaflet-popup-content-wrapper {
-    background: #222;
-    color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-  }
-  
-  .leaflet-popup-content {
-    font-size: 14px;
-    margin: 8px 12px;
-    text-align: center;
-  }
-  
-  .leaflet-popup-tip {
-    background: #222;
-  }
-  
   .custom-label .label-box {
     background-color: white;
     color: black;
