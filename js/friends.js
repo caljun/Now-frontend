@@ -241,9 +241,71 @@ async function addFriendToAreaFromList(friendNowId) {
   }
 }
 
+// エリア追加リクエスト読み込み
+async function loadAreaRequests() {
+  try {
+    const res = await fetch('/api/areas/requests', {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    const data = await res.json();
+    const list = document.getElementById('areaRequestList');
+    list.innerHTML = '';
+
+    if (data.requests.length === 0) {
+      list.innerHTML = '<li>リクエストはありません</li>';
+      return;
+    }
+
+    data.requests.forEach(req => {
+      const li = document.createElement('li');
+      li.classList.add('friend-card');
+
+      const name = document.createElement('div');
+      name.textContent = `${req.fromUser.name} からのリクエスト`;
+      name.classList.add('name');
+
+      const area = document.createElement('div');
+      area.textContent = `エリア名: ${req.area.name}`;
+      area.classList.add('id');
+
+      const approveBtn = document.createElement('button');
+      approveBtn.textContent = '承認';
+      approveBtn.onclick = () => respondAreaRequest(req._id, true);
+
+      const rejectBtn = document.createElement('button');
+      rejectBtn.textContent = '拒否';
+      rejectBtn.onclick = () => respondAreaRequest(req._id, false);
+
+      li.append(name, area, approveBtn, rejectBtn);
+      list.appendChild(li);
+    });
+  } catch (err) {
+    console.error('エリアリクエスト取得エラー:', err);
+  }
+}
+
+// 承認・拒否処理
+async function respondAreaRequest(requestId, approve) {
+  const url = `/api/areas/requests/${requestId}/${approve ? 'approve' : 'reject'}`;
+  try {
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    const data = await res.json();
+    if (!res.ok) return alert(data.error || '操作に失敗しました');
+
+    alert(data.message);
+    loadAreaRequests();
+  } catch (err) {
+    alert('通信エラー');
+  }
+}
+
 // ✅ 初期化（setupAreaSelectは削除）
 document.addEventListener('DOMContentLoaded', () => {
   loadFriends();
   loadFriendRequests();
+  loadAreaRequests(); // ← 追加
   document.getElementById('addFriendForm').addEventListener('submit', handleAddFriendSubmit);
 });
