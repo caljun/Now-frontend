@@ -5,6 +5,26 @@ if (!token) {
   window.location.href = 'login.html';
 }
 
+mapboxgl.accessToken = 'pk.eyJ1IjoiY2FsanVuIiwiYSI6ImNtYW83bHUzOTAxaWcybnB0MTlvaWY3NjcifQ.JwYLaH_HlbrjhgBeJxhLOw'; // ← ご自身のトークンをここに入れてください
+
+let map;
+
+// 初期化と現在地取得
+async function initMapbox(lat, lng) {
+  map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/mapbox/streets-v11',
+    center: [lng, lat],
+    zoom: 16
+  });
+
+  // 現在地ピン
+  new mapboxgl.Marker({ color: 'blue' })
+    .setLngLat([lng, lat])
+    .setPopup(new mapboxgl.Popup().setText('あなたの現在地'))
+    .addTo(map);
+}
+
 document.addEventListener('DOMContentLoaded', async () => {
   await loadAreaList();
   await sendCurrentLocation();
@@ -31,18 +51,12 @@ async function sendCurrentLocation() {
       });
 
       const data = await res.json();
-
       if (!res.ok) {
         alert(data.error || '位置情報送信に失敗しました');
         return;
       }
 
-      console.log('位置情報送信成功:', data);
-
-      const { map } = initMap();
-      window.map = map;
-      startWatchingLocation();
-
+      await initMapbox(latitude, longitude);
       const selectedAreaId = localStorage.getItem('selectedAreaId');
       if (selectedAreaId) {
         await fetchAreaFriends(selectedAreaId);
@@ -55,68 +69,43 @@ async function sendCurrentLocation() {
     }
   }, (error) => {
     console.error('位置情報の取得に失敗しました', error);
-    const messages = {
-      1: '位置情報の使用が拒否されています。「設定 > アプリ > Safari > 位置情報」で「確認」または「許可」に変更してください。',
-      2: '位置情報が取得できません。通信状況を確認してください。',
-      default: '未知の理由で位置情報の取得に失敗しました。'
-    };
-    alert(messages[error.code] || messages.default);
+    alert('位置情報の取得に失敗しました');
   });
 }
 
-function startWatchingLocation() {
-  navigator.geolocation.watchPosition(
-    async (position) => {
-      const { latitude, longitude } = position.coords;
+async function fetchAreaFriends(areaId) {
+  try {
+    const res = await fetch(`https://now-backend-wah5.onrender.com/api/areas/${areaId}/friends-in`, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
 
-      const res = await fetch('https://now-backend-wah5.onrender.com/api/location', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
-        },
-        body: JSON.stringify({ latitude, longitude })
-      });
-
-      if (!res.ok) {
-        const errText = await res.text();
-        console.error('位置情報の更新失敗:', res.status, errText);
-        return;
-      }
-
-      if (!window.myMarker) {
-        window.myMarker = L.marker([latitude, longitude])
-          .addTo(window.map)
-          .bindPopup("あなたの現在地");
-      } else {
-        window.myMarker.setLatLng([latitude, longitude]);
-      }
-    },
-    (err) => {
-      console.error('位置情報の取得に失敗しました', err);
-      const messages = {
-        1: '位置情報の使用が拒否されています。',
-        2: '位置情報が取得できません。通信状況を確認してください。',
-        default: '未知の理由で位置情報の取得に失敗しました。'
-      };
-      alert(messages[err.code] || messages.default);
-    },
-    {
-      enableHighAccuracy: true,
-      maximumAge: 5000,
-      timeout: 10000
+    const data = await res.json();
+    if (!res.ok) {
+      console.error('エリア内の友達取得失敗:', data.error);
+      return;
     }
-  );
+
+    const friends = data.friends;
+
+    friends.forEach(friend => {
+      if (friend.latitude && friend.longitude) {
+        new mapboxgl.Marker()
+          .setLngLat([friend.longitude, friend.latitude])
+          .setPopup(new mapboxgl.Popup().setText(friend.name))
+          .addTo(map);
+      }
+    });
+  } catch (err) {
+    console.error('通信エラー:', err);
+  }
 }
 
 async function loadAreaList() {
   const select = document.getElementById('areaSelect');
-
   try {
     const res = await fetch('https://now-backend-wah5.onrender.com/api/areas/my', {
       headers: { 'Authorization': `Bearer ${token}` }
     });
-
     const areas = await res.json();
     select.innerHTML = '';
 
@@ -142,38 +131,6 @@ async function loadAreaList() {
   }
 }
 
-async function fetchAreaFriends(areaId) {
-  try {
-    const res = await fetch(`https://now-backend-wah5.onrender.com/api/areas/${areaId}/friends-in`, {
-      headers: { Authorization: `Bearer ${token}` }
-    });
-
-    const data = await res.json();
-    if (!res.ok) {
-      console.error('エリア内の友達取得失敗:', data.error);
-      return;
-    }
-
-    const friends = data.friends;
-
-    friends.forEach(friend => {
-      if (friend.latitude && friend.longitude) {
-        const icon = L.divIcon({
-          className: 'custom-label',
-          html: `<div class="label-box">${friend.name}</div>`,
-          iconSize: [100, 24],
-          iconAnchor: [50, 32]
-        });
-
-        L.marker([friend.latitude, friend.longitude], { icon })
-          .addTo(window.map);
-      }
-    });
-  } catch (err) {
-    console.error('通信エラー:', err);
-  }
-}
-
 function setupLogout() {
   const logoutBtn = document.getElementById('logoutBtn');
   if (logoutBtn) {
@@ -184,3 +141,4 @@ function setupLogout() {
     });
   }
 }
+

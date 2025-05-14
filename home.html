@@ -8,7 +8,6 @@
   <!-- CSS -->
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/home.css" />
-  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 
   <!-- フォント・PWA -->
   <link rel="manifest" href="manifest.json" />
@@ -18,6 +17,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="Now" />
   <link rel="apple-touch-icon" href="assets/now-icon.png" />
+  <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet" />
+  <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
 </head>
 
 <body>
@@ -68,11 +69,7 @@
     </a>
   </nav>
 
-  <!-- Leaflet -->
-  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-
   <!-- アプリ用スクリプト -->
-  <script src="utils/map.js"></script>
   <script defer src="js/home.js"></script>
 
   <!-- Service Worker -->
