@@ -108,5 +108,7 @@ document.getElementById('saveBtn').addEventListener('click', async () => {
   }
 });
 
-// 初期化
-initMapbox();
+// 初期化（修正済）
+document.addEventListener('DOMContentLoaded', () => {
+  initMapbox();
+});
