@@ -77,12 +77,12 @@ function startWatchingLocation() {
         },
         body: JSON.stringify({ latitude, longitude })
       });
-      
+
       if (!res.ok) {
         const errText = await res.text();
         console.error('位置情報の更新失敗:', res.status, errText);
         return;
-      }      
+      }
 
       if (!window.myMarker) {
         window.myMarker = L.marker([latitude, longitude])
@@ -149,10 +149,6 @@ async function fetchAreaFriends(areaId) {
     });
 
     const data = await res.json();
-    alert("friends内容: " + JSON.stringify(data.friends));
-    const list = document.getElementById('friendList');
-    if (list) list.innerHTML = '';
-
     if (!res.ok) {
       console.error('エリア内の友達取得失敗:', data.error);
       return;
@@ -168,20 +164,9 @@ async function fetchAreaFriends(areaId) {
           iconSize: [100, 24],
           iconAnchor: [50, 32]
         });
-    
+
         L.marker([friend.latitude, friend.longitude], { icon })
           .addTo(window.map);
-
-        if (list) {
-          const item = document.createElement('li');
-          item.className = 'friend-card';
-          item.innerHTML = `
-            <p><strong>${friend.name}</strong></p>
-            <p>${friend.email}</p>
-            <img src="${friend.profilePhoto}" alt="プロフィール画像" width="100" />
-          `;
-          list.appendChild(item);
-        }
       }
     });
   } catch (err) {
