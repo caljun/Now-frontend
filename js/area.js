@@ -35,6 +35,10 @@ function startMap(center) {
   });
 
   map.on('click', onMapClick);
+
+  map.on('load', () => {
+    map.resize();
+  })
 }
 
 let currentCoords = [];
