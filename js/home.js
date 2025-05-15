@@ -92,7 +92,8 @@ async function fetchAreaFriends(areaId) {
         new mapboxgl.Marker()
           .setLngLat([friend.longitude, friend.latitude])
           .setPopup(new mapboxgl.Popup().setText(friend.name))
-          .addTo(map);
+          .addTo(map)
+          .togglePopup();
       }
     });
   } catch (err) {
