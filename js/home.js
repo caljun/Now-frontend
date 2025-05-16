@@ -75,6 +75,12 @@ async function sendCurrentLocation() {
 
 async function fetchAreaFriends(areaId) {
   try {
+    // 既存のマーカーをクリア
+    if (window.friendMarkers) {
+      window.friendMarkers.forEach(marker => marker.remove());
+    }
+    window.friendMarkers = [];
+
     const res = await fetch(`https://now-backend-wah5.onrender.com/api/areas/${areaId}/friends-in`, {
       headers: { Authorization: `Bearer ${token}` }
     });
@@ -89,11 +95,28 @@ async function fetchAreaFriends(areaId) {
 
     friends.forEach(friend => {
       if (friend.latitude && friend.longitude) {
-        new mapboxgl.Marker()
+        // カスタムマーカー要素の作成
+        const el = document.createElement('div');
+        el.className = 'friend-marker';
+        
+        // 名前を表示する要素
+        const nameEl = document.createElement('div');
+        nameEl.className = 'friend-name';
+        nameEl.textContent = friend.name;
+        
+        // マーカーのコンテナ
+        const markerEl = document.createElement('div');
+        markerEl.className = 'marker-pin';
+        
+        el.appendChild(nameEl);
+        el.appendChild(markerEl);
+
+        // マーカーの作成と追加
+        const marker = new mapboxgl.Marker(el)
           .setLngLat([friend.longitude, friend.latitude])
-          .setPopup(new mapboxgl.Popup().setText(friend.name))
-          .addTo(map)
-          .togglePopup();
+          .addTo(map);
+
+        window.friendMarkers.push(marker);
       }
     });
   } catch (err) {
