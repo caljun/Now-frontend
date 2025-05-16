@@ -31,10 +31,10 @@
       エリアを囲むことができます。<br>
       エリア名を入力して保存してください。
     </p>
-    <form id="areaForm">
+    <form id="areaForm" onsubmit="return false;">
       <input type="text" id="areaName" placeholder="エリア名" required />
       <div id="map"></div>
-      <button class="btn" type="submit">保存</button>
+      <button id="saveBtn" class="btn" type="button">保存</button>
     </form>
   </main>
 

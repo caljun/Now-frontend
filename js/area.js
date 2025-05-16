@@ -15,30 +15,45 @@ let drawnPolygon = null;
 function initMapbox() {
   const fallback = [139.767125, 35.681236]; // 東京駅
 
+  console.log('Initializing Mapbox...'); // デバッグログ
+
   navigator.geolocation.getCurrentPosition(
     (position) => {
+      console.log('Got position:', position); // デバッグログ
       const { latitude, longitude } = position.coords;
       startMap([longitude, latitude]);
     },
-    () => {
+    (error) => {
+      console.error('Geolocation error:', error); // エラーログ
       startMap(fallback);
     }
   );
 }
 
 function startMap(center) {
-  map = new mapboxgl.Map({
-    container: 'map',
-    style: 'mapbox://styles/mapbox/streets-v11',
-    center,
-    zoom: 15
-  });
+  console.log('Starting map with center:', center); // デバッグログ
+  
+  try {
+    map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/mapbox/streets-v11',
+      center,
+      zoom: 15
+    });
 
-  map.on('click', onMapClick);
+    map.on('click', onMapClick);
 
-  map.on('load', () => {
-    map.resize();
-  })
+    map.on('load', () => {
+      console.log('Map loaded successfully'); // デバッグログ
+      map.resize();
+    });
+
+    map.on('error', (e) => {
+      console.error('Mapbox error:', e); // エラーログ
+    });
+  } catch (error) {
+    console.error('Error creating map:', error); // エラーログ
+  }
 }
 
 let currentCoords = [];
