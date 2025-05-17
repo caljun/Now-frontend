@@ -151,3 +151,22 @@ label {
 .tab-item.active svg {
   stroke: #fff;
 }
+
+/* Mapboxポップアップのスタイル調整 */
+.mapboxgl-popup {
+  z-index: 1000;
+}
+
+.mapboxgl-popup-content {
+  background-color: rgba(0, 0, 0, 0.8) !important;
+  color: white !important;
+  padding: 8px 12px !important;
+  border-radius: 8px !important;
+  font-weight: bold !important;
+  font-size: 14px !important;
+}
+
+.mapboxgl-popup-tip {
+  border-top-color: rgba(0, 0, 0, 0.8) !important;
+  border-bottom-color: rgba(0, 0, 0, 0.8) !important;
+}
