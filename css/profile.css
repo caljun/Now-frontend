@@ -227,3 +227,80 @@
     display: none;
   }
   
+/* 設定セクション */
+.settings-section {
+  margin-top: 32px;
+  padding: 20px;
+  background: #1a1a1a;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.settings-title {
+  font-size: 1.2rem;
+  color: #fff;
+  margin-bottom: 20px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #333;
+}
+
+.settings-group {
+  margin-bottom: 24px;
+}
+
+.settings-group h4 {
+  font-size: 1rem;
+  color: #ccc;
+  margin-bottom: 12px;
+}
+
+.setting-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #333;
+}
+
+.setting-item:last-child {
+  border-bottom: none;
+}
+
+.setting-item label {
+  color: #fff;
+  font-size: 0.9rem;
+}
+
+.setting-item input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  accent-color: #088;
+}
+
+.setting-item select {
+  padding: 6px 12px;
+  background: #222;
+  border: 1px solid #444;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 0.9rem;
+}
+
+/* 保存ボタン */
+.save-settings {
+  background: #088;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  margin-top: 16px;
+  width: 100%;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.save-settings:hover {
+  background: #066;
+}
+  

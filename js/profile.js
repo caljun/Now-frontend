@@ -58,6 +58,9 @@ document.addEventListener('DOMContentLoaded', async () => {
       });
     });
 
+    // 設定の読み込みと保存
+    await loadSettings();
+
   } catch (err) {
     console.error(err);
     alert('プロフィール情報の取得に失敗しました');
@@ -118,4 +121,68 @@ document.getElementById('openModalBtn').addEventListener('click', () => {
 
 document.getElementById('closeModalBtn').addEventListener('click', () => {
   document.getElementById('editModal').classList.add('hidden');
+});
+
+// 設定の読み込みと保存
+async function loadSettings() {
+  try {
+    const res = await fetch('https://now-backend-wah5.onrender.com/api/settings', {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    
+    const settings = await res.json();
+    
+    // プライバシー設定の適用
+    document.getElementById('locationSharing').checked = settings.privacy?.locationSharing ?? true;
+    document.getElementById('profileVisibility').value = settings.privacy?.profileVisibility ?? 'friends';
+    document.getElementById('onlineStatus').checked = settings.privacy?.onlineStatus ?? true;
+    
+    // 通知設定の適用
+    document.getElementById('friendRequests').checked = settings.notifications?.friendRequests ?? true;
+    document.getElementById('areaAlerts').checked = settings.notifications?.areaAlerts ?? true;
+    document.getElementById('friendLocation').checked = settings.notifications?.friendLocation ?? true;
+    
+  } catch (err) {
+    console.error('設定の読み込みに失敗:', err);
+  }
+}
+
+// 設定の保存
+async function saveSettings() {
+  const settings = {
+    privacy: {
+      locationSharing: document.getElementById('locationSharing').checked,
+      profileVisibility: document.getElementById('profileVisibility').value,
+      onlineStatus: document.getElementById('onlineStatus').checked
+    },
+    notifications: {
+      friendRequests: document.getElementById('friendRequests').checked,
+      areaAlerts: document.getElementById('areaAlerts').checked,
+      friendLocation: document.getElementById('friendLocation').checked
+    }
+  };
+
+  try {
+    const res = await fetch('https://now-backend-wah5.onrender.com/api/settings', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      },
+      body: JSON.stringify(settings)
+    });
+
+    if (!res.ok) throw new Error('設定の保存に失敗しました');
+    
+    alert('設定を保存しました');
+    
+  } catch (err) {
+    console.error('設定の保存に失敗:', err);
+    alert('設定の保存に失敗しました');
+  }
+}
+
+// 設定変更の監視
+document.querySelectorAll('.setting-item input, .setting-item select').forEach(element => {
+  element.addEventListener('change', saveSettings);
 });

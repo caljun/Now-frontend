@@ -46,6 +46,49 @@
       <h3 class="area-title">エリア一覧</h3>
       <ul id="areaList" class="area-list"></ul>
 
+      <!-- 設定セクション -->
+      <div class="settings-section">
+        <h3 class="settings-title">設定</h3>
+        
+        <!-- プライバシー設定 -->
+        <div class="settings-group">
+          <h4>プライバシー設定</h4>
+          <div class="setting-item">
+            <label for="locationSharing">位置情報の共有</label>
+            <input type="checkbox" id="locationSharing" checked>
+          </div>
+          <div class="setting-item">
+            <label for="profileVisibility">プロフィールの公開範囲</label>
+            <select id="profileVisibility">
+              <option value="friends">友達のみ</option>
+              <option value="public">全員に公開</option>
+              <option value="private">非公開</option>
+            </select>
+          </div>
+          <div class="setting-item">
+            <label for="onlineStatus">オンラインステータスを表示</label>
+            <input type="checkbox" id="onlineStatus" checked>
+          </div>
+        </div>
+
+        <!-- 通知設定 -->
+        <div class="settings-group">
+          <h4>通知設定</h4>
+          <div class="setting-item">
+            <label for="friendRequests">友達リクエスト</label>
+            <input type="checkbox" id="friendRequests" checked>
+          </div>
+          <div class="setting-item">
+            <label for="areaAlerts">エリアの入退出通知</label>
+            <input type="checkbox" id="areaAlerts" checked>
+          </div>
+          <div class="setting-item">
+            <label for="friendLocation">友達の位置情報更新</label>
+            <input type="checkbox" id="friendLocation" checked>
+          </div>
+        </div>
+      </div>
+
       <!-- ログアウトボタン -->
       <button id="logoutBtn" class="logout-btn">ログアウト</button>
     </div>
