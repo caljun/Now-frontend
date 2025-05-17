@@ -11,6 +11,7 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiY2FsanVuIiwiYSI6ImNtYW83bHUzOTAxaWcybnB0MTlva
 
 let map;
 let drawnPolygon = null;
+let markers = []; // マーカーを保持する配列
 
 function initMapbox() {
   const fallback = [139.767125, 35.681236]; // 東京駅
@@ -19,19 +20,19 @@ function initMapbox() {
 
   navigator.geolocation.getCurrentPosition(
     (position) => {
-      console.log('Got position:', position); // デバッグログ
+      console.log('Got position:', position);
       const { latitude, longitude } = position.coords;
       startMap([longitude, latitude]);
     },
     (error) => {
-      console.error('Geolocation error:', error); // エラーログ
+      console.error('Geolocation error:', error);
       startMap(fallback);
     }
   );
 }
 
 function startMap(center) {
-  console.log('Starting map with center:', center); // デバッグログ
+  console.log('Starting map with center:', center);
   
   try {
     map = new mapboxgl.Map({
@@ -43,16 +44,22 @@ function startMap(center) {
 
     map.on('click', onMapClick);
 
+    // 右クリックで最後のポイントを削除
+    map.getCanvas().addEventListener('contextmenu', (e) => {
+      e.preventDefault();
+      removeLastPoint();
+    });
+
     map.on('load', () => {
-      console.log('Map loaded successfully'); // デバッグログ
+      console.log('Map loaded successfully');
       map.resize();
     });
 
     map.on('error', (e) => {
-      console.error('Mapbox error:', e); // エラーログ
+      console.error('Mapbox error:', e);
     });
   } catch (error) {
-    console.error('Error creating map:', error); // エラーログ
+    console.error('Error creating map:', error);
   }
 }
 
@@ -62,7 +69,29 @@ function onMapClick(e) {
   const lngLat = e.lngLat;
   currentCoords.push([lngLat.lng, lngLat.lat]);
 
+  // マーカーを追加
+  const marker = new mapboxgl.Marker({
+    color: '#FF0000',
+    scale: 0.8
+  })
+    .setLngLat(lngLat)
+    .setPopup(new mapboxgl.Popup().setText(`ポイント ${currentCoords.length}`))
+    .addTo(map);
+
+  markers.push(marker);
+  
   drawPolygon();
+}
+
+function removeLastPoint() {
+  if (currentCoords.length > 0) {
+    currentCoords.pop();
+    if (markers.length > 0) {
+      markers[markers.length - 1].remove();
+      markers.pop();
+    }
+    drawPolygon();
+  }
 }
 
 function drawPolygon() {
@@ -87,6 +116,7 @@ function drawPolygon() {
     data: polygon
   });
 
+  // ポリゴンの塗りつぶし
   map.addLayer({
     id: 'area',
     type: 'fill',
@@ -94,7 +124,19 @@ function drawPolygon() {
     layout: {},
     paint: {
       'fill-color': '#088',
-      'fill-opacity': 0.5
+      'fill-opacity': 0.3
+    }
+  });
+
+  // ポリゴンの境界線
+  map.addLayer({
+    id: 'area-border',
+    type: 'line',
+    source: 'area',
+    layout: {},
+    paint: {
+      'line-color': '#088',
+      'line-width': 2
     }
   });
 }
@@ -127,7 +169,7 @@ document.getElementById('saveBtn').addEventListener('click', async () => {
   }
 });
 
-// 初期化（修正済）
+// 初期化
 document.addEventListener('DOMContentLoaded', () => {
   initMapbox();
 });
