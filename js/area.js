@@ -96,18 +96,29 @@ function removeLastPoint() {
 
 function drawPolygon() {
   // 既存ポリゴン削除
-  if (map.getSource('area')) {
+  if (map.getLayer('area-border')) {
+    map.removeLayer('area-border');
+  }
+  if (map.getLayer('area')) {
     map.removeLayer('area');
+  }
+  if (map.getSource('area')) {
     map.removeSource('area');
   }
 
   if (currentCoords.length < 3) return;
 
+  // 最後の点と最初の点を結ぶために、最初の点を最後にもう一度追加
+  const coordinates = [...currentCoords];
+  if (coordinates[0] !== coordinates[coordinates.length - 1]) {
+    coordinates.push(coordinates[0]);
+  }
+
   const polygon = {
     type: 'Feature',
     geometry: {
       type: 'Polygon',
-      coordinates: [[...currentCoords, currentCoords[0]]]
+      coordinates: [coordinates]
     }
   };
 
@@ -116,15 +127,15 @@ function drawPolygon() {
     data: polygon
   });
 
-  // ポリゴンの塗りつぶし
+  // ポリゴンの塗りつぶし（薄い青色）
   map.addLayer({
     id: 'area',
     type: 'fill',
     source: 'area',
     layout: {},
     paint: {
-      'fill-color': '#088',
-      'fill-opacity': 0.3
+      'fill-color': '#3498db',
+      'fill-opacity': 0.2
     }
   });
 
@@ -135,7 +146,7 @@ function drawPolygon() {
     source: 'area',
     layout: {},
     paint: {
-      'line-color': '#088',
+      'line-color': '#2980b9',
       'line-width': 2
     }
   });
