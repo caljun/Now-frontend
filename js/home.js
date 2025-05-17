@@ -18,11 +18,7 @@ async function initMapbox(lat, lng) {
     zoom: 16
   });
 
-  // 現在地ピン
-  new mapboxgl.Marker({ color: 'blue' })
-    .setLngLat([lng, lat])
-    .setPopup(new mapboxgl.Popup().setText('あなたの現在地'))
-    .addTo(map);
+  // 現在地ピンは fetchAreaFriends で表示するため、ここでは表示しない
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -81,6 +77,9 @@ async function fetchAreaFriends(areaId) {
     }
     window.friendMarkers = [];
 
+    // 現在位置を取得
+    const currentPosition = await getCurrentPosition();
+    
     const res = await fetch(`https://now-backend-wah5.onrender.com/api/areas/${areaId}/friends-in`, {
       headers: { Authorization: `Bearer ${token}` }
     });
@@ -93,27 +92,26 @@ async function fetchAreaFriends(areaId) {
 
     const friends = data.friends;
 
+    // 自分の位置を追加
+    if (currentPosition) {
+      const myMarker = new mapboxgl.Marker({ color: '#2980b9' })
+        .setLngLat([currentPosition.longitude, currentPosition.latitude])
+        .setPopup(new mapboxgl.Popup().setText('あなたの現在地'))
+        .addTo(map);
+      window.friendMarkers.push(myMarker);
+    }
+
     friends.forEach(friend => {
       if (friend.latitude && friend.longitude) {
-        // カスタムマーカー要素の作成
-        const el = document.createElement('div');
-        el.className = 'friend-marker';
-        
-        // 名前を表示する要素
-        const nameEl = document.createElement('div');
-        nameEl.className = 'friend-name';
-        nameEl.textContent = friend.name;
-        
-        // マーカーのコンテナ
-        const markerEl = document.createElement('div');
-        markerEl.className = 'marker-pin';
-        
-        el.appendChild(nameEl);
-        el.appendChild(markerEl);
+        // 自分の位置は既に表示しているのでスキップ
+        if (friend.isCurrentUser) return;
 
-        // マーカーの作成と追加
-        const marker = new mapboxgl.Marker(el)
+        const popup = new mapboxgl.Popup({ offset: 25 })
+          .setText(friend.name);
+
+        const marker = new mapboxgl.Marker({ color: '#2980b9' })
           .setLngLat([friend.longitude, friend.latitude])
+          .setPopup(popup)
           .addTo(map);
 
         window.friendMarkers.push(marker);
@@ -122,6 +120,24 @@ async function fetchAreaFriends(areaId) {
   } catch (err) {
     console.error('通信エラー:', err);
   }
+}
+
+// 現在位置を取得するヘルパー関数
+function getCurrentPosition() {
+  return new Promise((resolve, reject) => {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        resolve({
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude
+        });
+      },
+      (error) => {
+        console.error('位置情報の取得に失敗:', error);
+        resolve(null);
+      }
+    );
+  });
 }
 
 async function loadAreaList() {
