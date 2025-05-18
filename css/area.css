@@ -3,17 +3,16 @@
     font-size: 0.95rem;
     color: #ccc;
     text-align: center;
-    margin-top: 12px;
     margin-bottom: 16px;
     line-height: 1.6;
   }
   
   /* 📍マップ */
   #map {
-    height: calc(100vh - 220px); /* ヘッダー + フォーム + タブバーの高さを除く */
+    height: calc(100vh - 220px);
     width: 100%;
     border-radius: 16px;
-    margin: 8px 0;
+    margin: 0;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
     box-sizing: border-box;
   }
@@ -34,7 +33,6 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
-    margin-top: 16px;
     margin-bottom: 32px;
     padding: 0 16px;
     box-sizing: border-box;

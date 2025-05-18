@@ -45,12 +45,13 @@ h1, h2, h3, p {
 
 /* === メインエリア === */
 .main {
-  padding-top: calc(60px + env(safe-area-inset-top)); /* ヘッダー + ステータスバー */
+  padding-top: 60px;
   min-height: 100vh;
   min-height: -webkit-fill-available;
   background: #111;
   position: relative;
   z-index: 1;
+  padding-bottom: calc(72px + env(safe-area-inset-bottom));
 }
 
 /* === ボタン === */
