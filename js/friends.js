@@ -87,7 +87,7 @@ async function loadFriends() {
     if (!res.ok) return console.error('友達一覧取得失敗:', data.error);
 
     if (data.friends.length === 0) {
-      friendList.innerHTML = '<li>まだ友達がいません</li>';
+      friendList.innerHTML = '<li class="friend-card">まだ友達がいません</li>';
     } else {
       data.friends.forEach(friend => {
         const li = document.createElement('li');
@@ -127,7 +127,7 @@ async function loadFriendRequests() {
     if (!res.ok) return console.error('リクエスト取得失敗:', data.error);
 
     if (data.requests.length === 0) {
-      requestList.innerHTML = '<li>リクエストはありません</li>';
+      requestList.innerHTML = '<li class="friend-card">リクエストはありません</li>';
     } else {
       data.requests.forEach(request => {
         const li = document.createElement('li');
@@ -251,7 +251,7 @@ async function loadAreaRequests() {
     list.innerHTML = '';
 
     if (data.requests.length === 0) {
-      list.innerHTML = '<li>リクエストはありません</li>';
+      list.innerHTML = '<li class="friend-card">リクエストはありません</li>';
       return;
     }
 
