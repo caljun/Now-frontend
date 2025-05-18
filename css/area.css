@@ -8,41 +8,27 @@
     padding: 0;
 }
   
+/* 🏷 エリア名 */
+#areaName {
+    padding: var(--spacing-md);
+    font-size: var(--font-md);
+    border-radius: var(--radius-md);
+    background-color: var(--color-card);
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: var(--spacing-lg);
+}
+  
 /* 📍マップ */
 #map {
-    height: calc(100vh - 280px);
+    height: 400px;
     width: 100%;
     border-radius: var(--radius-lg);
-    margin: 0 0 var(--spacing-md);
+    margin: 0 0 var(--spacing-lg);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
     box-sizing: border-box;
-}
-  
-/* 📝 フォームコンテナ */
-.area-form-container {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background: var(--color-background);
-    z-index: 10;
-    border-top: 1px solid var(--color-border);
-}
-
-.area-form-inner {
-    max-width: var(--container-width);
-    margin: 0 auto;
-    padding: var(--spacing-md) var(--spacing-lg) var(--tabbar-height);
-}
-  
-/* ✏️ フォーム全体 */
-form#areaForm {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-md);
-    margin: 0;
-    box-sizing: border-box;
-    width: 100%;
 }
   
 /* 🌍 エリアページ全体 */
@@ -56,20 +42,8 @@ form#areaForm {
     margin: 0 auto;
 }
   
-/* 🏷 エリア名 */
-#areaName {
-    padding: var(--spacing-md);
-    font-size: var(--font-md);
-    border-radius: var(--radius-md);
-    background-color: var(--color-card);
-    color: var(--color-text);
-    border: 1px solid var(--color-border);
-    width: 100%;
-    box-sizing: border-box;
-}
-  
 /* 💾 保存ボタン */
-#areaForm .btn {
+.btn {
     padding: var(--spacing-md);
     font-size: var(--font-md);
     background-color: var(--color-background);
@@ -84,7 +58,7 @@ form#areaForm {
     box-sizing: border-box;
 }
   
-#areaForm .btn:hover {
+.btn:hover {
     background-color: #222;
     box-shadow: 0 6px 14px rgba(255, 255, 255, 0.25);
 }

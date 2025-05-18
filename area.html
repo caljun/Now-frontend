@@ -28,23 +28,23 @@
 
   <main class="main">
     <div class="area-container">
+      <!-- 説明文 -->
       <p id="areaDescription">
         地図上でピンを3点以上打つことで、<br>
         エリアを囲むことができます。<br>
         エリア名を入力して保存してください。
       </p>
+
+      <!-- エリア名入力 -->
+      <input type="text" id="areaName" placeholder="エリア名" required />
+
+      <!-- 地図 -->
       <div id="map"></div>
+
+      <!-- 保存ボタン -->
+      <button id="saveBtn" class="btn" type="button">保存</button>
     </div>
   </main>
-
-  <div class="area-form-container">
-    <div class="area-form-inner">
-      <form id="areaForm" onsubmit="return false;">
-        <input type="text" id="areaName" placeholder="エリア名" required />
-        <button id="saveBtn" class="btn" type="button">保存</button>
-      </form>
-    </div>
-  </div>
 
   <nav class="tab-bar">
     <a href="home.html" class="tab-item">
