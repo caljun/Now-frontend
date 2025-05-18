@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   // Cloudinaryアップロードウィジェットの設定
   const uploadWidget = cloudinary.createUploadWidget(
     {
-      cloudName: process.env.CLOUDINARY_CLOUD_NAME,
+      cloudName: 'dnvduxv2v',
       uploadPreset: 'now_preset',
       sources: ['local', 'camera'],
       multiple: false,
@@ -164,6 +164,13 @@ document.getElementById('openModalBtn').addEventListener('click', () => {
 
 document.getElementById('closeModalBtn').addEventListener('click', () => {
   document.getElementById('editModal').classList.add('hidden');
+});
+
+// モーダル外クリックで閉じる
+document.getElementById('editModal').addEventListener('click', (e) => {
+  if (e.target.id === 'editModal') {
+    document.getElementById('editModal').classList.add('hidden');
+  }
 });
 
 // 設定の読み込みと保存
