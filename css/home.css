@@ -1,14 +1,21 @@
 /* 🔽 エリアセレクトボックス */
 .area-info {
+  position: fixed;
+  top: 76px; /* ヘッダー + マージン */
+  left: 50%;
+  transform: translateX(-50%);
   padding: 12px;
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.85);
   border-radius: 12px;
-  margin: 12px auto;
   display: flex;
   flex-direction: column;
   gap: 6px;
   max-width: 300px;
   width: 90%;
+  z-index: 2;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
 }
 
 .area-label {
@@ -24,18 +31,22 @@
   padding: 10px;
   border-radius: 8px;
   border: 1px solid #444;
-  background: #222;
+  background: rgba(34, 34, 34, 0.9);
   color: white;
   font-size: 0.95rem;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
 }
   
   /* 📍マップエリア */
   #map {
+    position: fixed;
+    top: 60px; /* ヘッダーの高さ分 */
+    left: 0;
+    right: 0;
+    bottom: 60px; /* タブバーの高さ分 */
     width: 100%;
-    height: calc(100vh - 130px);
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    z-index: 1;
   }  
   
   /* 👥 友達カード（使わない前提だが共通スタイルとして残す） */
@@ -182,5 +193,13 @@
 .modal-btn.delete {
   background: #ff4444;
   color: white;
+}
+
+/* メインコンテンツエリアの調整 */
+.main {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
 }
   
