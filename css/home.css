@@ -1,12 +1,14 @@
 /* 🔽 エリアセレクトボックス */
 .area-info {
-  padding: 16px;
+  padding: 12px;
   background: rgba(0, 0, 0, 0.8);
   border-radius: 12px;
-  margin: 16px;
+  margin: 12px auto;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
+  max-width: 300px;
+  width: 90%;
 }
 
 .area-label {
@@ -14,11 +16,12 @@
   font-size: 1rem;
   font-weight: bold;
   margin: 0;
+  text-align: center;
 }
 
 #areaSelect {
   width: 100%;
-  padding: 12px;
+  padding: 10px;
   border-radius: 8px;
   border: 1px solid #444;
   background: #222;
@@ -29,7 +32,7 @@
   /* 📍マップエリア */
   #map {
     width: 100%;
-    height: calc(100vh - 140px);
+    height: calc(100vh - 130px);
     border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
