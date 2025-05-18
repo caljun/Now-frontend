@@ -48,9 +48,8 @@ body {
   color: #fff;
   height: 100vh;
   overflow: hidden;
-  position: fixed;
+  position: relative;
   width: 100%;
-  position: fixed;
 }
 
 html {
