@@ -3,15 +3,19 @@
     font-size: 0.95rem;
     color: #ccc;
     text-align: center;
+    margin-top: 12px;
     margin-bottom: 16px;
     line-height: 1.6;
   }
   
-  /* 📝 マップ */
+  /* 📍マップ */
   #map {
-    height: calc(100vh - 180px); /* ヘッダー(60px) + フォーム(60px) + タブバー(60px) */
+    height: calc(100vh - 220px); /* ヘッダー + フォーム + タブバーの高さを除く */
     width: 100%;
+    border-radius: 16px;
+    margin: 8px 0;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    box-sizing: border-box;
   }
   
   /* 📝 フォームコンテナ */
@@ -28,9 +32,12 @@
   /* ✏️ フォーム全体 */
   form#areaForm {
     display: flex;
-    gap: 8px;
-    max-width: 800px;
-    margin: 0 auto;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 16px;
+    margin-bottom: 32px;
+    padding: 0 16px;
+    box-sizing: border-box;
   }
   
   /* 🌍 エリアページ全体 */
@@ -44,19 +51,19 @@
   
   /* 🏷 エリア名 */
   #areaName {
-    flex: 1;
-    padding: 12px;
+    padding: 14px;
     font-size: 1rem;
     border-radius: 12px;
     background-color: #222;
     color: #fff;
     border: 1px solid #444;
+    width: 100%;
     box-sizing: border-box;
   }
   
   /* 💾 保存ボタン */
   #areaForm .btn {
-    padding: 12px 24px;
+    padding: 14px;
     font-size: 1rem;
     background-color: #000;
     color: white;
@@ -66,6 +73,8 @@
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 4px 10px rgba(255, 255, 255, 0.15);
+    width: 100%;
+    box-sizing: border-box;
   }
   
   #areaForm .btn:hover {

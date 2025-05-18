@@ -7,6 +7,11 @@ body {
   background-color: #000; /* ← 最初から黒に */
   color: #fff;
   padding-bottom: calc(72px + env(safe-area-inset-bottom)); /* ← タブ＋safe-area */
+  padding-top: env(safe-area-inset-top); /* iOS用のステータスバー領域を確保 */
+  height: 100vh;
+  height: -webkit-fill-available; /* モバイルブラウザ用 */
+  overflow-x: hidden;
+  position: relative;
 }
 
 h1, h2, h3, p {
@@ -16,7 +21,7 @@ h1, h2, h3, p {
 /* === ヘッダー === */
 .header {
   position: fixed;
-  top: 0;
+  top: env(safe-area-inset-top); /* ステータスバーの下に固定 */
   left: 0;
   right: 0;
   height: 60px;
@@ -40,7 +45,12 @@ h1, h2, h3, p {
 
 /* === メインエリア === */
 .main {
-  padding: 80px 20px 20px; /* ヘッダーの高さ(60px) + 余白(20px) */
+  padding-top: calc(60px + env(safe-area-inset-top)); /* ヘッダー + ステータスバー */
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+  background: #111;
+  position: relative;
+  z-index: 1;
 }
 
 /* === ボタン === */
