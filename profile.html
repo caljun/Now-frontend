@@ -26,25 +26,43 @@
 
   <main class="main">
     <div class="profile-container">
-      <!-- プロフ画像 -->
-      <img id="profilePhoto" src="assets/placeholder.png" alt="プロフィール画像" class="profile-photo" />
+      <!-- プロフィール画像 -->
+      <div class="profile-photo-container">
+        <img id="profilePhoto" src="assets/placeholder.png" alt="プロフィール画像" class="profile-photo" />
+      </div>
 
-      <!-- 編集モーダル起動ボタン -->
-      <button id="openModalBtn" class="btn">プロフィールを編集</button>
-
-      <!-- 名前・ID -->
-      <div class="profile-info">
+      <!-- 名前 -->
+      <div class="profile-name">
         <h2 id="userName">名前未取得</h2>
-        <p>
-          ID: <span id="userId">NowID未取得</span>
-          <button onclick="copyNowId()" class="copy-btn"></button>
-        </p>
+      </div>
+
+      <!-- 友達の数 -->
+      <div class="friend-count">
         <p id="friendCount">友達: 0人</p>
       </div>
 
+      <!-- プロフィール編集ボタン -->
+      <div class="edit-button-container">
+        <button id="openModalBtn" class="btn primary-btn">プロフィールを編集</button>
+      </div>
+
+      <!-- NowID表示枠 -->
+      <div class="nowid-container">
+        <p class="nowid-label">あなたのID</p>
+        <div class="nowid-box">
+          <span id="userId">NowID未取得</span>
+          <button onclick="copyNowId()" class="copy-btn" aria-label="IDをコピー"></button>
+        </div>
+      </div>
+
+      <!-- 区切り線 -->
+      <div class="divider"></div>
+
       <!-- エリア一覧 -->
-      <h3 class="area-title">エリア一覧</h3>
-      <ul id="areaList" class="area-list"></ul>
+      <div class="area-section">
+        <h3 class="area-title">エリア一覧</h3>
+        <ul id="areaList" class="area-list"></ul>
+      </div>
 
       <!-- ログアウトボタン -->
       <button id="logoutBtn" class="logout-btn">ログアウト</button>
