@@ -23,6 +23,7 @@ h1, h2, h3, p {
   background-color: #000;
   display: flex;
   align-items: center;
+  justify-content: center;
   padding: 0 16px;
   z-index: 1000;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
@@ -33,6 +34,8 @@ h1, h2, h3, p {
   font-size: 1.5rem;
   font-weight: bold;
   margin: 0;
+  text-align: center;
+  width: 100%;
 }
 
 /* === メインエリア === */
