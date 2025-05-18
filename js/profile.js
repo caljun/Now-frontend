@@ -6,6 +6,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     return;
   }
 
+  let currentPhotoUrl = null;
+
   try {
     const res = await fetch('https://now-backend-wah5.onrender.com/api/auth/me', {
       headers: { Authorization: `Bearer ${token}` }
@@ -18,7 +20,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.getElementById('userName').textContent = data.name || '名前未設定';
     document.getElementById('userId').textContent = data.nowId || 'ID未設定';
     if (data.profilePhoto) {
+      currentPhotoUrl = data.profilePhoto;
       document.getElementById('profilePhoto').src = data.profilePhoto;
+      document.getElementById('modalProfilePhoto').src = data.profilePhoto;
     }
 
     // エリア一覧表示
@@ -66,6 +70,50 @@ document.addEventListener('DOMContentLoaded', async () => {
     alert('プロフィール情報の取得に失敗しました');
   }
 
+  // Cloudinaryアップロードウィジェットの設定
+  const uploadWidget = cloudinary.createUploadWidget(
+    {
+      cloudName: process.env.CLOUDINARY_CLOUD_NAME,
+      uploadPreset: 'now_preset',
+      sources: ['local', 'camera'],
+      multiple: false,
+      maxFiles: 1,
+      cropping: true,
+      croppingAspectRatio: 1,
+      croppingShowDimensions: true,
+      croppingValidateDimensions: true,
+      styles: {
+        palette: {
+          window: "#1a1a1a",
+          windowBorder: "#333333",
+          tabIcon: "#FFFFFF",
+          menuIcons: "#FFFFFF",
+          textDark: "#000000",
+          textLight: "#FFFFFF",
+          link: "#FFFFFF",
+          action: "#FF620C",
+          inactiveTabIcon: "#999999",
+          error: "#F44235",
+          inProgress: "#0078FF",
+          complete: "#20B832",
+          sourceBg: "#1a1a1a"
+        }
+      }
+    },
+    (error, result) => {
+      if (!error && result && result.event === "success") {
+        currentPhotoUrl = result.info.secure_url;
+        document.getElementById('profilePhoto').src = currentPhotoUrl;
+        document.getElementById('modalProfilePhoto').src = currentPhotoUrl;
+      }
+    }
+  );
+
+  // 画像アップロードボタンのイベントリスナー
+  document.getElementById('uploadPhotoBtn').addEventListener('click', () => {
+    uploadWidget.open();
+  });
+
   // ログアウト処理
   document.getElementById('logoutBtn').addEventListener('click', () => {
     localStorage.removeItem('token');
@@ -76,32 +124,27 @@ document.addEventListener('DOMContentLoaded', async () => {
   // ✅ プロフィール更新処理
   document.getElementById('updateProfileBtn').addEventListener('click', async () => {
     const name = document.getElementById('nameInput').value;
-    const photoInput = document.getElementById('photoInput').files[0];
-    const formData = new FormData();
+    const updateData = {};
 
-    if (name) formData.append('name', name);
-    if (photoInput) formData.append('profilePhoto', photoInput);
+    if (name) updateData.name = name;
+    if (currentPhotoUrl) updateData.profilePhoto = currentPhotoUrl;
 
     try {
       const updateRes = await fetch('https://now-backend-wah5.onrender.com/api/auth/update', {
         method: 'PUT',
-        headers: { Authorization: `Bearer ${token}` },
-        body: formData
+        headers: { 
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}` 
+        },
+        body: JSON.stringify(updateData)
       });
 
-      const raw = await updateRes.text();
-      console.log("🧪 サーバーからのレスポンス:", raw);
-
-      const result = JSON.parse(raw);
+      const result = await updateRes.json();
       if (!updateRes.ok) throw new Error(result.error || '更新失敗');
 
       // 成功時の即時反映
       if (result.user.name) {
         document.getElementById('userName').textContent = result.user.name;
-      }
-
-      if (result.user.profilePhoto) {
-        document.getElementById('profilePhoto').src = result.user.profilePhoto;
       }
 
       document.getElementById('editModal').classList.add('hidden');

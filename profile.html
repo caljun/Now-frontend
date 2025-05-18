@@ -17,6 +17,9 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="Now" />
   <link rel="apple-touch-icon" href="assets/now-icon.png" />
+  
+  <!-- Cloudinary -->
+  <script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript"></script>
 </head>
 
 <body>
@@ -74,7 +77,12 @@
     <div class="modal-content">
       <span id="closeModalBtn" class="modal-close">×</span>
       <h3>プロフィール編集</h3>
-      <input type="file" id="photoInput" accept="image/*" />
+      <div class="profile-edit-section">
+        <div class="current-photo-container">
+          <img id="modalProfilePhoto" src="assets/placeholder.png" alt="現在のプロフィール画像" class="profile-photo" />
+        </div>
+        <button id="uploadPhotoBtn" class="btn photo-upload-btn">画像を変更</button>
+      </div>
       <input type="text" id="nameInput" placeholder="新しい名前" />
       <button id="updateProfileBtn" class="btn">プロフィール更新</button>
     </div>
