@@ -40,7 +40,7 @@ h1, h2, h3, p {
 
 /* === メインエリア === */
 .main {
-  padding: 10px;
+  padding: 80px 20px 20px; /* ヘッダーの高さ(60px) + 余白(20px) */
 }
 
 /* === ボタン === */
@@ -56,6 +56,10 @@ h1, h2, h3, p {
   width: 100%;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
   transition: all 0.3s ease;
+  text-decoration: none;
+  display: block;
+  text-align: center;
+  margin-bottom: 12px;
 }
 
 .btn:hover {
@@ -78,6 +82,16 @@ h1, h2, h3, p {
 .logout-btn:hover {
   background-color: #f44;
   color: #fff;
+}
+
+.intro {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.actions {
+  max-width: 300px;
+  margin: 0 auto;
 }
 
 /* === 入力欄・セレクト === */
