@@ -6,12 +6,13 @@ body {
   font-family: 'Noto Sans JP', sans-serif;
   background-color: #000; /* ← 最初から黒に */
   color: #fff;
-  padding-bottom: calc(72px + env(safe-area-inset-bottom)); /* ← タブ＋safe-area */
-  padding-top: env(safe-area-inset-top); /* iOS用のステータスバー領域を確保 */
-  height: 100vh;
-  height: -webkit-fill-available; /* モバイルブラウザ用 */
+  height: 100%;
   overflow-x: hidden;
-  position: relative;
+}
+
+html {
+  height: 100%;
+  overflow: hidden;
 }
 
 h1, h2, h3, p {
@@ -21,7 +22,7 @@ h1, h2, h3, p {
 /* === ヘッダー === */
 .header {
   position: fixed;
-  top: env(safe-area-inset-top); /* ステータスバーの下に固定 */
+  top: 0;
   left: 0;
   right: 0;
   height: 60px;
@@ -45,13 +46,12 @@ h1, h2, h3, p {
 
 /* === メインエリア === */
 .main {
+  height: 100%;
+  overflow-y: auto;
   padding-top: 60px;
-  min-height: 100vh;
-  min-height: -webkit-fill-available;
-  background: #111;
-  position: relative;
-  z-index: 1;
   padding-bottom: calc(72px + env(safe-area-inset-bottom));
+  background: #111;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* === ボタン === */
