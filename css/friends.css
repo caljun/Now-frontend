@@ -1,17 +1,17 @@
 /* 🧑‍🤝‍🧑 フレンドページ全体 */
 .friends-container {
-  max-width: 360px;
+  max-width: 280px;
   margin: 0 auto;
-  padding: 20px 16px;
+  padding: 16px 12px;
 }
 
 /* 🧑‍🤝‍🧑 ID入力 */
 #friendNowId {
   width: 100%;
   box-sizing: border-box;
-  padding: 12px 14px;
-  font-size: 1rem;
-  margin-bottom: 12px;
+  padding: 10px 12px;
+  font-size: 0.95rem;
+  margin-bottom: 10px;
   border-radius: 12px;
   background-color: #222;
   color: #fff;
@@ -21,16 +21,16 @@
 /* ➕ 追加ボタン */
 #addFriendBtn {
   width: 100%;
-  padding: 14px;
-  font-size: 1rem;
+  padding: 12px;
+  font-size: 0.95rem;
   border-radius: 12px;
   background-color: #000;
   color: white;
-  border: 2px solid #fff;
+  border: 1px solid #fff;
   font-weight: bold;
   cursor: pointer;
   transition: all 0.3s ease;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
 }
 
 #addFriendBtn:hover {
@@ -45,14 +45,14 @@
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
 }
 
 /* 🧾 カードUI（リクエスト・友達共通） */
 .friend-card {
   background-color: #1e1e1e;
-  padding: 16px;
-  border-radius: 14px;
+  padding: 14px;
+  border-radius: 12px;
   border: 1px solid #333;
   color: white;
   display: flex;
@@ -60,42 +60,43 @@
   align-items: center;
   text-align: center;
   width: 100%;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
 .friend-card span,
 .friend-card div {
   display: block;
   color: white;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
   width: 100%;
   text-align: center;
 }
 
 .friend-card .name {
   font-weight: bold;
-  font-size: 1.1rem;
-  margin-bottom: 4px;
+  font-size: 1rem;
+  margin-bottom: 2px;
 }
 
 .friend-card .id {
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   opacity: 0.7;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
 /* ✅ 各ボタン共通 */
 .friend-card button {
   background-color: #000;
   color: white;
-  padding: 12px 20px;
+  padding: 10px 16px;
   border: none;
-  border-radius: 10px;
+  border-radius: 8px;
   font-weight: bold;
   cursor: pointer;
   transition: all 0.3s ease;
   width: 100%;
   margin-top: 4px;
+  font-size: 0.9rem;
 }
 
 .friend-card button:hover {
@@ -106,30 +107,30 @@
 /* 🏷️ 動的に出るエリア選択UI */
 .area-selection-ui {
   width: 100%;
-  margin: 12px 0 0;
-  padding: 16px;
+  margin: 8px 0 0;
+  padding: 12px;
   background-color: #1a1a1a;
   border-radius: 12px;
   border: 1px solid #333;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .area-selection-ui .label-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 16px;
+  gap: 6px;
+  margin-bottom: 12px;
   justify-content: center;
 }
 
 .area-label {
   border: 1px solid #ccc;
-  padding: 8px 16px;
-  border-radius: 8px;
+  padding: 6px 12px;
+  border-radius: 6px;
   text-align: center;
   cursor: pointer;
   white-space: nowrap;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   transition: all 0.2s ease;
 }
 
@@ -147,20 +148,20 @@
 .area-selection-ui .action-buttons {
   display: flex;
   justify-content: center;
-  gap: 12px;
+  gap: 8px;
 }
 
 .area-selection-ui .action-buttons button {
-  padding: 12px 20px;
-  font-size: 0.95rem;
+  padding: 8px 14px;
+  font-size: 0.85rem;
   font-weight: bold;
-  border-radius: 8px;
+  border-radius: 6px;
   border: none;
   background-color: #000;
   color: white;
   cursor: pointer;
   transition: all 0.3s ease;
-  min-width: 100px;
+  min-width: 80px;
 }
 
 .area-selection-ui .action-buttons button:hover {
