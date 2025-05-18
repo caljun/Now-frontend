@@ -3,70 +3,71 @@
     font-size: 0.95rem;
     color: #ccc;
     text-align: center;
-    margin-top: 12px;
     margin-bottom: 16px;
     line-height: 1.6;
   }
   
-  /* 📍マップ */
+  /* 📝 マップ */
   #map {
-    height: calc(100vh - 280px); /* ヘッダー(60px) + 説明(40px) + フォーム(160px) + 余白(20px) */
+    height: calc(100vh - 60px);
     width: 100%;
-    border-radius: 16px;
-    margin: 8px 0;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-    box-sizing: border-box;
   }
   
-  /* ✏️ フォーム全体 */
-  form#areaForm {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    margin-top: 16px;
-    margin-bottom: 32px;
-    padding: 0 20px;
-    box-sizing: border-box;
+  /* 📝 フォームコンテナ */
+  .area-form-container {
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.8);
+    position: fixed;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 400px;
+    border-radius: 16px;
+    backdrop-filter: blur(8px);
   }
   
   /* 🌍 エリアページ全体 */
   .area-container {
-    padding: 80px 20px 20px;
+    padding-top: 60px;
     min-height: 100vh;
+    background: #111;
     box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
   }
   
   /* 🏷 エリア名 */
   #areaName {
-    padding: 14px;
+    flex: 1;
+    padding: 12px;
     font-size: 1rem;
     border-radius: 12px;
     background-color: #222;
     color: #fff;
     border: 1px solid #444;
-    width: 100%;
-    box-sizing: border-box; /* ✅ はみ出し防止 */
+    box-sizing: border-box;
   }
   
   /* 💾 保存ボタン */
   #areaForm .btn {
-    padding: 14px;
+    padding: 12px 24px;
     font-size: 1rem;
     background-color: #000;
     color: white;
-    border: 2px solid #fff; /* ✅ 白い縁 */
+    border: 2px solid #fff;
     border-radius: 12px;
     font-weight: bold;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.15); /* ✅ 白い光の影 */
-    width: 100%;
-    box-sizing: border-box;
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.15);
   }
   
   #areaForm .btn:hover {
     background-color: #222;
-    box-shadow: 0 6px 14px rgba(255, 255, 255, 0.25); /* ✅ ホバー時に浮かせる */
+    box-shadow: 0 6px 14px rgba(255, 255, 255, 0.25);
   }
   
   /* ✅ 全体に適用（念のため） */
