@@ -75,21 +75,27 @@
   margin-top: 5px;
 }
 
+/* 🗺️ マップ上のラベル */
 .custom-label .label-box {
   background-color: white;
   color: black;
-  padding: 2px 6px;
-  border-radius: 12px;
+  padding: 4px 12px;
+  border-radius: 100px;
   font-size: 13px;
-  box-shadow: 0 0 4px rgba(0,0,0,0.3);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
   white-space: nowrap;
   text-align: center;
+  min-width: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 @media (max-width: 480px) {
   .custom-label .label-box {
-    font-size: 11px;
-    padding: 2px 4px;
+    font-size: 12px;
+    padding: 3px 10px;
+    min-width: 50px;
   }
 }
 
