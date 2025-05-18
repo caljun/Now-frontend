@@ -1,28 +1,29 @@
 /* 🔽 エリアセレクトボックス */
 .area-info {
-  padding: 12px 16px;
+  padding: 16px;
   background: rgba(0, 0, 0, 0.8);
   border-radius: 12px;
   margin: 16px;
   display: flex;
-  align-items: center;
-  gap: 12px;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .area-label {
   color: white;
-  font-size: 0.9rem;
+  font-size: 1rem;
+  font-weight: bold;
   margin: 0;
 }
 
 #areaSelect {
-  flex: 1;
-  padding: 8px 12px;
+  width: 100%;
+  padding: 12px;
   border-radius: 8px;
   border: 1px solid #444;
   background: #222;
   color: white;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
 }
   
   /* 📍マップエリア */

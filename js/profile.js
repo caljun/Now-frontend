@@ -75,13 +75,29 @@ document.addEventListener('DOMContentLoaded', async () => {
     {
       cloudName: 'dnvduxv2v',
       uploadPreset: 'now_preset',
-      sources: ['local', 'camera'],
+      sources: ['camera', 'local'],
       multiple: false,
       maxFiles: 1,
       cropping: true,
       croppingAspectRatio: 1,
       croppingShowDimensions: true,
       croppingValidateDimensions: true,
+      showSkipCropButton: false,
+      showPoweredBy: false,
+      language: 'ja',
+      text: {
+        ja: {
+          "queue": {
+            "title": "写真を選択",
+            "note": "タップして写真を選択",
+            "button": "アップロード"
+          },
+          "crop": {
+            "title": "写真を調整",
+            "button": "決定"
+          }
+        }
+      },
       styles: {
         palette: {
           window: "#1a1a1a",
@@ -97,20 +113,68 @@ document.addEventListener('DOMContentLoaded', async () => {
           inProgress: "#0078FF",
           complete: "#20B832",
           sourceBg: "#1a1a1a"
+        },
+        frame: {
+          background: "#1a1a1a"
+        },
+        fonts: {
+          "'Noto Sans JP', sans-serif": "https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap"
         }
       }
     },
     (error, result) => {
-      if (!error && result && result.event === "success") {
+      if (error) {
+        console.error('Cloudinaryアップロードエラー:', error);
+        alert('画像のアップロードに失敗しました');
+        return;
+      }
+      
+      if (result && result.event === "success") {
         currentPhotoUrl = result.info.secure_url;
         document.getElementById('profilePhoto').src = currentPhotoUrl;
         document.getElementById('modalProfilePhoto').src = currentPhotoUrl;
+        
+        // 自動的にプロフィールを更新
+        updateProfile({ profilePhoto: currentPhotoUrl });
       }
     }
   );
 
+  // プロフィール更新関数
+  async function updateProfile(updateData) {
+    try {
+      const updateRes = await fetch('https://now-backend-wah5.onrender.com/api/auth/update', {
+        method: 'PUT',
+        headers: { 
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}` 
+        },
+        body: JSON.stringify(updateData)
+      });
+
+      const result = await updateRes.json();
+      if (!updateRes.ok) throw new Error(result.error || '更新失敗');
+
+      // 成功時の即時反映
+      if (result.user.name) {
+        document.getElementById('userName').textContent = result.user.name;
+      }
+
+      document.getElementById('editModal').classList.add('hidden');
+      alert('プロフィールを更新しました');
+
+    } catch (err) {
+      console.error('プロフィール更新エラー:', err);
+      alert('更新に失敗しました');
+    }
+  }
+
   // 画像アップロードボタンのイベントリスナー
   document.getElementById('uploadPhotoBtn').addEventListener('click', () => {
+    if (!cloudinary) {
+      alert('Cloudinaryの読み込みに失敗しました。ページを更新してください。');
+      return;
+    }
     uploadWidget.open();
   });
 
