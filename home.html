@@ -27,13 +27,18 @@
   </header>
   
   <main class="main">
-    <div class="area-info">
-      <p class="area-label">現在のエリア</p>
-      <select id="areaSelect">
-        <option>読み込み中...</option>
-      </select>
-    </div>
     <div id="map"></div>
+    <div class="area-info">
+      <div class="area-info-inner">
+        <svg class="area-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+          <circle cx="12" cy="10" r="3"/>
+        </svg>
+        <select id="areaSelect">
+          <option>読み込み中...</option>
+        </select>
+      </div>
+    </div>
   </main>  
 
   <nav class="tab-bar">

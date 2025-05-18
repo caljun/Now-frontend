@@ -4,12 +4,11 @@
   top: 76px; /* ヘッダー + マージン */
   left: 50%;
   transform: translateX(-50%);
-  padding: 12px;
+  padding: 8px 12px;
   background: rgba(0, 0, 0, 0.85);
-  border-radius: 12px;
+  border-radius: 100px;
   display: flex;
-  flex-direction: column;
-  gap: 6px;
+  align-items: center;
   max-width: 300px;
   width: 90%;
   z-index: 2;
@@ -18,71 +17,82 @@
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
 }
 
-.area-label {
-  color: white;
-  font-size: 1rem;
-  font-weight: bold;
-  margin: 0;
-  text-align: center;
+.area-info-inner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.area-icon {
+  color: #FF620C;
+  flex-shrink: 0;
 }
 
 #areaSelect {
   width: 100%;
-  padding: 10px;
-  border-radius: 8px;
-  border: 1px solid #444;
-  background: rgba(34, 34, 34, 0.9);
+  padding: 8px;
+  border: none;
+  background: transparent;
   color: white;
   font-size: 0.95rem;
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
+  -webkit-appearance: none;
+  appearance: none;
+  outline: none;
+  cursor: pointer;
 }
-  
-  /* 📍マップエリア */
-  #map {
-    position: fixed;
-    top: 60px; /* ヘッダーの高さ分 */
-    left: 0;
-    right: 0;
-    bottom: 60px; /* タブバーの高さ分 */
-    width: 100%;
-    z-index: 1;
-  }  
-  
-  /* 👥 友達カード（使わない前提だが共通スタイルとして残す） */
-  .friend-card {
-    background-color: #1e1e1e;
-    padding: 14px 16px;
-    border-radius: 14px;
-    margin-bottom: 14px;
-    border: 1px solid #333;
-    color: #fff;
-  }
-  
-  .friend-card img {
-    width: 80px;
-    border-radius: 12px;
-    margin-top: 5px;
-  }
-  
+
+#areaSelect option {
+  background: #1a1a1a;
+  color: white;
+  padding: 8px;
+}
+
+/* 📍マップエリア */
+#map {
+  position: fixed;
+  top: 60px; /* ヘッダーの高さ分 */
+  left: 0;
+  right: 0;
+  bottom: 60px; /* タブバーの高さ分 */
+  width: 100%;
+  z-index: 1;
+}
+
+/* 👥 友達カード（使わない前提だが共通スタイルとして残す） */
+.friend-card {
+  background-color: #1e1e1e;
+  padding: 14px 16px;
+  border-radius: 14px;
+  margin-bottom: 14px;
+  border: 1px solid #333;
+  color: #fff;
+}
+
+.friend-card img {
+  width: 80px;
+  border-radius: 12px;
+  margin-top: 5px;
+}
+
+.custom-label .label-box {
+  background-color: white;
+  color: black;
+  padding: 2px 6px;
+  border-radius: 12px;
+  font-size: 13px;
+  box-shadow: 0 0 4px rgba(0,0,0,0.3);
+  white-space: nowrap;
+  text-align: center;
+}
+
+@media (max-width: 480px) {
   .custom-label .label-box {
-    background-color: white;
-    color: black;
-    padding: 2px 6px;
-    border-radius: 12px;
-    font-size: 13px;
-    box-shadow: 0 0 4px rgba(0,0,0,0.3);
-    white-space: nowrap;
-    text-align: center;
+    font-size: 11px;
+    padding: 2px 4px;
   }
-  
-  @media (max-width: 480px) {
-    .custom-label .label-box {
-      font-size: 11px;
-      padding: 2px 4px;
-    }
-  }
-  
+}
+
 .friend-marker {
   position: relative;
   display: flex;
@@ -195,7 +205,7 @@
   color: white;
 }
 
-/* メインコンテンツエリアの調整 */
+/* メインコンテンツエリア */
 .main {
   position: relative;
   height: 100%;
