@@ -9,23 +9,28 @@
   
   /* 📝 マップ */
   #map {
-    height: calc(100vh - 60px);
+    height: calc(100vh - 180px); /* ヘッダー(60px) + フォーム(60px) + タブバー(60px) */
     width: 100%;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
   }
   
   /* 📝 フォームコンテナ */
   .area-form-container {
-    padding: 20px;
-    background: rgba(0, 0, 0, 0.8);
     position: fixed;
-    bottom: 80px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 90%;
-    max-width: 400px;
-    border-radius: 16px;
-    backdrop-filter: blur(8px);
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #111;
+    padding: 12px 20px calc(60px + 12px);
+    z-index: 10;
+  }
+  
+  /* ✏️ フォーム全体 */
+  form#areaForm {
+    display: flex;
+    gap: 8px;
+    max-width: 800px;
+    margin: 0 auto;
   }
   
   /* 🌍 エリアページ全体 */
@@ -35,8 +40,6 @@
     background: #111;
     box-sizing: border-box;
     width: 100%;
-    display: flex;
-    flex-direction: column;
   }
   
   /* 🏷 エリア名 */
