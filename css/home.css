@@ -40,12 +40,16 @@
   appearance: none;
   outline: none;
   cursor: pointer;
+  text-align: center;
+  text-align-last: center;
+  -moz-text-align-last: center;
 }
 
 #areaSelect option {
   background: #1a1a1a;
   color: white;
   padding: 8px;
+  text-align: center;
 }
 
 /* 📍マップエリア */
