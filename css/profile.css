@@ -124,8 +124,23 @@
   
   /* 🚪 ログアウトボタン */
   .logout-btn {
+    width: 100%;
     max-width: var(--container-width);
-    margin: var(--spacing-xl) auto 0;
+    margin: var(--spacing-xl) auto;
+    padding: var(--spacing-md);
+    background-color: transparent;
+    color: #f44336;
+    border: 1px solid #f44336;
+    border-radius: var(--radius-md);
+    font-size: var(--font-md);
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .logout-btn:hover {
+    background-color: #f44336;
+    color: #fff;
   }
   
   .copy-btn {

@@ -12,7 +12,7 @@
   --color-success: #00e676;
   
   /* サイズ */
-  --container-width: 300px;
+  --container-width: min(100%, 420px);
   --header-height: 60px;
   --tabbar-height: calc(72px + env(safe-area-inset-bottom));
   
