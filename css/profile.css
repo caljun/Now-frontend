@@ -2,7 +2,7 @@
 .profile-container {
     max-width: 600px;
     margin: 0 auto;
-    padding: 20px 20px calc(72px + env(safe-area-inset-bottom));
+    padding: var(--spacing-xl) var(--spacing-xl) var(--tabbar-height);
     min-height: 100%;
     position: relative;
     overflow-y: auto;
@@ -14,7 +14,7 @@
   .profile-photo-container {
     width: 120px;
     height: 120px;
-    margin: 0 auto 24px;
+    margin: 0 auto var(--spacing-xl);
   }
   
   /* 🖼 プロフ写真 */
@@ -23,22 +23,22 @@
     height: 100%;
     border-radius: 50%;
     object-fit: cover;
-    border: 3px solid #fff;
+    border: 3px solid var(--color-text);
   }
   
   /* 👤 名前 */
   .profile-name {
-    margin-bottom: 16px;
+    margin-bottom: var(--spacing-lg);
   }
   
   .profile-name h2 {
-    font-size: 1.5rem;
+    font-size: var(--font-xl);
     font-weight: bold;
   }
   
   /* 👥 友達数 */
   .friend-count {
-    margin-bottom: 24px;
+    margin-bottom: var(--spacing-xl);
   }
   
   .friend-count p {
@@ -47,138 +47,138 @@
   
   /* ✏️ 編集ボタン */
   .edit-button-container {
-    max-width: 300px;
-    margin: 0 auto 24px;
+    max-width: var(--container-width);
+    margin: 0 auto var(--spacing-xl);
   }
   
   /* 🆔 NowID表示枠 */
   .nowid-container {
-    max-width: 300px;
-    margin: 0 auto 32px;
+    max-width: var(--container-width);
+    margin: 0 auto var(--spacing-xl);
   }
   
   .nowid-label {
     color: #ccc;
-    margin-bottom: 8px;
+    margin-bottom: var(--spacing-sm);
   }
   
   .nowid-box {
-    background: #1a1a1a;
-    border: 1px solid #333;
-    border-radius: 12px;
-    padding: 12px;
+    background: var(--color-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-md);
   }
   
   /* 区切り線 */
   .divider {
     height: 1px;
-    background: #333;
-    margin: 0 auto 32px;
+    background: var(--color-border);
+    margin: 0 auto var(--spacing-xl);
   }
   
   /* 📋 エリアセクション */
   .area-section {
-    margin-bottom: 32px;
+    margin-bottom: var(--spacing-xl);
   }
   
   .area-title {
-    font-size: 1.2rem;
-    color: #fff;
-    margin-bottom: 16px;
+    font-size: var(--font-lg);
+    color: var(--color-text);
+    margin-bottom: var(--spacing-lg);
   }
   
   /* 📋 エリアリスト */
   .area-list {
     list-style: none;
     padding: 0;
-    margin: 0 0 20px;
+    margin: 0 0 var(--spacing-xl);
   }
   
   /* 🗂 エリアカード */
   .area-card {
-    background: #1a1a1a;
-    border: 1px solid #333;
-    border-radius: 12px;
-    padding: 16px;
-    margin-bottom: 12px;
+    background: var(--color-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-lg);
+    margin-bottom: var(--spacing-md);
     text-align: left;
   }
   
   .area-card h3 {
     margin: 0;
-    font-size: 1.1rem;
+    font-size: var(--font-md);
     font-weight: bold;
   }
   
   .area-card p {
-    margin: 6px 0 0;
-    font-size: 0.9rem;
+    margin: var(--spacing-xs) 0 0;
+    font-size: var(--font-sm);
     opacity: 0.8;
   }
   
   /* 🚪 ログアウト */
   .logout-container {
-    margin-top: 40px;
+    margin-top: var(--spacing-xl);
     text-align: center;
   }
   
   /* 🚪 ログアウトボタン */
   .logout-btn {
-    max-width: 300px;
-    margin: 32px auto 0;
+    max-width: var(--container-width);
+    margin: var(--spacing-xl) auto 0;
   }
   
   .copy-btn {
     background: none;
     border: none;
-    font-size: 1rem;
+    font-size: var(--font-md);
     cursor: pointer;
     color: #aaa;
-    margin-left: 8px;
+    margin-left: var(--spacing-sm);
   }
   .copy-btn:hover {
-    color: #fff;
+    color: var(--color-text);
   }
   
   /* 📤 プロフ画像アップロード */
   #photoInput {
-    margin-top: 12px;
-    color: #fff;
-    background-color: #1a1a1a;
-    border: 1px solid #444;
-    border-radius: 10px;
-    padding: 10px;
+    margin-top: var(--spacing-md);
+    color: var(--color-text);
+    background-color: var(--color-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-md);
     width: 100%;
-    max-width: 300px;
-    font-size: 0.9rem;
+    max-width: var(--container-width);
+    font-size: var(--font-sm);
   }
   
   /* ✏️ 名前入力欄 */
   #nameInput {
-    margin-top: 12px;
-    background-color: #1a1a1a;
-    color: #fff;
-    border: 1px solid #444;
-    border-radius: 10px;
-    padding: 12px;
-    font-size: 1rem;
+    margin-top: var(--spacing-md);
+    background-color: var(--color-card);
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-md);
+    font-size: var(--font-md);
     width: 100%;
-    max-width: 300px;
+    max-width: var(--container-width);
     box-sizing: border-box;
   }
   
   /* 💾 プロフィール更新ボタン */
   #updateProfileBtn {
-    margin-top: 16px;
-    background-color: #000;
-    color: #00e676;
-    border: 1px solid #00e676;
-    padding: 12px 20px;
-    font-size: 1rem;
-    border-radius: 12px;
+    margin-top: var(--spacing-lg);
+    background-color: var(--color-background);
+    color: var(--color-accent);
+    border: 1px solid var(--color-accent);
+    padding: var(--spacing-md) var(--spacing-xl);
+    font-size: var(--font-md);
+    border-radius: var(--radius-md);
     font-weight: bold;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: var(--transition-normal);
   }
   
   #updateProfileBtn:hover {

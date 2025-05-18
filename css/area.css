@@ -1,18 +1,18 @@
 /* 📝 説明テキスト */
 #areaDescription {
-    font-size: 0.95rem;
+    font-size: var(--font-sm);
     color: #ccc;
     text-align: center;
-    margin: 0 0 12px;
+    margin: 0 0 var(--spacing-md);
     line-height: 1.6;
-    padding: 0 16px;
+    padding: 0 var(--spacing-lg);
 }
   
 /* 📍マップ */
 #map {
     height: calc(100vh - 280px);
     width: 100%;
-    border-radius: 16px;
+    border-radius: var(--radius-lg);
     margin: 0;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
     box-sizing: border-box;
@@ -24,53 +24,53 @@
     bottom: 0;
     left: 0;
     width: 100%;
-    background: #111;
-    padding: 12px 16px calc(env(safe-area-inset-bottom) + 72px);
+    background: var(--color-background);
+    padding: var(--spacing-md) var(--spacing-lg) var(--tabbar-height);
     z-index: 10;
-    border-top: 1px solid #333;
+    border-top: 1px solid var(--color-border);
 }
   
 /* ✏️ フォーム全体 */
 form#areaForm {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: var(--spacing-md);
     margin: 0;
     box-sizing: border-box;
 }
   
 /* 🌍 エリアページ全体 */
 .area-container {
-    padding-top: 12px;
+    padding-top: var(--spacing-md);
     min-height: 100vh;
-    background: #111;
+    background: var(--color-background);
     box-sizing: border-box;
     width: 100%;
 }
   
 /* 🏷 エリア名 */
 #areaName {
-    padding: 14px;
-    font-size: 1rem;
-    border-radius: 12px;
-    background-color: #222;
-    color: #fff;
-    border: 1px solid #444;
+    padding: var(--spacing-md);
+    font-size: var(--font-md);
+    border-radius: var(--radius-md);
+    background-color: var(--color-card);
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
     width: 100%;
     box-sizing: border-box;
 }
   
 /* 💾 保存ボタン */
 #areaForm .btn {
-    padding: 14px;
-    font-size: 1rem;
-    background-color: #000;
-    color: white;
-    border: 2px solid #fff;
-    border-radius: 12px;
+    padding: var(--spacing-md);
+    font-size: var(--font-md);
+    background-color: var(--color-background);
+    color: var(--color-text);
+    border: 2px solid var(--color-text);
+    border-radius: var(--radius-md);
     font-weight: bold;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: var(--transition-normal);
     box-shadow: 0 4px 10px rgba(255, 255, 255, 0.15);
     width: 100%;
     box-sizing: border-box;

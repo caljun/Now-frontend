@@ -1,36 +1,36 @@
 /* 🧑‍🤝‍🧑 フレンドページ全体 */
 .friends-container {
-  max-width: 280px;
+  max-width: var(--container-width);
   margin: 0 auto;
-  padding: 16px 12px;
+  padding: var(--spacing-lg);
 }
 
 /* 🧑‍🤝‍🧑 ID入力 */
 #friendNowId {
   width: 100%;
   box-sizing: border-box;
-  padding: 10px 12px;
-  font-size: 0.95rem;
-  margin-bottom: 10px;
-  border-radius: 12px;
-  background-color: #222;
-  color: #fff;
-  border: 1px solid #444;
+  padding: var(--spacing-md);
+  font-size: var(--font-sm);
+  margin-bottom: var(--spacing-md);
+  border-radius: var(--radius-md);
+  background-color: var(--color-card);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
 }
 
 /* ➕ 追加ボタン */
 #addFriendBtn {
   width: 100%;
-  padding: 12px;
-  font-size: 0.95rem;
-  border-radius: 12px;
-  background-color: #000;
-  color: white;
-  border: 1px solid #fff;
+  padding: var(--spacing-md);
+  font-size: var(--font-sm);
+  border-radius: var(--radius-md);
+  background-color: var(--color-background);
+  color: var(--color-text);
+  border: 1px solid var(--color-text);
   font-weight: bold;
   cursor: pointer;
-  transition: all 0.3s ease;
-  margin-bottom: 20px;
+  transition: var(--transition-normal);
+  margin-bottom: var(--spacing-xl);
 }
 
 #addFriendBtn:hover {
@@ -45,16 +45,16 @@
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: var(--spacing-md);
 }
 
 /* 🧾 カードUI（リクエスト・友達共通） */
 .friend-card {
-  background-color: #1e1e1e;
-  padding: 14px;
-  border-radius: 12px;
-  border: 1px solid #333;
-  color: white;
+  background-color: var(--color-card);
+  padding: var(--spacing-md);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -66,113 +66,114 @@
 .friend-card span,
 .friend-card div {
   display: block;
-  color: white;
-  margin-bottom: 6px;
+  color: var(--color-text);
+  margin-bottom: var(--spacing-xs);
   width: 100%;
   text-align: center;
 }
 
 .friend-card .name {
   font-weight: bold;
-  font-size: 1rem;
-  margin-bottom: 2px;
+  font-size: var(--font-md);
+  margin-bottom: var(--spacing-xs);
 }
 
 .friend-card .id {
-  font-size: 0.85rem;
+  font-size: var(--font-xs);
   opacity: 0.7;
-  margin-bottom: 10px;
+  margin-bottom: var(--spacing-md);
 }
 
 /* ✅ 各ボタン共通 */
 .friend-card button {
-  background-color: #000;
-  color: white;
-  padding: 10px 16px;
+  background-color: var(--color-background);
+  color: var(--color-text);
+  padding: var(--spacing-md) var(--spacing-lg);
   border: none;
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   font-weight: bold;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: var(--transition-normal);
   width: 100%;
-  margin-top: 4px;
-  font-size: 0.9rem;
+  margin-top: var(--spacing-xs);
+  font-size: var(--font-sm);
 }
 
 .friend-card button:hover {
-  background-color: #333;
+  background-color: var(--color-border);
   transform: scale(1.02);
 }
 
 /* 🏷️ 動的に出るエリア選択UI */
 .area-selection-ui {
   width: 100%;
-  margin: 8px 0 0;
-  padding: 12px;
-  background-color: #1a1a1a;
-  border-radius: 12px;
-  border: 1px solid #333;
+  margin: var(--spacing-sm) 0 0;
+  padding: var(--spacing-md);
+  background-color: var(--color-card);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .area-selection-ui .label-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
-  margin-bottom: 12px;
+  gap: var(--spacing-xs);
+  margin-bottom: var(--spacing-md);
   justify-content: center;
+  padding: 0 var(--spacing-xs);
 }
 
 .area-label {
   border: 1px solid #ccc;
-  padding: 6px 12px;
-  border-radius: 6px;
+  padding: var(--spacing-xs) var(--spacing-md);
+  border-radius: var(--radius-sm);
   text-align: center;
   cursor: pointer;
   white-space: nowrap;
-  font-size: 0.85rem;
-  transition: all 0.2s ease;
+  font-size: var(--font-xs);
+  transition: var(--transition-fast);
 }
 
 .area-label:hover {
-  background-color: #333;
+  background-color: var(--color-border);
   transform: scale(1.02);
 }
 
 .area-label.selected {
-  background-color: white;
-  color: black;
-  border-color: white;
+  background-color: var(--color-text);
+  color: var(--color-background);
+  border-color: var(--color-text);
 }
 
 .area-selection-ui .action-buttons {
   display: flex;
   justify-content: center;
-  gap: 8px;
+  gap: var(--spacing-sm);
 }
 
 .area-selection-ui .action-buttons button {
-  padding: 8px 14px;
-  font-size: 0.85rem;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  font-size: var(--font-xs);
   font-weight: bold;
-  border-radius: 6px;
+  border-radius: var(--radius-sm);
   border: none;
-  background-color: #000;
-  color: white;
+  background-color: var(--color-background);
+  color: var(--color-text);
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: var(--transition-normal);
   min-width: 80px;
 }
 
 .area-selection-ui .action-buttons button:hover {
-  background-color: #333;
+  background-color: var(--color-border);
   transform: scale(1.02);
 }
 
 .label-list {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: var(--spacing-xs);
   max-width: 100%;
   overflow-x: auto;
 }
