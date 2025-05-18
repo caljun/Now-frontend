@@ -2,7 +2,7 @@
 .profile-container {
     max-width: 600px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 20px 20px;
     text-align: center;
   }
   
@@ -87,7 +87,7 @@
   .area-list {
     list-style: none;
     padding: 0;
-    margin: 0;
+    margin: 0 0 20px;
   }
   
   /* 🗂 エリアカード */
