@@ -2,7 +2,11 @@
 .profile-container {
     max-width: 600px;
     margin: 0 auto;
-    padding: 0 20px 20px;
+    padding: 20px 20px calc(72px + env(safe-area-inset-bottom));
+    min-height: 100%;
+    position: relative;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
     text-align: center;
   }
   

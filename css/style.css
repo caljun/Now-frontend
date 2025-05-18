@@ -6,8 +6,10 @@ body {
   font-family: 'Noto Sans JP', sans-serif;
   background-color: #000;
   color: #fff;
-  height: 100%;
-  overflow-x: hidden;
+  height: 100vh;
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
 }
 
 html {
@@ -46,12 +48,13 @@ h1, h2, h3, p {
 
 /* === メインエリア === */
 .main {
-  height: 100%;
+  height: calc(100vh - 60px);
+  margin-top: 60px;
   overflow-y: auto;
-  padding-top: 60px;
-  padding-bottom: calc(72px + env(safe-area-inset-bottom));
-  background: #111;
   -webkit-overflow-scrolling: touch;
+  background: #111;
+  position: relative;
+  padding-bottom: calc(72px + env(safe-area-inset-bottom));
 }
 
 /* === ボタン === */
