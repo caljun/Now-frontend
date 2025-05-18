@@ -50,6 +50,7 @@ body {
   overflow: hidden;
   position: fixed;
   width: 100%;
+  position: fixed;
 }
 
 html {
@@ -63,11 +64,11 @@ h1, h2, h3, p {
 
 /* === 共通コンテナ === */
 .container {
-  max-width: var(--container-width);
+  box-sizing: border-box; /* ✅ ← padding込みで幅制御 */
+  padding: 0 var(--spacing-lg); /* ✅ ← 左右paddingに統一 */
+  max-width: min(100%, 420px);
   margin: 0 auto;
-  padding: var(--spacing-lg);
   width: 100%;
-  box-sizing: border-box;
 }
 
 /* === ヘッダー === */
