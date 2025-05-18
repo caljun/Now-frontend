@@ -27,25 +27,22 @@
     box-shadow: 0 2px 6px rgba(255, 255, 255, 0.1);
   }
   
-  /* 👤 名前とID */
-  .profile-info-container {
-    flex: 1;
-  }
-  
+  /* 👤 名前 */
   .profile-name {
-    margin-bottom: 8px;
+    margin-bottom: 16px;
+    width: 100%;
   }
   
   .profile-name h2 {
     font-size: 1.5rem;
     font-weight: bold;
-    margin: 0;
+    color: #fff;
   }
   
   /* 👥 友達数 */
   .friend-count {
-    text-align: center;
     margin-bottom: 24px;
+    width: 100%;
   }
   
   .friend-count p {
@@ -60,32 +57,32 @@
     margin-bottom: 24px;
   }
   
-  .primary-btn {
+  /* 🆔 NowID表示枠 */
+  .nowid-container {
     width: 100%;
-    padding: 12px;
+    max-width: 300px;
+    margin-bottom: 32px;
+  }
+  
+  .nowid-label {
+    font-size: 0.9rem;
+    color: #ccc;
+    margin-bottom: 8px;
+  }
+  
+  .nowid-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 16px;
     background-color: #1a1a1a;
-    color: #fff;
     border: 1px solid #333;
     border-radius: 12px;
+  }
+  
+  .nowid-box span {
     font-size: 1rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-  
-  .primary-btn:hover {
-    background-color: #333;
-  }
-  
-  /* 🆔 NowID表示枠 */
-  .nowid-box {
-    display: inline-flex;
-    align-items: center;
-    padding: 8px 12px;
-    background-color: #1a1a1a;
-    border: 1px solid #333;
-    border-radius: 8px;
-    font-size: 0.9rem;
+    color: #fff;
   }
   
   /* 区切り線 */
@@ -98,54 +95,39 @@
   
   /* 📋 エリアセクション */
   .area-section {
-    margin-top: 32px;
+    width: 100%;
+    text-align: center;
   }
   
   .area-title {
     font-size: 1.2rem;
-    margin-bottom: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  
-  /* 🧾 プロフ情報 */
-  .profile-info {
-    text-align: center;
-    margin-bottom: 16px;
-  }
-  
-  .profile-info p {
-    font-size: 0.95rem;
-    opacity: 0.8;
-    color: #ccc;
-  }
-  
-  /* 🔢 友達数表示 */
-  #friendCount {
-    font-size: 1rem;
-    font-weight: bold;
-    margin-top: 8px;
     color: #fff;
+    margin-bottom: 16px;
   }
   
   /* 📋 エリアリスト */
   .area-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 16px;
     width: 100%;
+    max-width: 400px;
     padding: 0;
     list-style: none;
-    margin: 0;
+    margin: 0 auto;
   }
   
   /* 🗂 エリアカード */
   .area-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100px;
+    padding: 16px;
+    border-radius: 12px;
     background-color: #1e1e1e;
     border: 1px solid #444;
-    border-radius: 12px;
-    padding: 16px;
+    margin-bottom: 12px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+    text-align: left;
   }
   
   .area-card h3 {
@@ -169,19 +151,8 @@
   /* 🚪 ログアウトボタン */
   .logout-btn {
     margin-top: 32px;
-    padding: 12px 20px;
-    font-size: 1rem;
-    background-color: #000;
-    color: #e53935;
-    border: 1px solid #e53935;
-    border-radius: 12px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  .logout-btn:hover {
-    background-color: #1e1e1e;
+    max-width: 300px;
+    width: 100%;
   }
   
   .copy-btn {
