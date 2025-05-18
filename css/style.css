@@ -47,7 +47,7 @@ body {
   background-color: #000;
   color: #fff;
   height: 100vh;
-  overflow: hidden;
+  overflow-y: auto;
   position: relative;
   width: 100%;
 }
