@@ -25,37 +25,38 @@
   </header>
 
   <main class="main">
-
-    <!-- 🔁 友達追加フォーム（1つのカード枠に統合） -->
-    <section class="friend-card add-section">
-      <h2>友達を追加</h2>
-      <form id="addFriendForm">
-        <input type="text" id="friendNowId" placeholder="友達のNow ID（例：abcd1234）" />
+    <div class="container">
+      <div class="friends-container">
+        <!-- 🔁 友達追加フォーム（1つのカード枠に統合） -->
+        <section class="friend-card add-section">
+          <h2>友達を追加</h2>
+          <form id="addFriendForm">
+            <input type="text" id="friendNowId" placeholder="友達のNow ID（例：abcd1234）" />
+            <button type="submit" id="addFriendBtn">友達申請を送る</button>
+          </form>      
+        </section>    
       
-        <button type="submit" id="addFriendBtn">友達申請を送る</button>
-      </form>      
-    </section>    
-  
-    <br>
-  
-    <!-- リクエスト一覧 -->
-    <section class="friend-section">
-      <h2>届いたリクエスト</h2>
-      <ul id="requestList" class="friend-list"></ul>
-    </section>
+        <br>
+      
+        <!-- リクエスト一覧 -->
+        <section class="friend-section">
+          <h2>届いたリクエスト</h2>
+          <ul id="requestList" class="friend-list"></ul>
+        </section>
 
-    <!-- エリア追加リクエスト一覧 -->
-    <section class="friend-section">
-      <h2>エリア追加リクエスト</h2>
-      <ul id="areaRequestList" class="friend-list"></ul>
-    </section>
+        <!-- エリア追加リクエスト一覧 -->
+        <section class="friend-section">
+          <h2>エリア追加リクエスト</h2>
+          <ul id="areaRequestList" class="friend-list"></ul>
+        </section>
 
-    <!-- 友達一覧 -->
-    <section class="friend-section">
-      <h2>友達一覧</h2>
-      <ul id="friendList" class="friend-list"></ul>
-    </section>
-  
+        <!-- 友達一覧 -->
+        <section class="friend-section">
+          <h2>友達一覧</h2>
+          <ul id="friendList" class="friend-list"></ul>
+        </section>
+      </div>
+    </div>
   </main>
   
   <nav class="tab-bar">
