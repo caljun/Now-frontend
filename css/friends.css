@@ -1,8 +1,11 @@
 /* 🧑‍🤝‍🧑 フレンドページ全体 */
 .friends-container {
   margin: 0 auto;
-  padding: 0;
+  padding: var(--spacing-md);
   width: 100%;
+  box-sizing: border-box;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 /* 🧑‍🤝‍🧑 ID入力 */
@@ -60,6 +63,7 @@
   align-items: stretch;
   text-align: center;
   width: 100%;
+  box-sizing: border-box;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
